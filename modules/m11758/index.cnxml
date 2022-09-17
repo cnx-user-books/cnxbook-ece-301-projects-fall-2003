@@ -1,0 +1,19 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+	<title>Our Group</title>
+
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>09d1ffc9-0de9-4436-ae70-4ba58306a333</md:uuid>
+</metadata>
+
+	<content>
+		<para id="introgroup">Here's our group:<figure id="idm57088">
+				<title>Amit Aggarwal - in the middle</title>
+				<media id="idp998832" alt=""><image src="../../media/AmitPic.jpeg" mime-type="image/jpeg"/></media></figure>
+Tasks: Signal Simulation, Range Analysis, Poster, Connexions.
+			<figure id="idp7588496">
+				<title>Erlend Hansen</title>
+				<media id="idp9845088" alt=""><image src="../../media/ErlendPic.jpeg" mime-type="image/jpeg"/></media>
+			</figure>
+Tasks: Signal Simulation, Velocity Analysis, Poster, Connexions.
+</para>
+	</content>
+</document>

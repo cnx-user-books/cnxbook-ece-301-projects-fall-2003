@@ -1,0 +1,70 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+	<title>DMT: Implementation</title>
+	<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>513c5788-0900-4745-ab70-4597a1a791a2</md:uuid>
+</metadata>
+	<content>
+		<section id="sec1">
+			<title>DMT System</title>
+			<para id="simulate1"/>
+		</section>
+		<para id="simulate2">
+       Our DMT system can be represented by the following block diagram:
+    </para>
+		<figure id="fig1">
+			<title>Block Diagram</title>
+			<media id="idp5497840" alt=""><image src="../../media/blockdiagram.jpg" mime-type="image/jpeg"/></media>
+		</figure>
+		<para id="simulate3"/>
+		<para id="simulate7"><emphasis>Visit the following links to find out more about the particular subsystems:</emphasis></para>
+		<list list-type="bulleted" id="list1">
+			<item><link document="m11722">A/D &amp; D/A</link></item>
+			<item><link document="m11723">Serial/Parallel, Parallel/Serial</link></item>
+			<item><link document="m11724">Constellation Mapping</link></item>
+			<item><link document="m11725">Mirror/IFFT, De-Mirror/FFT</link></item>
+			<item><link document="m11762">Cyclic Prefix</link></item>
+			<item><link document="m11727">The Channel</link></item>
+			<item><link document="m11728">Equalization &amp; Approximation</link></item>
+		</list>
+		<section id="sec2">
+			<title>Operation of the System</title>
+			<para id="simulate4">  Before we talk about our implementation, we need to describe how DMT may be used to send and receive an analog signal:</para>
+		</section>
+		<para id="simulate5"><list list-type="bulleted" id="list2">
+				<item>A sampled analog signal passes through an <link document="m11722">A/D converter</link> (<emphasis>Q</emphasis> bits/sample) where it is represented as a bitstream.</item>
+				<item>The bitstream is divided into <emphasis>S</emphasis> length <emphasis>N</emphasis> parallel blocks with a <link document="m11723">serial-to-parallel converter</link>.</item>
+				<item>Each block undergoes a <link document="m11724">constellation mapping</link>, where segments of bits (length B) are represented as single complex values in a constellation.</item>
+				<item>The mapped blocks are <link document="m11725">mirrored</link> to give them conjugate symmetry (which increases their lengths to <emphasis>2N/B</emphasis>), then the IFFT of each block is taken.</item>
+				<item> A <link document="m11762">cyclic prefix</link> (length <emphasis>C</emphasis>) is inserted at the beginning of each block to combat problems introduced by the channel.</item>
+				<item>The blocks (now known as <term>symbols</term>) are <link document="m11723">concatenated</link> to form a length <emphasis>S(2N/B+C)</emphasis> time domain signal, which is transmitted into the <link document="m11727">channel</link>.</item>
+				<item>On the other side of the <link document="m11727">channel</link>, the received signal  is again <link document="m11723">broken up</link> into <emphasis>S</emphasis> parallel blocks. </item>
+				<item>The <link document="m11762">cyclic prefixes</link> are removed, the FFT of each block is taken and each is <link document="m11725">de-mirrored</link> so that the block length is once again <emphasis>N/B</emphasis>.</item>
+				<item>Because the channel filtered the time domain signal and added noise, each block is <link document="m11728">equalized </link>through multiplication by the inverse transfer function of the channel (which is known by the receiver).</item>
+				<item>The complex numbers in each block, which have been distorted by noise, are <link document="m11728">approximated</link> by values in the original constellation. A de-constellation mapping then occurs, which converts the complex values back to bits and increases the block length back to <emphasis>N</emphasis>.  </item>
+				<item>The blocks of bits are <link document="m11723">concatenated</link> back into a single bitstream, which then undergoes a <link document="m11722">D/A conversion</link> back to a sampled analog signal. This is an approximation of the original signal.</item>
+			</list></para>
+		<section id="sec3">
+			<title>Implementation</title>
+			<para id="simulate10"/>
+		</section>
+		<para id="simulate8">We implemented our DMT system through a collection of MATLAB functions.  Some of them, such as the IFFT and FFT, were standard built-in functions while others, such as the constellation mapping and approximation routines, were coded from scratch.  We directed the use of each function with a separate script, <code display="inline">run.m</code>, which allowed us to easily change input parameters.  The MATLAB code for each function can be found below:    </para>
+		<para id="simulate11">MATLAB code used:<list list-type="bulleted" id="list3">
+				<item><link resource="run.m">run.m</link></item>
+				<item><link resource="constbuilder.m">constbuilder.m</link></item>
+				<item><link resource="a2d.m">a2d.m</link></item>
+				<item><link resource="constmap.m">constmap.m</link></item>
+				<item><link resource="series2parallel.m">series2parallel.m</link></item>
+				<item><link resource="mirror.m">mirror.m</link></item>
+				<item><link resource="cyclicpad.m">cyclicpad.m</link></item>
+				<item><link resource="matlaberr.m">matlaberr.m</link></item>
+				<item><link resource="parallel2series.m">parallel2series.m</link></item>
+				<item><link resource="channel.m">channel.m</link></item>
+				<item><link resource="decyclicpad.m">decyclicpad.m</link></item>
+				<item><link resource="filterchannel.m">filterchannel.m</link></item>
+				<item><link resource="demirror.m">demirror.m</link></item>
+				<item><link resource="approximate.m">approximate.m</link></item>
+				<item><link resource="deconstmap.m">deconstmap.m</link></item>
+				<item><link resource="d2a.m">d2a.m</link></item>
+			</list></para>
+		<para id="simulate9"><link document="m11710">Home</link>  |   Previous: <link document="m11710">Introduction</link>   |   Next: <link document="m11729">Results &amp; Conclusions</link></para>
+	</content>
+</document>

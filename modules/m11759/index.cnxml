@@ -1,0 +1,25 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+
+	<title>RADAR Conclusion</title>
+
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>8615782e-a3df-41c0-9dc6-d829c3b5befa</md:uuid>
+</metadata>
+
+	<content>
+		<para id="conc1"><title>Possible Improvements</title>There are many improvements that we can make to our system in order to create better results. First of all, we need to increase the range of the detection, not having to limit our input signals as much to get accurate results. We need to adjust with the sampling rate that we use in order to be able to detect smaller velocities as well as more accurate ranges. We could optimize the algorithm for the peak locator in the velocity analysis to give more accurate results.</para>
+		<para id="conc2">In the end, we managed to create a system that created signals to send out with a RADAR, as well as simulate a returned signal for objects a specific distance away or moving at a certain velocity. We were able to detect the range for objects that were fairly close, and calculate the velocity for objects moving extremely fast.</para>
+<section id="Acknowledgements">
+<para id="thanks">We would like to thank Dr. Courtney Lane and Chris Rozell for all their help.</para>
+<para id="books"><title>Bibliography</title>
+
+		<list id="book1">
+		<item>Burrus [et al.]. <emphasis>Computer-Based Exercises for Signal Processing Using MATLAB</emphasis>. 1998.</item>
+		<item>Mahafza, Bassem. <emphasis>Radar Systems Analysis and Design Using MATLAB</emphasis>. 2000.</item></list>
+</para></section>
+
+<section id="next">
+<para id="linknext">
+Now to our Group:<link document="m11758"> The Group</link>
+</para></section>
+	</content>
+</document>

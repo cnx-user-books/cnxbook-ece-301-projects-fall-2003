@@ -1,0 +1,103 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Guitar Distortion: Basic Concepts</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>bbda85a9-6a38-4037-9ea4-923a3c8b14ec</md:uuid>
+</metadata>
+
+  <content>
+    <para id="p1">
+      In trying to mimic an amplifier, one fact must be forefront in
+      our brains: distortion is almost <emphasis>always</emphasis>
+      nonlinear!  Therefore, instead of looking directly to
+      convolution and linear transforms, we have to think a little bit
+      first.  The first place we can look at is the Taylor series.
+    </para>
+    <section id="s1">
+      <title>Taylor Series</title>
+       <para id="s1p1">
+	In calculus, we learned about the <term>Taylor
+	Expansion</term> and the <term>Taylor Series</term>, also
+	known as the <term>McLaurin Series</term>.  In essence, the
+	expansion follows <link target-id="s1p1e1"/>.
+	<equation id="s1p1e1">
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:ci type="fn">f</m:ci>
+		<m:ci>x</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:sum/>
+		<m:bvar>
+		  <m:ci>n</m:ci>
+		</m:bvar>
+		<m:lowlimit>
+		  <m:cn>0</m:cn>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:infinity/>
+		</m:uplimit>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:diff/>
+		      <m:degree>
+			<m:ci>n</m:ci>
+		      </m:degree>
+		      <m:apply>
+			<m:ci type="fn">f</m:ci>
+			<m:ci><m:msub>
+			    <m:mi>x</m:mi>
+			    <m:mn>0</m:mn>
+			  </m:msub></m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:factorial/>
+		      <m:ci>n</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:power/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>x</m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>x</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub></m:ci>
+		    </m:apply>
+		    <m:ci>n</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation>
+	The Taylor Series is used to approximate a function.  As we
+	know from the concepts behind signals, all signals are
+	functions, and therefore we can use the Taylor Series to
+	approximate a signal.  As we add more and more into the
+	series, the approximation becomes closer and closer to the
+	orginal signal.  However, for distortion, we <emphasis>do
+	not</emphasis> want the original signal; instead, we want
+	something grindy, something swanky to excite all of the
+	rock-and-rollers out there.
+      </para>
+    </section>
+    <section id="s2">
+      <title>The DFT and the FFT</title>
+      <para id="s2p1">
+	Another idea used in analyzing distortion is the DFT.  Before
+	and after using the Taylor Series to "play around" with the
+	signal, the DFT can be used to analyze the new (or old) sound,
+	seeing which harmonics are the most important.  MATLAB has a
+	wonderful FFT function that allows for simple and fast DFT
+	calculation.
+      </para>
+    </section>
+  </content>
+  
+</document>

@@ -1,0 +1,538 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Back propagation mathematics</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>61d208e0-760d-44dd-8a89-bbc31e8acb17</md:uuid>
+</metadata>
+
+
+
+  <content>
+<section id="errordef">
+  <title>Error definition</title>
+    <para id="introduction">
+       <!-- Insert module text here -->
+The back propagation method is the example of the wide class of training methods based on the information covered in the gradient of error function. The independent variables in this minimization are weights of neural network and the considered error to be minimized is the root mean square one.
+    </para>   
+    <para id="error_definition">
+Let us consider the training set composed of <m:math><m:ci>L</m:ci></m:math> ordered pairs, of the following form:
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mrow><m:mo>{</m:mo> <m:mrow>
+    <m:mrow><m:mo>(</m:mo>
+     <m:mrow>
+      <m:msup>
+       <m:mstyle mathvariant="bold" mathsize="normal"><m:mi>x</m:mi></m:mstyle>
+       <m:mrow>
+        <m:mrow><m:mo>(</m:mo>
+         <m:mn>1</m:mn>
+        <m:mo>)</m:mo></m:mrow>
+       </m:mrow>
+      </m:msup>
+      <m:mo>,</m:mo><m:msup>
+       <m:mstyle mathvariant="bold" mathsize="normal"><m:mi>d</m:mi></m:mstyle>
+       <m:mrow>
+        <m:mrow><m:mo>(</m:mo>
+         <m:mn>1</m:mn>
+        <m:mo>)</m:mo></m:mrow>
+       </m:mrow>
+      </m:msup>
+      
+     </m:mrow>
+    <m:mo>)</m:mo></m:mrow><m:mo>,</m:mo><m:mrow><m:mo>(</m:mo>
+     <m:mrow>
+      <m:msup>
+       <m:mstyle mathvariant="bold" mathsize="normal"><m:mi>x</m:mi></m:mstyle>
+       <m:mrow>
+        <m:mrow><m:mo>(</m:mo>
+         <m:mn>2</m:mn>
+        <m:mo>)</m:mo></m:mrow>
+       </m:mrow>
+      </m:msup>
+      <m:mo>,</m:mo><m:msup>
+       <m:mstyle mathvariant="bold" mathsize="normal"><m:mi>d</m:mi></m:mstyle>
+       <m:mrow>
+        <m:mrow><m:mo>(</m:mo>
+         <m:mn>2</m:mn>
+        <m:mo>)</m:mo></m:mrow>
+       </m:mrow>
+      </m:msup>
+      
+     </m:mrow>
+    <m:mo>)</m:mo></m:mrow><m:mn>,...,</m:mn><m:mrow><m:mo>(</m:mo>
+     <m:mrow>
+      <m:msup>
+       <m:mstyle mathvariant="bold" mathsize="normal"><m:mi>x</m:mi></m:mstyle>
+       <m:mrow>
+        <m:mrow><m:mo>(</m:mo>
+         <m:mi>L</m:mi>
+        <m:mo>)</m:mo></m:mrow>
+       </m:mrow>
+      </m:msup>
+      <m:mo>,</m:mo><m:msup>
+       <m:mstyle mathvariant="bold" mathsize="normal"><m:mi>d</m:mi></m:mstyle>
+       <m:mrow>
+        <m:mrow><m:mo>(</m:mo>
+         <m:mi>L</m:mi>
+        <m:mo>)</m:mo></m:mrow>
+       </m:mrow>
+      </m:msup>
+      
+     </m:mrow>
+    <m:mo>)</m:mo></m:mrow>
+   </m:mrow> <m:mo>}</m:mo></m:mrow>
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+</m:semantics></m:math>
+Furthermore, let us define the total error <m:math><m:ci>E</m:ci></m:math> generated on outputs of neural network after presenting the entire training set, as:
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>E</m:mi><m:mo>=</m:mo><m:munderover>
+    <m:mo>∑</m:mo>
+    <m:mrow>
+     <m:mi>l</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+    <m:mi>L</m:mi>
+   </m:munderover>
+   <m:mrow>
+    <m:msup>
+     <m:mi>E</m:mi>
+     <m:mrow>
+      <m:mrow><m:mo>(</m:mo>
+       <m:mi>l</m:mi>
+      <m:mo>)</m:mo></m:mrow>
+     </m:mrow>
+    </m:msup>
+    
+   </m:mrow>
+   
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+</m:semantics></m:math>
+where:
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:msup>
+    <m:mi>E</m:mi>
+    <m:mrow>
+     <m:mrow><m:mo>(</m:mo>
+      <m:mi>l</m:mi>
+     <m:mo>)</m:mo></m:mrow>
+    </m:mrow>
+   </m:msup>
+   <m:mo>=</m:mo><m:munderover>
+    <m:mo>∑</m:mo>
+    <m:mrow>
+     <m:mi>m</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+    <m:mi>M</m:mi>
+   </m:munderover>
+   <m:mrow>
+    <m:msubsup>
+     <m:mi>E</m:mi>
+     <m:mi>m</m:mi>
+     <m:mrow>
+      <m:mrow><m:mo>(</m:mo>
+       <m:mi>l</m:mi>
+      <m:mo>)</m:mo></m:mrow>
+     </m:mrow>
+    </m:msubsup>
+    
+   </m:mrow>
+   <m:mo>=</m:mo><m:mfrac>
+    <m:mn>1</m:mn>
+    <m:mn>2</m:mn>
+   </m:mfrac>
+   <m:munderover>
+    <m:mo>∑</m:mo>
+    <m:mrow>
+     <m:mi>m</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+    <m:mi>M</m:mi>
+   </m:munderover>
+   <m:mrow>
+    <m:msup>
+     <m:mrow>
+      <m:mrow><m:mo>(</m:mo>
+       <m:mrow>
+        <m:msubsup>
+         <m:mi>d</m:mi>
+         <m:mi>m</m:mi>
+         <m:mrow>
+          <m:mrow><m:mo>(</m:mo>
+           <m:mi>l</m:mi>
+          <m:mo>)</m:mo></m:mrow>
+         </m:mrow>
+        </m:msubsup>
+        <m:mo>−</m:mo><m:msubsup>
+         <m:mi>y</m:mi>
+         <m:mi>m</m:mi>
+         <m:mrow>
+          <m:mrow><m:mo>(</m:mo>
+           <m:mi>l</m:mi>
+          <m:mo>)</m:mo></m:mrow>
+         </m:mrow>
+        </m:msubsup>
+        
+       </m:mrow>
+      <m:mo>)</m:mo></m:mrow>
+     </m:mrow>
+     <m:mn>2</m:mn>
+    </m:msup>
+    
+   </m:mrow>
+   
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+</m:semantics></m:math>
+As was already told, the independent variables in the minimization of error <m:math><m:ci>E</m:ci></m:math> are weights 
+<m:math>
+ <m:semantics>
+  <m:msub>
+   <m:mi>w</m:mi>
+   <m:mi>ij</m:mi>
+  </m:msub>
+  <m:annotation-xml encoding="MathML-Content">
+   <m:apply>
+    <m:ci>Subscript</m:ci>
+    <m:ci>w</m:ci>
+    <m:ci>ij</m:ci>
+   </m:apply>
+  </m:annotation-xml>
+ </m:semantics>
+</m:math>
+
+Since even for the relatively small networks the number of weigths is big, in real applications, the training of the neural network is the minimization of the scalar field over the vector space with hundreds or (more often) thousands dimensions. One of the minizmiazation techniques for such problem is the steapest descent method
+    </para>
+    <para id="steapest_descent_method">
+    </para>
+</section>
+
+
+
+
+
+    <para id="trial">
+    
+<m:math display="block">
+    <m:apply>
+     <m:int/>
+     <m:bvar>
+      <m:ci>x</m:ci>
+     </m:bvar>
+     <m:lowlimit>
+      <m:cn type="integer">0</m:cn>
+     </m:lowlimit>
+     <m:uplimit>
+      <m:cn type="integer">1</m:cn>
+     </m:uplimit>
+     <m:apply>
+      <m:power/>
+      <m:ci>x</m:ci>
+      <m:cn type="integer">2</m:cn>
+     </m:apply>
+    </m:apply>
+</m:math>
+
+
+<m:math display="block">  <m:apply>   <m:sum/>    
+<m:bvar>    <m:ci>n</m:ci>   </m:bvar>   <m:lowlimit>    <m:cn type="integer">1</m:cn>   </m:lowlimit>   <m:uplimit>    <m:infinity/>   
+ </m:uplimit>   <m:apply>    <m:times/>    <m:cn type="integer">2</m:cn> 
+    <m:apply>     <m:power/>     <m:cn type="integer">2</m:cn>      
+<m:cn type="rational">1<m:sep/>2</m:cn>    </m:apply>    <m:apply>      
+<m:plus/>     <m:apply>      <m:times/>      <m:cn type="integer">26390</m:cn>      <m:ci>n</m:ci>     </m:apply>     <m:cn type="integer">1103</m:cn>    </m:apply>    <m:apply>     <m:factorial/> 
+     <m:apply>      <m:times/>      <m:cn type="integer">4</m:cn>       
+<m:ci>n</m:ci>     </m:apply>    </m:apply>    <m:apply>     <m:power/>   
+   <m:apply>      <m:times/>      <m:cn type="integer">9801</m:cn>       
+<m:apply>       <m:power/>       <m:cn type="integer">396</m:cn>        
+<m:apply>        <m:times/>        <m:cn type="integer">4</m:cn>         
+<m:ci>n</m:ci>       </m:apply>      </m:apply>      <m:apply>        
+<m:power/>       <m:apply>        <m:factorial/>        <m:ci>n</m:ci>     
+   </m:apply>       <m:cn type="integer">4</m:cn>      </m:apply>      
+</m:apply>     <m:cn type="integer">-1</m:cn>    </m:apply>   </m:apply> 
+  </m:apply> </m:math>
+
+
+<m:math display="block">
+ <m:mrow>
+  <m:munderover>
+   <m:mo>∑</m:mo>
+   <m:mrow>
+    <m:mi>n</m:mi>
+    <m:mo>=</m:mo>
+    <m:mn>1</m:mn>
+   </m:mrow>
+   <m:mi>∞</m:mi>
+  </m:munderover>
+  <m:mfrac>
+   <m:mrow>
+    <m:mn>2</m:mn>
+    <m:mo>⁢</m:mo>
+    <m:msqrt>
+     <m:mn>2</m:mn>
+    </m:msqrt>
+    <m:mo>⁢</m:mo>
+    <m:mrow>
+     <m:mo>(</m:mo>
+     <m:mrow>
+      <m:mrow>
+       <m:mn>26390</m:mn>
+       <m:mo>⁢</m:mo>
+       <m:mi>n</m:mi>
+      </m:mrow>
+      <m:mo>+</m:mo>
+      <m:mn>1103</m:mn>
+     </m:mrow>
+     <m:mo>)</m:mo>
+    </m:mrow>
+    <m:mo>⁢</m:mo>
+    <m:mrow>
+     <m:mrow>
+      <m:mo>(</m:mo>
+      <m:mrow>
+       <m:mn>4</m:mn>
+       <m:mo>⁢</m:mo>
+       <m:mi>n</m:mi>
+      </m:mrow>
+      <m:mo>)</m:mo>
+     </m:mrow>
+     <m:mo>!</m:mo>
+    </m:mrow>
+   </m:mrow>
+   <m:mrow>
+    <m:mn>9801</m:mn>
+    <m:mo>⁢</m:mo>
+    <m:msup>
+     <m:mn>396</m:mn>
+     <m:mrow>
+      <m:mn>4</m:mn>
+      <m:mo>⁢</m:mo>
+      <m:mi>n</m:mi>
+     </m:mrow>
+    </m:msup>
+    <m:mo>⁢</m:mo>
+    <m:msup>
+     <m:mrow>
+      <m:mi>n</m:mi>
+      <m:mo>!</m:mo>
+     </m:mrow>
+     <m:mn>4</m:mn>
+    </m:msup>
+   </m:mrow>
+  </m:mfrac>
+ </m:mrow>
+</m:math>
+
+
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:munderover>
+    <m:mo>∑</m:mo>
+    <m:mrow>
+     <m:mi>n</m:mi>
+     <m:mo>=</m:mo>
+     <m:mn>1</m:mn>
+    </m:mrow>
+    <m:mi>∞</m:mi>
+   </m:munderover>
+   <m:mfrac>
+    <m:mrow>
+     <m:mn>2</m:mn>
+     <m:mo>⁢</m:mo>
+     <m:msqrt>
+      <m:mn>2</m:mn>
+     </m:msqrt>
+     <m:mo>⁢</m:mo>
+     <m:mrow>
+      <m:mo>(</m:mo>
+      <m:mrow>
+       <m:mrow>
+        <m:mn>26390</m:mn>
+        <m:mo>⁢</m:mo>
+        <m:mi>n</m:mi>
+       </m:mrow>
+       <m:mo>+</m:mo>
+       <m:mn>1103</m:mn>
+      </m:mrow>
+      <m:mo>)</m:mo>
+     </m:mrow>
+     <m:mo>⁢</m:mo>
+     <m:mrow>
+      <m:mrow>
+       <m:mo>(</m:mo>
+       <m:mrow>
+        <m:mn>4</m:mn>
+        <m:mo>⁢</m:mo>
+        <m:mi>n</m:mi>
+       </m:mrow>
+       <m:mo>)</m:mo>
+      </m:mrow>
+      <m:mo>!</m:mo>
+     </m:mrow>
+    </m:mrow>
+    <m:mrow>
+     <m:mn>9801</m:mn>
+     <m:mo>⁢</m:mo>
+     <m:msup>
+      <m:mn>396</m:mn>
+      <m:mrow>
+       <m:mn>4</m:mn>
+       <m:mo>⁢</m:mo>
+       <m:mi>n</m:mi>
+      </m:mrow>
+     </m:msup>
+     <m:mo>⁢</m:mo>
+     <m:msup>
+      <m:mrow>
+       <m:mi>n</m:mi>
+       <m:mo>!</m:mo>
+      </m:mrow>
+      <m:mn>4</m:mn>
+     </m:msup>
+    </m:mrow>
+   </m:mfrac>
+  </m:mrow>
+  <m:annotation-xml encoding="MathML-Content">
+   <m:apply>
+    <m:sum/>
+    <m:bvar>
+     <m:ci>n</m:ci>
+    </m:bvar>
+    <m:lowlimit>
+     <m:cn type="integer">1</m:cn>
+    </m:lowlimit>
+    <m:uplimit>
+     <m:infinity/>
+    </m:uplimit>
+    <m:apply>
+     <m:times/>
+     <m:cn type="integer">2</m:cn>
+     <m:apply>
+      <m:power/>
+      <m:cn type="integer">2</m:cn>
+      <m:cn type="rational">1<m:sep/>2</m:cn>
+     </m:apply>
+     <m:apply>
+      <m:plus/>
+      <m:apply>
+       <m:times/>
+       <m:cn type="integer">26390</m:cn>
+       <m:ci>n</m:ci>
+      </m:apply>
+      <m:cn type="integer">1103</m:cn>
+     </m:apply>
+     <m:apply>
+      <m:factorial/>
+      <m:apply>
+       <m:times/>
+       <m:cn type="integer">4</m:cn>
+       <m:ci>n</m:ci>
+      </m:apply>
+     </m:apply>
+     <m:apply>
+      <m:power/>
+      <m:apply>
+       <m:times/>
+       <m:cn type="integer">9801</m:cn>
+       <m:apply>
+        <m:power/>
+        <m:cn type="integer">396</m:cn>
+        <m:apply>
+         <m:times/>
+         <m:cn type="integer">4</m:cn>
+         <m:ci>n</m:ci>
+        </m:apply>
+       </m:apply>
+       <m:apply>
+        <m:power/>
+        <m:apply>
+         <m:factorial/>
+         <m:ci>n</m:ci>
+        </m:apply>
+        <m:cn type="integer">4</m:cn>
+       </m:apply>
+      </m:apply>
+      <m:cn type="integer">-1</m:cn>
+     </m:apply>
+    </m:apply>
+   </m:apply>
+  </m:annotation-xml>
+ </m:semantics>
+</m:math>
+
+<m:math display="block">
+    <m:apply>
+    <m:sum/>
+    <m:bvar>
+     <m:ci>n</m:ci>
+    </m:bvar>
+    <m:lowlimit>
+     <m:cn type="integer">1</m:cn>
+    </m:lowlimit>
+    <m:uplimit>
+     <m:infinity/>
+    </m:uplimit>
+    <m:apply>
+     <m:times/>
+     <m:cn type="integer">2</m:cn>
+     <m:apply>
+      <m:power/>
+      <m:cn type="integer">2</m:cn>
+      <m:cn type="rational">1<m:sep/>2</m:cn>
+     </m:apply>
+     <m:apply>
+      <m:plus/>
+      <m:apply>
+       <m:times/>
+       <m:cn type="integer">26390</m:cn>
+       <m:ci>n</m:ci>
+      </m:apply>
+      <m:cn type="integer">1103</m:cn>
+     </m:apply>
+     <m:apply>
+      <m:factorial/>
+      <m:apply>
+       <m:times/>
+       <m:cn type="integer">4</m:cn>
+       <m:ci>n</m:ci>
+      </m:apply>
+     </m:apply>
+     <m:apply>
+      <m:power/>
+      <m:apply>
+       <m:times/>
+       <m:cn type="integer">9801</m:cn>
+       <m:apply>
+        <m:power/>
+        <m:cn type="integer">396</m:cn>
+        <m:apply>
+         <m:times/>
+         <m:cn type="integer">4</m:cn>
+         <m:ci>n</m:ci>
+        </m:apply>
+       </m:apply>
+       <m:apply>
+        <m:power/>
+        <m:apply>
+         <m:factorial/>
+         <m:ci>n</m:ci>
+        </m:apply>
+        <m:cn type="integer">4</m:cn>
+       </m:apply>
+      </m:apply>
+      <m:cn type="integer">-1</m:cn>
+     </m:apply>
+    </m:apply>
+   </m:apply>
+</m:math>
+
+
+    </para>
+  </content>
+  
+</document>

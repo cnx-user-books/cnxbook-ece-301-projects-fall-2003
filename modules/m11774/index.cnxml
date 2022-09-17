@@ -1,0 +1,50 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>A Fishy Solution To The Worst Job In Science - Introduction</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>6afdf8f7-4ef9-462d-bcf9-2c064a801ac4</md:uuid>
+</metadata>
+
+  <content>
+   <section id="subTitle">
+<title>Fish Image Classifier</title> 
+    <para id="Whereideacamefrom">
+      Our project idea came from the <link url="http://www.popularmechanics.com/">Popular Science Magazine</link> article, “The worst, most torturous, icky, painful, stinky, dangerous, and just plain horrible jobs in science.” In the article fish counting is mentioned. According to the article’s rating system this job received a rating of “Inspires reflexive ridicule”, and “Zzzzzzzzzzzz”. The fish counters job consists of pushing buttons as different species of fish swim up stream, the two most important species being trout and salmon. Fish counts set fishing limits, which have contributed to record salmon returns the past couple of years. 
+    </para>   
+    <para id="Industrystandards">
+      Currently Iceland is developing three different automated fish <link url="http://www.marine.ie/scientific+services/monitoring/salmon+stocks/fish+counter+programme.htm">counting methods</link>: resistivity (installation costs: $12,163.90), Infra-red ($21,895.10), and hydroacoustic ($72,983.90). All three of these methods are extremely expensive and still require a human watcher because of the inability to deal with many cases. The large installation costs are needed to create the idealization factors necessary to accurately count.
+</para>
+<para id="ProjectGoal">
+	We decided to pursue our project idea in order to provide a low cost, accurate, and environmentally safe counting system that could help our precious global treasure and resource, salmon, while not inconveniencing scientists with such boring tasks.
+     </para>
+<para id="idealization">
+      By modifying slightly a preexisting fish counter, such as the Riverwatcher by <link url="http://www.vaki.is/Forsida/Enska/Menu.htm">Vaki</link> (a company in Iceland), we could create an environment that allows for our ideal image state. Our ideal image state is one in which the salmon is sitting in the middle of the canvas, alone, at an equal distance from the camera every time, all while displayed on a black backdrop. We can do this by extending the final exit corridor to the length of the largest salmon size possible. Using the motion detector attached at the farthest end of the corridor we could have it activate our camera, which would need to be added as another modification. The salmon’s picture would be taken when the whole salmon is in the corridor so that we wouldn’t have to worry about tracking. And since the extended corridor would be black, all the images would have or salmon sitting on a black backdrop. By making the corridor only wide enough to fit one salmon at a time we could guarantee one salmon per image. With this newly adapted piece of equipment we could take the chaotic and unpredictable environment and still control it so that we have our ideal image state.  The reason we chose black rather than white is because black contains no light energy while white contains all energies, making it harder for signal processing.
+     </para>
+<para id="fishwithbkexplanation">
+     For completeness we also developed a detection method that could attempt to detect the salmon in a narrow river setting. In this setting the only idealization factor that changes is the background. Instead of creating a perfect black background we have the river bed as our background. The rest of the assumptions still hold true. 
+     </para>
+    <para id="abstract">
+The use of Digital Image Processing is a wide ranging field, and our project focuses on using it to solve a real life problem.  Our project will classify fish, as opposed to just matching a given image, by using a real image of a fish and telling us what species it is.  The entire process will use numerous techniques written in MATLAB and rank the image using a tested algorithm. The output will be the correct guess of which fish species it is without any human intervention. This process can be seen in following image.
+     </para>
+
+<figure id="projectdiagram">
+<title>Project Diagram</title>
+<media id="idm7635952" alt=""><image src="../../media/Testing_Process.JPG" mime-type="image/jpeg"/></media>
+<caption>Overall structure of project implementation.</caption>
+</figure>
+
+    <para id="intro">
+      Fish range in appearance, from male to female and from spawning to non-spawning.  Using a <link document="m10101">matched filter</link> would not be accurate because of these slight but crucial differences.  We therefore decided to study the anatomy of fish to find distinctive traits which will allow us to classify fish into corresponding species.  Fish length, width, fin patterns, and coloration are well recorded in journals and distinctive to the human eye.  A computer will use different functions to get values which will in turn let us know what fish type it is.
+     </para>
+    </section>
+    
+    <section id="ProjectObjTitle">
+<title>Project Objectives</title> 
+   <para id="ProjectObjectives">
+           The project testing objectives are as follows:
+	   Color Intensities,
+	   Size of an Image and Length to Width Ratio,
+	   Edge Detection, 
+           Distinctions of Similar Color Blocks. 
+     </para>
+</section>
+  </content>
+</document>

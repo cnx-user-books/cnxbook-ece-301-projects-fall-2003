@@ -1,0 +1,220 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+	<title>Background</title>
+
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>370bcffc-e133-4185-b5d6-e56d14cdbf4f</md:uuid>
+</metadata>
+
+	<content>
+		<section id="RadarInGeneral">
+			<title>Radar in general</title>
+			<para id="ConceptofRadar"><title>The Concept of Radar</title>Radar itself is an abbreviation for RAdio Detection and Ranging. Radar systems send out modulated waveforms using antennas in order to transmit electromagnetic energy into a specific volume of space to search for targets. Objects (i.e. targets) within a certain volume will reflect  part of the energy (radar returns or echoes) back to the radar. From these radar returns, the radar reciever then extracts information such as velocity and range, angular position, and other identifying characteristics. </para>
+			<para id="Assumptions"><title>Assumptions made in poject for radar</title>In our project, we decided to keep the level of complexity of how rader is utilized down to a manageable level for a group size of two. As a result we made the following assumptions in our approach to modeling radar inside of Matlab. </para>
+			<para id="AssumptionList"><list list-type="bulleted" id="AssumptionLIst">
+					<item>The target is in direct line with our transmitted wave (i.e. not at an angle)</item>
+					<item>For velocity processing, the target has a constant velocity</item>
+					<item>For range processing, the target is not moving</item>
+				</list></para>
+			<para id="Wherenext">   We will now examine the concept of one of the most commonly used signals to do radar processing, the Linear Frequency Modulated Chirp (LFM Chirp) and its characteristics. Following that, the important concept of match filtering is discussed since it is implemented for calculating the range of a target. </para>
+		</section>
+		<section id="LFMradarchirp">
+			<title>Linear Frequency Modulated Chirp (LFM chirp)</title>
+			<para id="BasicDefinitionofLFMinCT"><title>Basic Definition (in Continuous Time)</title>A linear frequency modulated chirp signal for radar is defined by the equation (1) <equation id="LFMContinuous-TimeChirpEq1">
+					<title>LFM Continuous-Time Chirp</title>
+					<m:math>
+						<m:apply>
+							<m:eq/>
+							<m:apply>
+								<m:ci type="fn">s</m:ci>
+								<m:ci>t</m:ci>
+							</m:apply>
+							<m:apply>
+								<m:exp/>
+								<m:apply>
+									<m:times/>
+									<m:apply>
+										<m:divide/>
+										<m:apply>
+											<m:times/>
+											<m:imaginaryi/>
+											<m:ci>W</m:ci>
+										</m:apply>
+										<m:ci>T</m:ci>
+									</m:apply>
+									<m:apply>
+										<m:power/>
+										<m:ci>t</m:ci>
+										<m:cn>2</m:cn>
+									</m:apply>
+								</m:apply>
+							</m:apply>
+						</m:apply>
+					</m:math>
+				</equation></para>
+			<para id="LFMContinuous-TimeChirpEq2"><emphasis>t = time</emphasis> on the range of  [-T/2,T/2], <emphasis>T</emphasis> =time duration in seconds of LFM signal pulse, <emphasis>W</emphasis> =  swept bandwitdth over the life of the pulse in Hz                      <emphasis/><emphasis/><emphasis/><emphasis/><emphasis/><emphasis/></para>
+			<para id="LFMCharacteristics"><title>Characteristics</title>The changing frequency of the chirp signal sweeps from (-1/2)W to +(1/2)W Hz. It is interesting to note that the phase of s(t) varies quadratically versus t while the frequency changes linearly versus time. The deriviative of phase determines the instantaneous frequency of the signal. The signal is complex valued in this case because it is the baseband form of the linear frequency modulation. <emphasis/> See Figure(1.1 ) below for example.</para>
+			<para id="LFMspectrumCharacteristics"><title>Characteristics of Spectrum</title>Thus, it would seem like the frequency spectrum S(f) would have most of its energy in the range of | f | &lt; (W/2). However, this is in fact only true if the frequency sweeps slowly enough or if T is large enough. </para>
+			<para id="LFMmodelinginMatlab"><title>Modeling chirp with Matlab</title> In Matlab however, the chirp signal has to be represented as a discrete time signal. A solution to this problem is to just oversample s(t) enough so that we can effectively simulate the continuous time version. Otherwise, if we just wanted to have a discrete time signal, the sampling frequency would be kept approximately equal to the swept bandwidth W. But, we will need to oversample by at least a factor of 5 at least in order to properly simulate the continous time signal. <figure id="Continuous-timeLFMchirpradarsignal">
+					<title>Figure(1.1) Continuous-time LFM chirp radar signal</title>
+					<media id="idm6643744" alt=""><image src="../../media/LFMchirp.jpg" mime-type="image/jpeg"/></media>
+					<caption>Continuous-time LFM chirp radar signal</caption>
+				</figure><note id="Plotting">Since the chirp signal is compex valued and will be processed through a complex valued matched filter, all plots must be made of either the real part of equations (1), (2), or of the magnitude of the Fourier transform below. Figure 1.1 is a plot of the real part of the LFM chirp. </note></para>
+			<para id="LFMsamplingfreq"><title>Sampling frequency fs</title>The sampling frequency<emphasis> fs = 1 / Ts</emphasis>. The sampling rate can also be tied to W, the swept bandwidth of the chirp, because in many cases the chirp is more or less bandlimited to a frequency extent of W. Therefore, it is convenient to let <emphasis>fs = p*W</emphasis> where <emphasis>p&gt;(or equal to) 1 </emphasis>represents the <emphasis>oversampling factor</emphasis>. Thus, the equation for our discretized chirp changes into equation (2). <equation id="DiscreteTimeLFMChirpRadarSignalEq">
+					<title>LFM Discrete-Time Chirp Radar Signal</title>
+					<m:math>
+						<m:apply>
+							<m:eq/>
+							<m:apply>
+								<m:ci type="fn">s</m:ci>
+								<m:ci>t</m:ci>
+							</m:apply>
+							<m:apply>
+								<m:exp/>
+								<m:apply>
+									<m:times/>
+									<m:apply>
+										<m:divide/>
+										<m:apply>
+											<m:times/>
+											<m:imaginaryi/>
+											<m:pi/>
+											<m:ci>W</m:ci>
+										</m:apply>
+										<m:ci>T</m:ci>
+									</m:apply>
+									<m:apply>
+										<m:power/>
+										<m:apply>
+											<m:minus/>
+											<m:apply>
+												<m:times/>
+												<m:ci>n</m:ci>
+												<m:ci>Ts</m:ci>
+											</m:apply>
+											<m:apply>
+												<m:divide/>
+												<m:ci>T</m:ci>
+												<m:cn>2</m:cn>
+											</m:apply>
+										</m:apply>
+										<m:cn>2</m:cn>
+									</m:apply>
+								</m:apply>
+							</m:apply>
+						</m:apply>
+					</m:math>
+				</equation></para>
+			<para id="DiscreteTimeLFMChirpRadarSignalEq2">with 0&lt;(or equal to) n &lt; T</para>
+			<para id="LFMFourierTransf"><title>Fourier Transform of Chirp</title><emphasis/><note id="TimeBandwidth">Time bandwidth product (<emphasis>TW</emphasis>) is just the product of the chirp pulse's length <emphasis>T</emphasis> (units generally in microseconds) and the chirp's swept bandwidth <emphasis>W</emphasis> (units generally in Mhz). Thus the product itself should have dimensionless units.  </note> It is interesting to note that it may not be possible to make the discrete-time chirp symmetric, depending on how the sampling times are defined. If we assume that s(t) is the chirp and S(f) is its Fourier transform, we can approximate |S(f)| with a rectangle that extends from f = -W/2 and f = +W/2. Figure below shows that the rectangle approximation is not too bad. See Figure (1.2)<figure id="FourierTransformLFM">
+					<title>Figure(1.2) Fourier Transform of LFM</title>
+					<media id="idm7006624" alt=""><image src="../../media/fourtransfchirp.jpg" mime-type="image/jpeg"/></media>
+					<caption>Fourier Transform of LFM chirp</caption>
+				</figure><note id="NoteFourierTransf">The Fourier Transform of a continuous-time chirp. Notice that most of the energy is concentrated in the frequency region between -W/2 and +W/2 (i.e. -1 MHz and +1MHz). The dashed line is the magnitude of an approximate transform |S`(f)|, which is perfectly bandlimited. </note>Moreover, the DFT of a chirp sometimes has interesting properties when p = 1. Since there are N nonzero samples in a discrete time chirp signal, the N-point DFT can be taken. Plus, whenever N equals a multiple of 4 and p = fs/W = 1, the DFT S[k] is also an exact chirp. </para>
+			<para id="LFMapplication"><title>WHY LFM chirps</title>The transmitted signals are designed differently for range and velocity processing. In the case of range processing, the output SNR and range resolution must be maximized. Thus, LFM chirp signals with large TW products are used in conjunction with a "pulse compression" <emphasis>match filter</emphasis>. <note id="ChirpTrain">The actual transmitted waveform for range processing for our project will be a burst waveform of consecutive LFM chirp signals of the same TW, p paramters. The reason why is because of taking into account possible future work on this project. If the range and velocity analyzers were ever to be integrated, a burst waveform of LFM chirps of the same p, TW paramteters would have to be used as the transmitted signal for both. Thus, having the range analyzer work with such a signal already facilitates the possibility of integrating the two systems. </note>When used with each other, the SNR is maxized and the detectability of changes in our signal is enhanced. The resulting output of our match filter, LFM chirp combination is a very narrow "compressed" peak that has a large amplitude relative to the rest of output. This makes the detection of echoes easier, and more on how exactly is discussed in the <link document="m11719"> "Approach for Range" </link>module. In the case of velocity processing, a radar relies on Doppler frequency shift caused by a moving target. The processor must perform a spectrum analysis, but the magnitude of the Doppler shift is so small that a different type of transmited waveform is needed - a single pulse would not work. A <emphasis>burst waveform </emphasis>consisting of a coherent group of short pulses is sufficient enough to be used. See the <link document="m11757"> RADAR: Velocity Analysis </link> module for details.  <emphasis/></para>
+		</section>
+		<section id="MatchFilter">
+			<title>Match Filtering</title>
+			<para id="DefinitionofMatchFiltering"><title>Definition of Match Filtering</title>A match filter is defined by its frequency response H(f) = S*(f) (i.e. the complex conjugate of the Fourier transform of the transmitted signal s(t)) or by its impulse response which in turn is determined by the transmitted waveform (the LFM chirp radar signal is the s(t) in the case of range processing). Note that t is on the range of [-T/2,T/2].<equation id="ImpulseResponseforMatchFilterEq">
+					<title>Impulse Response for  Match Filter (with transmitted radar chirp as example) </title>
+					<m:math>
+						<m:apply>
+							<m:eq/>
+							<m:apply>
+								<m:ci type="fn">h</m:ci>
+								<m:ci>t</m:ci>
+							</m:apply>
+							<m:apply>
+								<m:conjugate/>
+								<m:apply>
+									<m:ci type="fn">s</m:ci>
+									<m:apply>
+										<m:minus/>
+										<m:ci>t</m:ci>
+									</m:apply>
+								</m:apply>
+							</m:apply>
+							<m:apply>
+								<m:exp/>
+								<m:apply>
+									<m:times/>
+									<m:apply>
+										<m:divide/>
+										<m:apply>
+											<m:times/>
+											<m:imaginaryi/>
+											<m:ci>W</m:ci>
+										</m:apply>
+										<m:ci>T</m:ci>
+									</m:apply>
+									<m:apply>
+										<m:power/>
+										<m:ci>t</m:ci>
+										<m:cn>2</m:cn>
+									</m:apply>
+								</m:apply>
+							</m:apply>
+						</m:apply>
+					</m:math>
+				</equation></para>
+			<para id="ImpulseResponseforMatchFilterEq2"><note id="ImpulseResponseNote">Since the LFM chirp has the element t^2 in its exponential, the time reversal virtually has no effect. Thus the only difference between the impulse response and the transmitted wave is that one is the complex conjugate of the other. </note><equation id="MatchFilterOutput">
+					<title>Match Filter Output</title>
+					<m:math>
+						<m:apply>
+							<m:eq/>
+							<m:apply>
+								<m:ci type="fn">y</m:ci>
+								<m:ci>t</m:ci>
+							</m:apply>
+							<m:apply>
+								<m:times/>
+								<m:apply>
+									<m:ci type="fn">h</m:ci>
+									<m:ci>t</m:ci>
+								</m:apply>
+								<m:apply>
+									<m:ci type="fn">r</m:ci>
+									<m:ci>t</m:ci>
+								</m:apply>
+							</m:apply>
+							<m:apply>
+								<m:times/>
+								<m:apply>
+									<m:ci type="fn">h</m:ci>
+									<m:ci>t</m:ci>
+								</m:apply>
+								<m:apply>
+									<m:ci type="fn">Gs</m:ci>
+									<m:apply>
+										<m:minus/>
+										<m:ci>t</m:ci>
+										<m:ci>Td</m:ci>
+									</m:apply>
+								</m:apply>
+							</m:apply>
+						</m:apply>
+					</m:math>
+				</equation></para>
+			<para id="MatchFilterOutput2">Note: (1)The recieved signal in terms of range processing is going to be a time delayed and weighted version of the transmitted signal s(t) (i.e. due to a target at a certain range and G is the weighting of the signal due to, for example, noise in the channel. (2) The match filter is <emphasis>Linear Time Invariant.     </emphasis><note id="DiscreteMatchFilter">A discrete time matched filter is what Matlab has to utilize, thus a sampled version of h(t) is needed. Since the discrete time filter is FIR, the output can be calculated by direct convolution (i.e. using the <emphasis>conv</emphasis> command in Matlab).</note>The matched filter will enhance the SNR, and as a result is able to detect our chirp signals even when they are "buried" beneath the noise level. (see <link document="m11719">The
+ Approach for Range</link>; module for utilization). </para>
+			<para id="IntuitionofMatchFilter"><title>Intuition behind Match Filtering</title>By taking the convolution of the recieved signal with the original transmitted signal ( a chirp) you are basically sliding across your time reversed h(t) across your receievd signal doing a point wise multiplication and then integrating over the area of that product. Thus, the peak in the real part of the output is only going to occur when the chirp in h(t) is exactly lined up with a chirp in the recieved signal. In other words, the spike output corresponds to where the greatest area underneath the curve is produced from the pointwise multiplication. The location of the spike itself corresponds to the location of where the right most edge of a chirp is located in the recieved signal. Moreover, even in the presence of noise, the output of the match filter will still produce a compressed peak output corresponding to the location of a chirp in the recieved signal. In the <link document="m11719"> "Approach for Range" </link> module, we discuss how this value is useful in calculating range. See also <link url="http://www.dsp.rice.edu/courses/elec301/">Professor Richard Baraniuk's ELEC 301 </link> course webpage at Rice University under "Demos and Applets" for visual aids in understanding the concept of convolution. </para>
+<para id="WheretonExt"><title>Where to Next</title> Next, look at <link document="m11719"> "Approach for Range" </link> as next step.</para>
+		</section>
+</content>
+	<bib:file>
+		<bib:entry id="BlueBook">
+			<bib:book>
+				<bib:author>Mahafza, Bassem R.</bib:author>
+				<bib:title>Radar Systems Analysis and Design Using Matlab</bib:title>
+				<bib:publisher>Chapman &amp;Hall/CRC</bib:publisher>
+				<bib:year>2000</bib:year>
+			</bib:book>
+		</bib:entry>
+		<bib:entry id="Burrus">
+			<bib:book>
+				<bib:author>Burrus [ et al.]</bib:author>
+				<bib:title>Computer-Based Exerciese for Signal Processing Using MATLAB</bib:title>
+				<bib:publisher>Prentice Hall</bib:publisher>
+				<bib:year>2000</bib:year>
+			</bib:book>
+		</bib:entry>
+	</bib:file>
+</document>

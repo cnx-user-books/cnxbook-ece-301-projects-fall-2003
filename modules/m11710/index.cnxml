@@ -1,0 +1,47 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+	<title>DMT: Introduction</title>
+	<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>3fe66d2d-fe8f-4056-bed0-4f0a982fee40</md:uuid>
+</metadata>
+	<content>
+		<section id="tab1">
+			<title>ELEC 301 Project: Discrete Multitone (DMT)</title>
+			<para id="pg1"/>
+			<para id="pg2"><term>Table of Contents</term></para>
+			<list list-type="bulleted" id="lst1">
+				<item><link document="m11710">Introduction</link></item>
+				<item><link document="m11721">Implementation</link><list list-type="bulleted" id="lst2">
+						<item><link document="m11722">A/D &amp; D/A</link></item>
+						<item><link document="m11723">Serial/Parallel, Parallel/Serial</link></item>
+						<item><link document="m11724">Constellation Mapping</link></item>
+						<item><link document="m11725">Mirror/IFFT, De-Mirror/FFT</link></item>
+						<item><link document="m11762">Cyclic Prefix</link></item>
+						<item><link document="m11727">The Channel</link></item>
+						<item><link document="m11728">Equalization &amp; Approximation</link></item>
+					</list></item>
+				<item><link document="m11729">Results and Conclusions</link></item>
+				<item><link document="m11730">Group Members, etc.</link></item>
+			</list>
+		</section>
+		<section id="sec1">
+			<title>Introduction</title>
+			<para id="background1"> The internet has revolutionized life today as we know it.  It has helped spread vast amounts of knowledge from people to people at the click of a mouse.  The Internet has become very important to us and we continually try to make it easier to use as well as more efficient and faster.  One innovation that has helped greatly in this regard is <term>Discrete Multitone</term>, or <term>DMT</term>.  This is the topic of our ELEC 301 group project.  "What is DMT, and why should I care?", you might ask.  Discrete Multitone is a form of multicarrier modulation that encodes bits in the frequency domain, rather than in time.  We'll get more into our implementation of a DMT system in a second, but we first wish to discuss its usefulness. 
+ </para>
+		</section>
+		<para id="background2">
+  Although DMT is now also used in certain wireless communication systems (802.11), a shining example of it's great power is its use in DSL (Digital Subscriber Line) technologies. Before DSL, most people accessed the Internet via a dial up connection, which uses a phone line.  This was not very efficient or fast; one had to wait a while to get connected, and once connected, it was easy to get disconnected if an outside call came in.  Even if the connection was not lost, phone calls could delay, corrupt or cause incoming bitstreams to be totally lost.  In order to avoid problems with data loss and and enable themselves to continue receiving phone calls, many people bought seperate lines for their telephone and Internet use.  This helped a little, but it was expensive and did not increase the efficiency of their Internet connection.  This is where Digital Subsciber Lines came in.  DSL technology enables very high speed connections from individual computers to switching stations over a standard copper telephone line.  Amazingly, through its use of DMT, DSL allows a subscriber to be able to receive phone calls over the same line at the same time, without risk of disconnection or data loss.
+    </para>
+		<para id="background3">
+  Normal telephone conversation only takes up a fraction of the bandwidth available on standard copper phone lines; there is almost 1 MHz of unused bandwidth.  DSL technology derives its great advantage over dial-up by exploiting this extra bandwidth to carry information without disturbing the line's ability to carry conversations.  In order to use the extra bandwidth, DSL systems use DMT.  DMT places the data onto 247 separate sub-channels, each 4 KHz wide.  This is like having 247 different dial-up lines connected to a computer all at the same time!  
+    </para>
+		<figure id="fig1">
+			<title>DMT Sub-Channels</title>
+			<media id="idp919136" alt=""><image src="../../media/dsl-dmt.gif" mime-type="image/gif"/></media>
+			<caption>DMT divides available bandwidth into 247 sub-channels.</caption>
+		</figure>
+		<para id="background4">
+  The noise level of each sub-channel is monitored; if a particular sub-channel becomes too noisy, something must be done.  This is where one of the major benefits of DMT comes in: since information is encoded in frequency, one simply has to reallocate the data sent at the particular frequency of the noisy sub-channel to one with less noise.  As the frequency response of the channel changes with time, the DSL system constantly shifts data from one sub-channel to another, searching for the frequency distribution that allows for an optimal datarate.  In addition to allowing versatility in spectral allocation, DMT also allows the system to be resilient to impulse noise.  These "spikes" in the Time Domain would likely cause a bit to be flipped with a conventional transmission scheme, but have little effect with DMT; a sinusoid plus a spike still looks like a sinusoid.  In order for telephone calls to not be disrupted by data being transferred, DSL systems make sure the frequencies used are above the 4 kHz needed for voice conversation.  By simply low-pass filtering the recieved signal, one can extract the 4 kHz for voice, keeping the data signals separate.  This is another one of DMT's upsides: it conforms the data to a channel with a partitioned frequency spectrum.   
+</para>
+		<para id="backgroun5">  DMT clearly is a great way to send data over a phone line, but what does this have to do with our ELEC 301 project?  Our overall objectives were to understand how DMT works, implement a working system in MATLAB and show that it is capable of efficiently sending data over a noisy channel.</para>
+		<para id="background6"><link document="m11710">Home</link>   |   Next: <link document="m11721">Implementation</link></para>
+	</content>
+</document>

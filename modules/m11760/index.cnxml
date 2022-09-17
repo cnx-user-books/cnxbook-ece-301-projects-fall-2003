@@ -1,0 +1,20 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+	<title>RADAR: Introduction and Problem</title>
+
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>39116ee9-42d8-4026-83d9-38642be3c615</md:uuid>
+</metadata>
+
+	<content>
+		<section id="Introduction">
+			<title>Introduction to RADAR</title>
+			<para id="IntroPara"><emphasis>RADAR </emphasis>(Radio Detection and Ranging) is a device that sends out electromagnetic waves. These waves reflect off of objects in space, and a proportion of the original wave energy is actually bounced back towards the RADAR. The RADAR then reads this returning signal and analyzes it. This returning signal can be processed to determine many properties about the original object that the wave reflected off of. Two examples that can be determined from the returned signal are the location of the object (distance away from the radar itself) as well as the velocity of the object in relation to the radar.</para>
+			<para id="ProblemPara">Our goal for this project was to simulate this type of RADAR system within MATLAB. We wanted to first create a signal that is appropriate for sending out. We then hoped to simulate the effects the environment had on the travelling wave as well as how it would be effected if it reflects off of an object. The received wave thus would depend on how far away the object was, as well as it's velocity (in the direction of the radar). Then we wanted to successfully create 2 systems, one that analyzed the received signal for the location of the object (range), and one system to find the velocity of the object. Our goal was to use these systems with the received signals that we create to get back the original distance or velocity that we used to simulate the received signals in the first place.</para>
+		</section>
+
+<section id="next">
+<para id="linknext">
+Now to Background:<link document="m11718"> Background of RADAR</link>
+</para></section>
+		
+	</content>
+</document>

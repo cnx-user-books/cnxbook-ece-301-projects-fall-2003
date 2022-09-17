@@ -1,0 +1,48 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Old-School Image Querying</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>ad8e2314-2a31-4ffe-ae42-6b6135eb7b7a</md:uuid>
+</metadata>
+
+  <content>
+
+<para id="p1">
+Jacobs et al. propose an algorithm where sparse signatures for images in the database are first created. When a user inputs a query image, the signature of the query is computed and compared to signatures in the database.
+</para>
+
+<para id="p2">
+The signatures are computed as follows:
+</para>
+
+<list id="oldskool" list-type="enumerated">
+<item>Compute the discrete wavelet transform of the image.</item>
+<item>Set all but the highest magnitude wavelet coefficients to 0.</item>
+<item>Of the remaining coefficients, quantize the positive coefficients to +1 and the negative ones to –1.</item>
+</list>
+
+     <figure id="fig1">
+        <title>A Basic Sketch of the Algorithm</title>
+        <media id="idp1758592" alt=""><image src="../../media/sketch.jpg" mime-type="image/jpeg"/></media>
+      </figure>
+
+<para id="p3">
+This matrix of mostly 0’s and a few +1’s and –1’s constitutes the signature for an image. These +1’s and –1’s correspond to the feature points in an image, and basically characterize the image structure. Jacobs et al. concluded, after some experimentation, that on their database, considering the top 60 magnitude coefficients worked well for scanned images, while the top 40 coefficients gave best results for hand-drawn images.
+</para>
+
+<para id="p4">
+The signatures in our implementation were compared using the generic L1 norm of the difference between signature matrices. Jacobs et al. use the non-intuitive “Lq” norm, which somehow weights the coefficients corresponding to different scales differently. This idea definitely carries some merit, but Jacobs et al. do not provide a very good explanation of this scheme, and we don’t believe that it will improve the performance of their querying algorithm significantly.
+</para>
+
+
+<para id="p30">
+Our implementation of their algorithm is available on Owlnet at 
+</para>
+	<code id="idp2706496" display="block">
+          ~venkatc/elec301/tmproject/code/dwt
+        </code>
+<para id="p40">
+The m-file for generating signatures is <code>sig_gen.m</code>, and the metric function for comparing signatures is <code>metric.m</code>.
+</para>
+
+  </content>
+  
+</document>

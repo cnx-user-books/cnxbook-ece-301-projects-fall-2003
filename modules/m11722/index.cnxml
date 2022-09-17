@@ -1,0 +1,28 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+	<title>DMT: A/D &amp; D/A Conversion</title>
+	<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>adaf923c-c265-472e-b5c6-a772765b7426</md:uuid>
+</metadata>
+	<content>
+		<para id="ad1">Why, you might ask, did we implement our system by using a sampled analog waveform as the input rather than an arbitrary bit stream?  First, it allowed us to actaully see and hear the errors introduced by a noisy channel, rather than just having a tally of the bit errors.  Second, we found it motivational to have a visible goal (i.e. the input waveform) to shoot for as we watched our results improved with every version of our code.  Finally, it gave us more experience coding and lets us put these nifty plots in this module, which helps constrast the encoded time-domain plots seen in other subsystems with a real speech signal.   </para>
+		<section id="sec1">
+			<title>Analog-to-Digital (A/D)</title>
+			<para id="ad2">The A/D converter in our system takes in a MATLAB vector corresponding to a sampled analog signal and converts it to a bit stream.  This is a two step process: quantization and bit assignment.  In <term>quantization</term>, the amplitude axis of the input signal is broken up into <emphasis>2^B</emphasis> levels and each sample is rounded to the nearest level.  Each level is assigned a <emphasis>B</emphasis>-bit binary number, so the length <emphasis>Q</emphasis> input vector of samples is mapped to a length <emphasis>BQ </emphasis>bitstream.  Below are figures of the input and quantized input waveforms.    </para>
+		</section>
+		<para id="delete_me"><figure orient="vertical" id="fig1">
+				<title>Input sampled waveform</title>
+				<media id="idm2336656" alt=""><image src="../../media/speechin.jpg" mime-type="image/jpeg"/></media>
+				<caption>The input waveform used was the 'Handel' sound file built into MATLAB</caption>
+			</figure><figure orient="vertical" id="fig2">
+				<title>Quantized input waveform</title>
+				<media id="idm2026000" alt=""><image src="../../media/quantin.jpg" mime-type="image/jpeg"/></media>
+				<caption>Quantized version of 'Handel'</caption>
+			</figure></para>
+		<section id="sec2">
+			<title>Digital-to-Analog (D/A)</title>
+			<para id="ad3">The D/A converter in our system performs the inverse operation of the A/D converter: it takes in a MATLAB bitsream and converts it to sampled analog signal.  Here, it is only a one step process: since we performed <emphasis>B</emphasis>-bit A/D conversion, we assign each block of <emphasis>B</emphasis> bits the original associated quantization level.  There is an implicit error induced in D/A conversion due to quantization: since we originally rounded the sampled points to the nearest level, the information regarding their exact values is lost.  This is called <term>quantization error</term>.  However, with a speech waveform, a 4-bit (16 quantization level) approximation of the signal sounds reasonably close to the real thing.  To actually see how well our output signal matched up with our input, we compared it with a quantized version of the input waveform.<emphasis/><emphasis/><emphasis/><emphasis/></para>
+			<para id="ad4">Other sources for information about A/D conversion: <term document="m0051">Amplitude Quantization</term></para>
+			<para id="ad5">Our related MATLAB functions: <code display="inline"><link document="m11721" resource="a2d.m">a2d.m</link></code>, <code display="inline"><link document="m11721" resource="d2a.m">d2a.m</link></code></para>
+			<para id="ad6"><link document="m11710">Home</link>   |   Previous: <link url="/m11721/latest">Implementation</link>   |   Next:  <link document="m11723">Serial/Parallel, Parallel/Serial</link></para>
+		</section>
+	</content>
+</document>

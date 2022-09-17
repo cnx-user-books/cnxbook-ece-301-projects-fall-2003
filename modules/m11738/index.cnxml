@@ -1,0 +1,28 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Conclusions</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>2421d39d-25c6-4ee9-bac5-dd25de064725</md:uuid>
+</metadata>
+
+  <content>
+			<para id="conclusions">Through formant analysis, we were able to successfully identify vowels in multi-syllabic words and short sentences.  Formant analysis along with a match filter method to detect vowels proved to be effective, although a few problems were encountered.  After this project experience, we can understand the complications inherent in any full speech recognition system.    </para>
+		<section id="improvement">
+			<title>Improvements</title>
+			<list id="improve">
+				<item>The most immediately obvious improvement we could make would be to increase the vowel database.  This would require much more intricate filtering and thresholding, but would ultimately make for a much more robust system.</item>
+				<item>Another addition we could make would be support for multiple speakers.  We would have to abandon our current method of absolute value thresholding and implement a system that utilized a formant ratio system, as the ratio between formants of a vowel sound is fairly consistent from speaker to speaker.</item>
+				<item>Other improvements might be yielded by experimentation with the size of the window that we use to break our signal into chunks or by tinkering with the auto-regressive model.  Early in our project we settled on the window size and auto-regressive model we would use in order to increase the focus of our project.  It is possible that more effective results could be obtained with a different window size or an optimized auto-regressive model.</item>
+				<item>Another obvious improvement would be to boost the sampling rate of the input signal.  This would result in significantly higher resolution, and allow much more precise tracking of subtle nuances in the dynamic change of formants.  This would also possibly allow the beginning of consonant detection (or at least classification) as our research has told us that by carefully tracking changes to vowel formant values just before and after a consonant sound reveals certain properties of the consonant.</item>
+				<item>Even without the boost in frequency of the sampling rate, we could likely add detection for 'R', 'L', and 'S' consonant sounds.  We found all three of these to have strong resonant frequencies ('R' and 'L' as discussed in our problems section; 'S' had defined formants at high frequencies). </item>
+			</list>
+		</section>
+		<section id="references">
+			<title>References and Acknowledgements</title>
+			<para id="ref"><link url="http://www.owlnet.rice.edu/~elec431/projects96/digitalbb/">Digital Bubble Bath </link>- 1996 Elec 431 Group</para>
+			<para id="bara">Dr. Baraniuk  </para>
+		</section>
+
+
+
+  </content>
+  
+</document>

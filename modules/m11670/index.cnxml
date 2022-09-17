@@ -1,0 +1,26 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Content-Based Image Querying with Complex Wavelets: Discrete Wavelet Transform</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>f6fd736c-64b3-486a-94a9-47ad8a2774b9</md:uuid>
+</metadata>
+
+  <content> 
+
+<para id="par1">
+Over the last couple of decades, wavelets have provided a novel method for analyzing mathematical functions. They have been useful in both pure and applied mathematics (as in harmonic analysis), as well as in electrical engineering. They have turned out to be powerful for proving theorems, and have many interesting properties. The major advantage to using wavelets is that they provide a strong mathematical framework for analyzing functions at various <emphasis>scales</emphasis>.  This property makes wavelet-based analysis a powerful tool in image processing. Ideas such as <emphasis>multiresolution</emphasis> – versions of an image at various resolutions – blend naturally with our intuition about the resolution of an image. Due to this property of multiresolution, wavelets are also useful in characterizing the structure of an image. The <emphasis>coarse-scale</emphasis> wavelet coefficients contain a lot of information about the image structure. In addition, wavelets provide a sparse basis for most natural images, and hence are useful in image compression.
+</para>
+
+
+    <figure id="lenafig">
+      <title>DWT of Lena</title>
+      <media id="idm8081680" alt=""><image src="../../media/lena_wavelet.png" mime-type="image/png"/></media>
+      <caption>This figure illustrates what we mean by <emphasis>multiresolution</emphasis>.</caption>
+    </figure>
+
+
+<para id="par2">
+One can define a separable two-dimensional wavelet basis as a series of one-dimensional wavelet transformations along the rows, and then along the columns.  Such a basis provides all the advantages of one-dimensional wavelets, but have the same disadvantage in that they do not offer shift-invariance.  That is, an image and its shifted version would not have any noticeable correlation in the wavelet domain.  
+</para>
+
+  </content>
+  
+</document>

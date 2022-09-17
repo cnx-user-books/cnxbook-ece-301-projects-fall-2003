@@ -1,0 +1,27 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Guitar Distortion: Rocking in the Digital World</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>f70bac46-8c77-4c5d-b0bf-cd46ef7e184b</md:uuid>
+</metadata>
+
+  <content>
+    <para id="p1">
+      Since the days of the 1940s and 1950s, not much has changed in
+      the guitar amplification world.  Good engineering produced a
+      robust design that has lasted several decades without much
+      alteration.  That is until recently, when advances in technology
+      allowed the production of electronic circuits that could perform
+      several complex calculations on signals in real time.  This has
+      revolutionized the way audio components are built today, and
+      piqued our interest in how to build a simple guitar distortion
+      model that models a classic tube amp.
+    </para>
+    <para id="p2">
+      In this day and age, we can use computers and filters instead of
+      large bulky circuitry to mimic this classic sound, thereby
+      reducing the cost of this expensive equipment.  All we need is a
+      good program, and we're set!  This project focuses on using
+      MATLAB for the simulation of distortion.
+    </para>
+  </content>
+  
+</document>

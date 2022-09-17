@@ -1,0 +1,25 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Problem</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>6a53e076-d117-4bd2-ac03-2f9f409d3614</md:uuid>
+</metadata>
+
+  <content>
+<section id="problem_sect1">
+			<title>The Problem</title>
+			<para id="sect1_para1">Our project involves the examination of four sets of images from each subject. The program is equipped to detect four emotions: <term>happy</term>, <term>angry</term>, <term>sad</term>, and <term>surprised</term>. It should be able to <term>examine the four images, distinguish between them, and correctly classify each image with its corresponding emotion</term> to a satisfactory degree. Although initial implementations will have a user-defined cropping of relevant facial features, we will also need to design a way to accurately automate this process.      </para>
+		</section>
+
+<section id="problem_sect2">
+			<title>Initial concerns</title>
+			<para id="sect2_para1">Naturally, we want two images of the same person to be different only in emotion, not in lighting, position, intensity, etc. Thus, all pictures were taken in the same environment with the same digital camera, each framing the subject's face only as he or she looked straight ahead. The images were then grayscaled and reduced to a size of 250 by 333 pixels. This took care of issues of normalization, since all images were then uniform.    </para>
+			<para id="sect2_para2">A second, more important issue was which portions of the face to examine. The brain tends to look at several regions: the eyes, the mouth, the cheeks, and the forehead. However, the difference between emotions is very subtle for all of these regions except the mouth, which tends to be the most expressive. Thus, we decided to focus exclusively on the mouth for our project and attempt to gain accurate results using only that portion of the face.  <figure orient="horizontal" id="problem_fig1">
+					
+					<media id="idp3091776" alt=""><image src="../../media/crop3.jpg" id="problem_img" mime-type="image/jpeg"/></media>
+					<caption>An example of the four images to be processed (happy, surprised, angry, sad)</caption>
+				</figure></para>
+		</section>
+
+	 
+  </content>
+  
+</document>

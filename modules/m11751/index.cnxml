@@ -1,0 +1,138 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Vowel Detection Results</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>570033f9-5f51-485f-ac84-b90cc08bfff2</md:uuid>
+</metadata>
+
+  <content>
+		<para id="results">Our project produced largely successful results.  We achieved flawless output for a variety of two syllable words that, as a whole, contained all of our database vowels.  We were also successful with some three and four syllable words. </para>
+
+<para id="resulttable"><table id="tabe" summary="">
+				<title>Result Table</title>
+				<tgroup cols="2">
+					<colspec colnum="1" colname="spycolgen1" colwidth="1.958333in"/>
+					<colspec colnum="2" colname="spycolgen2" colwidth="1.791667in"/>
+					<tbody>
+						<row>
+							<entry align="center">Input</entry>
+							<entry align="center">Output</entry>
+						</row>
+						<row>
+							<entry>
+<link resource="biblioteca.wav">Biblioteca</link></entry>
+							<entry>CiCiCoCeCaC</entry>
+						</row>
+						<row>
+							<entry>
+<link resource="loteria.wav">Loteria</link></entry>
+							<entry>CoCeuCiCaC</entry>
+						</row>
+						<row>
+							<entry><link resource="mexico.wav">Mexico</link></entry>
+							<entry>CeCiCoC</entry>
+						</row>
+						<row>
+							<entry><link resource="santiago.wav">Santiago</link></entry>
+							<entry>CaCiCaCoC</entry>
+						</row>
+						<row>
+							<entry><link resource="santafe.wav">Santa Fe</link></entry>
+							<entry>CaCa CeC</entry>
+						</row>
+						<row>
+							<entry><link resource="cabo.wav">Cabo</link></entry>
+							<entry>CaCoC</entry>
+						</row>
+						<row>
+							<entry><link resource="dime.wav">Dime</link></entry>
+							<entry>CiCeC</entry>
+						</row>
+						<row>
+							<entry><link resource="tito.wav">Tito</link></entry>
+							<entry>CiCoC</entry>
+						</row>
+						<row>
+							<entry>Papi</entry>
+							<entry>CaCiC</entry>
+						</row>
+						<row>
+							<entry><link resource="arturo.wav">Arturo</link></entry>
+							<entry>CaCuCoC</entry>
+						</row>
+						<row>
+							<entry>Alejandro</entry>
+							<entry>CaoCeCaCoC</entry>
+						</row>
+						<row>
+							<entry><link resource="dame.wav">Dame una camisa</link></entry>
+							<entry>CaCe CiuCa CaCiCaC</entry>
+						</row>
+						<row>
+							<entry><link resource="sillysentence.wav">Me gusta Rich B</link></entry>
+							<entry>Ce CuCa CiCiC</entry>
+						</row>
+					</tbody>
+				</tgroup>
+			</table></para>
+
+<note id="anote" type="Note"><label>Note</label>C represents a string of 1, 2, or more non-vowels and a,e,i,o,and u are the actual vowels detected.  Also, "Me gusta Rich B" had to be parsed together.</note>
+
+
+		<list id="lists">
+			<item>'Biblioteca' and 'Santiago' demonstrate superfluous consonant placement between vowels.</item>
+			<item>'Una' illustrates difficulty in vowel detection because the second formant in the vowel sound was not present.</item>
+			<item>'Loteria' and 'Alejandro' demonstrate the errors caused by 'R' and 'L' respectively.</item>
+		</list>
+
+
+		<section id="asdf">
+			<title>Problems</title>
+			<list list-type="bulleted" id="sf">
+				<item>A relatively minor problem we encountered was the placement of consonants at the beginning and end of word, regardless of the beginning or ending sound being a consonant or vowel.  A good example is the word Arturo, which begins and ends with a vowel sound, though our program returns a consonant at beginning and end.  This is because of the dead space that is inherent at the start and end of file, due to the delay between recording beginning and the speech sample starting (and similarly at the end).  The simplest way we could have amended this would have been to manually crop the files, so that no dead space was found.</item>
+				<item>Occasionally our vocal tract model did not sufficiently emphasize the second formant in 'I' at a frequency far enough away from the third for there to be a peak at the frequency value we associated with the second one.  As a result, the third formant was sometimes detected as the second.  We never got this problem ironed out, and it caused confusion between I's and U's in our filter.  A possible method of correcting this would be to apply a differentiator to adjacent frequency values of our frequency response.  When the difference levels off or goes negative with a sufficiently high magnitude value, we could add that point as a formant peak.  In the image below, one can visually tell that there is likely a peak around 1950 Hz, but there is no expressed peak, so our detection program passed over it. 
+
+<figure id="id">
+<media id="idm7844816" alt=""><image src="../../media/i-drop2.png" mime-type="image/png"/></media>
+<caption>Example of loss of 2nd formant in Vowel 'I'</caption>
+</figure>
+
+</item>
+				<item>· L's and R's were occasionally detected as vowels.  This is due to the fact that the pronunciation of them is little different from that of vowels; they primarily rely on resonant frequencies from the vocal tract rather than restriction of airflow as other consonants.  Below are some frequency responses of the vocal tract as L's and R's were being pronounced.  As you can tell, they are highly similar to the frequency response of the vocal tract when vowels are being produced.  Without drastically changing the focus of our project, the only method to amend this would be to have more intricate threshold values.  
+
+<figure orient="horizontal" id="horfig">
+ <subfigure id="subfig1">
+<media id="idp2614928" alt=""><image src="../../media/l-alej2.png" mime-type="image/png"/></media>
+<caption>Consonant 'L' Vocal Model</caption>
+</subfigure>
+<subfigure id="subfig2">
+<media id="idp1956752" alt=""><image src="../../media/r-lot2.png" mime-type="image/png"/></media>
+<caption>Consonant 'R' Vocal Model</caption>
+</subfigure>
+</figure>
+
+</item>
+				<item>· Often in direct transition from vowel to vowel with no consonant between, a consonant value was returned between the two vowels.  This can be seen below in the three images showing the transition from the second I in biblioteca to the 'O'.  The first image is the 'I', the third is the 'O', and the second is the transition between them.  The transitional frequency response is not sufficiently similar to either the 'I' or 'O', so it gets classified as a consonant.  Currently anything that does not match one of our five vowels gets classified as a consonant.  A possible means of circumventing this would be to add a transitional character to our database, in this case and 'IO' database character.  Or we could have direct consonant recognition (a broad class, not specific consonants) and then classify vowels that don't match our database as unknowns, rather than just pooling them with consonants.  &lt;i-bib.fig&gt;, &lt;between.fig&gt;, &lt;o-bib.fig&gt; 
+
+<figure orient="horizontal" id="horfig2">
+ <subfigure id="subfig3">
+<media id="idp1716864" alt=""><image src="../../media/bib-i2.png" mime-type="image/png"/></media>
+<caption>Second 'I' in Biblioteca</caption>
+</subfigure>
+<subfigure id="subfig4">
+<media id="idp2937088" alt=""><image src="../../media/between2.png" mime-type="image/png"/></media>
+<caption>Transition between vowels</caption>
+</subfigure>
+</figure>
+
+<figure id="id2">
+<media id="idm7520160" alt=""><image src="../../media/bib-o2.png" mime-type="image/png"/></media>
+<caption>'O' in Biblioteca</caption>
+</figure>
+
+
+</item>
+			</list>
+		</section>
+
+  </content>
+  
+</document>

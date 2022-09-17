@@ -1,0 +1,71 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>The Problems with Distortion</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>b1ef1dbd-c556-4963-ac60-1bf10fa86665</md:uuid>
+</metadata>
+
+  <content>
+    <para id="p1">
+      Let's say you go out to Radio Shack and buy a few cheap cables
+      that let you plug in your slammin' new guitar into your
+      soundcard, just so you can play around with different
+      distortions.  You want try playing with MATLAB, using the Taylor
+      Series method's familiar discrete power series:
+      <equation id="p1e1">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci>y</m:ci>
+	    <m:apply>
+	      <m:sum/>
+	      <m:bvar>
+		<m:ci>n</m:ci>
+	      </m:bvar>
+	      <m:lowlimit>
+		<m:cn>0</m:cn>
+	      </m:lowlimit>
+	      <m:uplimit>
+		<m:ci>N</m:ci>
+	      </m:uplimit>
+	      <m:apply>
+		<m:times/>
+		<m:ci><m:msub>
+		    <m:mi>a</m:mi>
+		    <m:mi>n</m:mi>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>x</m:ci>
+		  <m:ci>n</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      where <m:math><m:ci>x</m:ci></m:math> is your original signal,
+      <m:math><m:ci>y</m:ci></m:math> is your distorted signal, and 
+      <m:math>
+	<m:ci><m:msub> 
+	    <m:mi>a</m:mi> 
+	    <m:mi>n</m:mi> 
+	  </m:msub></m:ci>
+      </m:math> is the constant for each item of the sum.
+    </para>
+    <para id="p2">
+      The first problem you notice in playing back your
+      <code>wav</code> file is the noise; after all, those were some
+      really cheap cables!  However, from an introductory electrical
+      engineering class and another signals class, you've learned how
+      to filter out noise, so that should be easy to deal with later.
+    </para>
+    <para id="p3">
+      You notice the next problem when trying to execute the Taylor
+      Series approximation of the signals.  You may set some
+      harmonics' constants to zero, but as you increase different
+      coefficients of higher and higher powers, the only difference is
+      that the music has a lower volume, and the volume of the noise
+      is higher!  Why isn't this working?
+    </para>   
+  </content>
+  
+</document>

@@ -1,0 +1,29 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+	<title>DMT: Mirror/IFFT, De-Mirror/FFT</title>
+	<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>ecd1d061-3cb8-4ddf-80d4-0879b3bddb95</md:uuid>
+</metadata>
+	<content>
+		<section id="sec1">
+			<title>Mirror</title>
+			<para id="mir1">Like serial/parallel conversion, mirroring is simple both in principle and implementation, but is essential to DMT.  We need to eventually transmit a real-valued signal, but after constellation mapping, the blocks are all complex-valued.  Mirroring ensures that the transmitted signal is real-valued by using the fact that the IFFT of a conjugate-symmetric vector is real; i.e., mirroring gives each block conjugate symmetry.  In mirroring, each block is flipped around, conjugated and tacked onto the end of the original block.  There are a few finer points, however.  If the block is length <emphasis>M</emphasis> before mirroring, the (<emphasis>M</emphasis>+1)th element of the mirrored block takes any real value (we set it to zero) while the (<emphasis>M</emphasis>+2)th through 2<emphasis>M</emphasis>th elements take the 1st through (M-1)th elements (flipped) of the original block.  Also, the first element in any block cannot be complex valued; it must be artificially set to some real value.  This is because the first point in any block corresponds to a frequency of zero after after the IFFT; if this element is complex, the resulting IFFT vector will have a complex DC offset and thus will also be complex.  Although this would be a source of error, we assumed that the receiver knew the correct first elements of each block, eliminating this error.  We felt we were justified in this regard because our main goal was to implement a DMT system resilient to <emphasis>channel</emphasis> error (We could also have coded it so that the first few bits in each block were assigned real-valued constellation points, but this way was easier).          <figure orient="vertical" id="fig1">
+					<title>Mirrored block</title>
+					<media id="idp2579200" alt=""><image src="../../media/mirrored.jpg" mime-type="image/jpeg"/></media>
+					<caption>This is one block (originally length 128) of constellation points after mirroring (magnitude only).  The mirrored portion is shown in blue.</caption>
+				</figure></para>
+		</section>
+		<section id="sec2">
+			<title>IFFT</title>
+			<para id="mir2">  The <link document="m10250">IFFT</link> basically provides the modulation for DMT.  As hinted at in the S/P module, the complex constellation points in each block (now mirrored) are interpreted as the spectral coefficients for a time-domain signal; the IFFT gives us this signal.  By ensuring that our block length remains a power of 2 through the mapping and mirroring process, we make sure that the IFFT is most computationally efficient.  We simply used the IFFT function built into MATLAB in our system.  <figure orient="horizontal" id="fig2">
+					<title>IFFT of one block</title>
+					<media id="idm7350160" alt=""><image src="../../media/tdmirror.jpg" mime-type="image/jpeg"/></media>
+					<caption>This is the IFFT of the previous figure.  It is real-valued and the same length as the mirrored block. </caption>
+				</figure></para>
+		</section>
+		<section id="sec3">
+			<title>FFT/De-Mirror</title>
+			<para id="mir3">After going through the channel, the blocks undergo an inverse of the transmission process.  Once the received time-domain blocks are separated, an FFT returns the spectral coefficients of each block, which are "noisy" versions of the post-mirroring values.  This can be looked at as demodulating in a way; the FFT essentially multiplies the sinusoids by in the time-domain waveform by their conjugates.  De-mirroring is straight forward; we want to get rid of the conjugate-symmetric part of each block so the last <emphasis>M</emphasis> values (for a block with pre-mirroring length <emphasis>M</emphasis>) are simply thrown away.  Again, the FFT algorithm was built into MATLAB and the de-mirroring code was trivial.    </para>
+			<para id="mir4">Our related MATLAB functions: <code display="inline"><link document="m11721" resource="mirror.m">mirror.m</link></code>, <code display="inline"><link document="m11721" resource="demirror.m">demirror.m</link></code></para>
+			<para id="mir5"><link document="m11710">Home</link>  |  Previous: <link document="m11721">Implementation</link>   |   Next: <link document="m11762">Cyclic Prefix</link></para>
+		</section>
+	</content>
+</document>

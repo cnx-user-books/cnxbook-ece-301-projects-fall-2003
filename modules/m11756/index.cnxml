@@ -1,0 +1,32 @@
+<document xmlns="http://cnx.rice.edu/cnxml" id="Intro" module-id="" cnxml-version="0.7">
+	<title>Image Compression through Sparse Approximation - Main</title>
+	<content>
+		<section id="prob">
+			<title>Problem</title>
+			<para id="probPar">Sparse approximation, defined as the  practice of representing a given signal as a summation of elements from a dictionary of elementary signals, has traditionally only involved one basis - the canonical basis in which we percieve the world, the fourier basis that is the foundation of the frequency domain, or the dct basis that is behind the modern JPEG image format.  However, recent thought has suggested that more accurate, faster methods for sparse approximation may instead be derived from a  "combinational" basis, ie, a basis that consists of two or more bases concatenated onto eachother.  This resultant basis is often called an "overcomplete" or "redundant" basis, as there are always more vectors in the basis than the magnitude of the dimension of the space they span.  Since they are redundant in this effect, the immediate problem would seem to be that there are then an infintie number of representations for any vector, or signal, in a space.  Modern theory suggests that there are ideal algorithms for determining these transformations, in terms of number of computations and sparsity of the resultant representation; the two most prevalent being Basis Pursuit (BP) and Orthogonal Matching Pursuit (OMP).</para>
+			<para id="dummu1"/>
+			<para id="dummy2"/>
+			<para id="dummy3"/>
+		</section>
+		<section id="obj">
+			<title>Objective</title>
+			<para id="objPar">For our project, we intend to analyze the performance of the BP and OMP with different dictionaries and different types of images. Our goal is to compare the effectiveness if these algorithms by determining the level of sparsity and compression that they can achieve, while still producing recognizable images.</para>
+			<para id="dummy4"/>
+			<para id="dummy5"/>
+			<para id="dummy6"/>
+		</section>
+		<section id="continue">
+			<title>Continue</title>
+			<para id="links"><list list-type="bulleted" id="bullets">
+					<item><link document="m11778">Background Information</link></item>
+					<item><link document="m11780">Procedure</link></item>
+					<item><link document="m11783">Results</link></item>
+					<item><link document="m11781">Conclusion</link></item>
+					<item><link document="m11779">Our Code</link></item>
+					<item><link document="m11782">Team Members</link></item>
+					<item><link document="m11784">References</link></item>
+				</list></para>
+		</section>
+	</content>
+      
+      </document>

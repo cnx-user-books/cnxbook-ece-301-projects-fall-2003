@@ -1,0 +1,39 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>The Distortion Team</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>f1f0c45a-4bb8-4507-b0c5-ea675fb18712</md:uuid>
+</metadata>
+
+  <content>
+    <section id="s1">
+      <title>Jason Buck</title>
+      <para id="s1p1">
+	In this project, Jason acted as our guitarist and sound
+	equipment man.  Also, he brainstormed for ideas, did research
+	in distortion, all of the noise filtering including the MATLAB
+	function, contributed to the webpage, and helped with the text
+	of the poster presentation.  He also served as a distortion
+	critic when we were deciding on our final series.
+      </para>
+      <para id="s1p2">
+	Jason Buck is currently a junior ECE student, specializing in
+	Computer Engineering.
+      </para>
+    </section>
+    <section id="s2">
+      <title>Elizabeth Gregory</title>
+      <para id="s2p1">
+	Elizabeth is the lucky person that discovered to use powers
+	less than one.  She helped brainstorm for ideas, did research
+	in various filters and unused methods, did most of the
+	Connexions work, and helped with the design and layout of the
+	poster.  Elizabeth also served as a Connexions tutor for the
+	other ELEC 301 groups.
+      </para>
+      <para id="s2p2">
+	Elizabeth Gregory is currently a junior EDE student,
+	specializing in Signals and Systems.
+      </para>
+    </section>
+  </content>
+  
+</document>

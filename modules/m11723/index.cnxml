@@ -1,0 +1,13 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+	<title>DMT: Serial/Parallel, Parallel/Serial</title>
+	<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>f024e1b9-e9a4-4707-ab73-633490eefd58</md:uuid>
+</metadata>
+	<content>
+		<section id="sec1">
+			<title>S/P, P/S</title>
+			<para id="sp1">The concepts of serial-to-parallel and parallel-to-serial conversion are trivial. In S/P, a long stream of data is broken up into several equal-length (or approximately equal-length) "chunks" which can all be operated upon at the same time.  In P/S, these pieces are concatenated one right after the another into a long data stream.  Their implementation in MATLAB is also trivial; all one has to do is manipulate a vector into several columns of a matrix, or take a matrix and concatenate its columns.  However, S/P conversion is very important in DMT.  The blocks produced in S/P are the input to the <link document="m11724">constellation mapping</link>, which is basically representing segments of bits as spectral coefficients.  The length of the blocks (along with the the constellation used) determine the number of spectral coefficients to be used by the <link document="m11725">IFFT</link>; i.e. S/P is essential in choosing how many frequencies are to be used.  Usually, the block length is a power of 2, which makes the IFFT and FFT algorithms most computationally efficient.</para>
+			<para id="sp2">Our related MATLAB functions: <link document="m11721" resource="series2parallel.m"><code display="inline">series2parallel.m</code></link>, <link document="m11721" resource="parallel2series.m"><code display="inline">parallel2series.m</code></link></para>
+			<para id="sp3"><link document="m11710">Home</link>  |  Previous: <link document="m11721">Implementation</link>   |   Next: <link document="m11724">Constellation Mapping</link></para>
+		</section>
+	</content>
+</document>

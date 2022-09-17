@@ -1,0 +1,42 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+  <title>Concluding Thoughts on Distortion</title>
+  <metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m11754</md:content-id>
+  <md:title>Concluding Thoughts on Distortion</md:title>
+  <md:abstract>In our conclusion, we compare our original signal with our favorite distortion signal.</md:abstract>
+  <md:uuid>ea53346f-5475-4ea2-9eff-7d84c9612bbe</md:uuid>
+</metadata>
+
+  <content>
+    <para id="p1">
+      In the end, we found our perfect distortion (plus a bit of noise
+      we couldn't quite get out).  Taking a look at the spectrograms
+      for <link target-id="musicsample">our music sample</link> and <link target-id="distorted">our distorted musical sample</link>, we can
+      see which harmonics were emphasized to create the distortion.
+      <figure id="musicsample">
+	<title>Music Sample: Everlong by the Foo Fighters</title>
+	<media id="id1168715989171" alt=""><image src="../../media/musicsample.gif" mime-type="image/gif"/></media>
+      </figure>
+      <figure id="distorted">
+	<title>Distorted Music Sample</title>
+	<media id="id1168737191768" alt=""><image src="../../media/distortedmusicsample.gif" mime-type="image/gif"/></media>
+      </figure>
+    </para>   
+    <para id="p2">More importantly, we can hear the wonderful difference between
+      the two sound clips, <link resource="Everlong.wav">the original Foo
+      Fighters' Everlong clip</link> and <link resource="LizEverlong.wav">the distorted version</link>.
+      <media id="id1168716065848" alt="" display="block"><audio src="Everlong.wav" id="music1" mime-type="audio/x-wav"><param name="composer" value="Foo Fighters"/><param name="title" value="Everlong Clip"/><param name="total-time" value="20"/><param name="performer" value="Jason Buck"/></audio></media>
+      <media id="id1168727069465" alt="" display="block"><audio src="LizEverlong.wav" id="music2" mime-type="audio/x-wav"><param name="composer" value="Foo Fighters"/><param name="title" value="Everlong Clip"/><param name="comments" value="distorted"/><param name="total-time" value="20"/><param name="performer" value="Jason Buck"/></audio></media>
+      To test the overall quality of our distortion, we can also
+      listen to how our <link resource="LizEverlong.wav">distorted sample</link>
+      sounds in comparison to an <link resource="DisEverlong.wav">Marshall
+      AVT-50 amplifier</link>.
+      <media id="id1168728165027" alt="" display="block"><audio src="EverlongDis.wav" id="music3" mime-type="audio/x-wav"><param name="composer" value="Foo Fighters"/><param name="title" value="Everlong Clip"/><param name="comments" value="Recording from Marshall AVT-50    amplifier"/><param name="total-time" value="20"/><param name="performer" value="Jason Buck"/></audio></media>
+      All in all, this is a great method for simple distortion!  The
+      next step would be to map the pertinent terms from our Taylor
+      Series to "nobs" in order to increase or decrease each
+      coefficient to change the distortion.
+    </para>
+  </content>
+  
+</document>

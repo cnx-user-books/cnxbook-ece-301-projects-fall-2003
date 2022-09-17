@@ -1,0 +1,168 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+	<title>Approach for Range</title>
+
+<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>ae4acddf-5f0d-4592-9aeb-49856a00bf40</md:uuid>
+</metadata>
+
+
+	<content>
+		<section id="Approach">
+			<title>Approach</title>
+			<para id="Flowchart"><title>Flow Chart for Approach of Range</title><figure id="FlowChartforApproachofRange">
+					<title>Range Analysis Block Diagram</title>
+					<media id="idp8192352" alt=""><image src="../../media/rangechart.jpg" mime-type="image/jpeg"/></media>
+					<caption>Range Analysis Block Diagram</caption>
+				</figure></para>
+			<para id="Methods"><title>Chirp and Chirp Train Design</title>First, we design a Linear Frequency Modulated (LFM) chirp for the desired time-bandwidth product amount (TW), oversampling amount p, and sampling frequency (fs) . The MATLAB program
+"<link resource="dchirp2.m">dchirp2</link>" will build up a single pulse while "<link resource="ctbuild4.m">ctbuild4</link>" will design a burst waveform consisting of L chirps, repeated over a period M.  </para>
+			<para id="Dchirp2ex"><title>Example of "dchirp2" MATLAB function call</title>[s,h,y,T,W,Ts] = dchirp2(TW,p,sampfreq)    with outputs: <list id="Dchirp2outputs">
+					<item>s = single LFM chirp set to specified input paramters</item>
+					<item>h = match filter impulse response</item>
+					<item>y = (used for testing of original code) passing s through match filter</item>
+					<item>T = time duration of LFM chirp (units: sec)</item>
+					<item>W= swept bandwidth of LFM chirp (units: Hz)</item>
+					<item>Ts= sampling period (1/fs)</item>
+				</list></para>
+			<para id="CTbuildex"><title>Example of "ctbuild4" MATLAB function call</title>[s,ssent,h,y,T,W,Ts] = ctbuild4(TW,p,sampfreq,M,L)    with outputs: <list id="CTbuildoutputs">
+					<item>s = single chirp defined by TW,p </item>
+					<item>ssent = noise-free burst waveform of L lfm chirps of the same TW, p</item>
+					<item>h = match filter impulse response</item>
+					<item>y = (used for testing of original code) passing s through match filter</item>
+					<item>T = time duration of LFM chirp (units: sec)</item>
+					<item>W= swept bandwidth of LFM chirp (units: Hz)</item>
+					<item>Ts= sampling period (1/fs)</item>
+				</list></para>
+			<para id="Channel"><title>Simulate radar returns</title>In order to simulate proper radar returns, we first simulate the <emphasis>noise</emphasis> of a channel. Thus, we add complex white Gaussian nosie, using the "crandn" command in MATLAB, to our complex train of chirps. We perform this opertion in our main MATLAB function called "<link resource="burst4.m">burst4</link>." Next, we then apply a time delay to our signal.  The program accomplishes that by shifting a vector x of length N to the right by amount TD.<note id="AddingNoise">For the project we worked only with an assumed value of SNR = -10 dB (i.e. the std. deviation is the square root of 10 multiplied against the chirp's average amplitude). We did a visual comparison of these two values to make sure our value of n was correct. See MATLAB function "<link resource="burst4.m">burst4</link>" for detailed commentary. </note><note id="TDvariable">The TD value inputted by the user is in terms of how many elements the user wants to physically shift the transmitted wave form by and do not correspond to actual units of time.  </note></para>
+			<para id="MaxRange"><title>Defining max range of radar processing</title>The <emphasis>Maximum Range</emphasis> of our radar system is determiend by two things. First, how large the resting time is between consecutive falling and rising edges of chirps. Secondly, how long our signal is. The reason why these are important is that since this model for range processing is in discrete time, we can not simulate an infinite range for our targets. That would correspond to having to time delay our transmitted signal by a extremely large amount. If shifted by an amount greater than the signal's length, the simulated return would just be a flat line of value zero for the length of the signal. Basically, the signal can be time delayed only up until the first LFM chirp's  falling edge. This location corresponds to the last value  of the recieved signal to ensure getting a big enough spike in the match filter's output to use in calculating range.  Thus, since we define the value for time period (Ts) of our chirp pulse train and the number of pulses, we can define the  max range by finding the maximum amount we can shift our signal. Then by plugging in this max Td value into the discrete-time range equation below, the max range value is found.<equation id="MaxTDEq">
+					<title>Equation for Max Time Delay </title>
+					<m:math>
+						<m:apply>
+							<m:eq/>
+							<m:ci>MaxTD</m:ci>
+							<m:apply>
+								<m:minus/>
+								<m:apply>
+									<m:times/>
+									<m:ci>M</m:ci>
+									<m:ci>L</m:ci>
+								</m:apply>
+								<m:apply>
+									<m:minus/>
+									<m:ci>M</m:ci>
+									<m:ci>N</m:ci>
+								</m:apply>
+							</m:apply>
+						</m:apply>
+					</m:math>
+				</equation></para>
+			<para id="MaxTDEq2"><note id="MaxTDEq3">Basically M multiplied by L is the entire length of the signal and (M-N) is the last value of the first chirp right on the falling edge. </note></para>
+			<para id="BuildMatchFilter"><title>Characterizing Match Filter</title>We characterize the match filter impulse response as being h(t)=s*(-t)=exp(-j*W/T*t^2) with t on the range of [-T/2,T/2]. See <link document="m11718"> "Background" </link> module under the section "Match Filter" for more details.</para>
+			<para id="RangeAnalysis"><title>Range Analysis</title>The approach taken now to analyze the corresponding range of the target for the received signal is the following:<list id="StepsforAnalysis">
+					<item>Process recieved signal through a match filter with impulse response described above and in "Backgrounds"</item>
+					<item>Process originally transmitted signal through same match filter</item>
+					<item>Pick out the peaks from outputs via setting a threshold value as a starting point</item>
+					<item>Compare the location of the first peak from each output</item>
+					<item>The difference in locations of the 1st peaks is the time delay (Td) value</item>
+					<item>Plug Td into discrete time range equation to get approximate range </item>
+				</list><note id="FirstPeak">The reason why we only need to analyze the first peak is because we are assuming that the object is not moving. Also, for future work, if the range and velocity systems were to be integrated (i.e. can take into account a moving target ) an initial range would be calculated from the first returned pulse. Velocity would be calculated as well from the rest of the recieved signal. Then, a relationship could be found for the object's range as a function of time. More specifically R(t) = Ro - vt where assuming the target is approaching the radar and since the velocity was calculated the simple distance = rate x time relationship can be used ( where x = multiplication). Note, this is all assuming a constant velocity and that the target is still not at an angle to the radar's transmission path. </note>The matlab function "<link resource="rangecalc.m">rangecalc</link>" does the above stated list and an exampe of how it is called follows. It is interesting to note that the "rangecalc" function calls a subfunction to actually pick out the peaks in the outputs of the matched filters. The subfunction is called "<cite><cite-title><link resource="pkpicker.m">pkpicker</link>"</cite-title></cite>" and was provided by the "Computer-Based Exerciese for Signal Processing Using MATLAB" book by Burrus [ et al.]. Given the number of peaks to look for, a threshold value to use, and a vector, the function will go through a vector and will output the locations of the highest peaks above the threshold as well as their values.    </para>
+			<para id="Rangecalcex"><title>Example of "rangecalc" MATLAB function call</title>[timedelay,range,rsigmatchlocs] = rangecalc(rsig,tsig,h,number,thresh,Ts)     with inputs:<list id="Rangecalcinputs">
+					<item>rsig = simulated recieved signal</item>
+					<item>tsig = originally transmitted chirp train</item>
+					<item>h = match filter impulse resposne</item>
+					<item>number = # of pulses you want to be picked out</item>
+					<item>thresh = starting point to look for peaks in signal</item>
+					<item>Ts = sampling period</item>
+				</list> with outputs:   <list id="Rangecalcoutputs">
+					<item>timedelay = difference in location of 1st peaks from outputs of both match filters </item>
+					<item>range =  corresponding real world target range (units: meters)</item>
+					<item>rsigmatchlocs = vector containing locations of peaks from output of match filter of recieved signal</item>
+				</list></para>
+			<para id="Pkpicker"><title>Example of "pkpicker" MATLAB function call</title>[peaks,locs] = pkpicker( x, thresh, number, sortem )           with inputs:  <list id="Pkpickerinputs">
+					<item>x       :  input data  (if complex, operate on mag)  </item>
+					<item>thresh  :  reject peaks below this level  </item>
+					<item>number  :  max number of peaks to return  </item>
+					<item>sortem  :  'sort' will return list sorted by peak height instead of by index # (the default)</item>
+				</list>with outputs: <list id="Pkpickeroutputs">
+					<item>peaks   :  peak values  </item>
+					<item>locs       :  location of peaks (index within a column)</item>
+				</list></para>
+			<para id="PutAllTogether"><title>Putting it all together</title>The function that we designed to combine all of the previously mentioned functions is called "<link resource="burst4.m">burst4</link>".</para>
+			<para id="Burst4ex"><title>Example of "burst4" MATLAB function call</title>[noisytestecho,noisyshifttestecho,rsigmatchlocs,timedelay,range,h] = burst4(L,TW,p,M,n,sampfreq,TD)        with inputs:<list id="st3inputs">
+					<item>L: number of pulses  </item>
+					<item>TW: time bandwidth product  </item>
+					<item>p: oversampling factor  </item>
+					<item>M: interpulse period  </item>
+					<item>n: noise factor  </item>
+					<item>sampfreq: sampling frequency to be used   </item>
+					<item>TD: The amount the transmitted signal is to be shifted   </item>
+				</list>with outputs: <list id="Burst4outputs">
+					<item>noisytestecho: noisy burst waveform of L lfm chirps of the same TW,p   </item>
+					<item>noisyshifttestecho: shifted (i.e. time-delayed) of noisy burst waveform  </item>
+					<item>rsigmatchlocs: vector containing locations of peaks from output of match filter of recieved signal</item>
+					<item>timedelay: difference in location of 1st peaks from outputs of both match filters   </item>
+					<item>range:  real world target range (units: meters) </item>
+					<item> h: impulse response for match filter  </item>
+				</list></para>
+			<para id="Comparison"><title>Method of Comparison</title>Using the "<link resource="radar.m">radar</link>" function provided by "Computer-Based Exerciese for Signal Processing Using MATLAB" by Burrus [ et al.] (see page 328 of book for full explanation of usage) we were able to compare our simulated returned signal.</para>
+		</section>
+		<section id="RangeEquation">
+			<title>Range Equation</title>
+			<para id="ContinuousTimeRangeEq"><equation id="ContinuousTimeRangeEq2">
+					<title>Range Equation (Continuous Time)</title>
+					<m:math>
+						<m:apply>
+							<m:eq/>
+							<m:ci>Range</m:ci>
+							<m:apply>
+								<m:divide/>
+								<m:apply>
+									<m:times/>
+									<m:ci>c</m:ci>
+									<m:ci>Td</m:ci>
+								</m:apply>
+								<m:cn>2</m:cn>
+							</m:apply>
+						</m:apply>
+					</m:math>
+				</equation></para>
+			<para id="ContinousTimeRangeEqCharact2"><title>Characteristics of continous-time Range Equation</title>The equation is designed for continuous time signal where the two parameters are: <list id="ContRangeEqParam">
+					<item>Td = time delay between transmitted signal and recieved signal</item>
+					<item>c = speed of light (3 x 10^8 m/s)      (where x = multiplication)</item>
+				</list><equation id="DiscreteTimeRangeEq">
+					<title>Range Equation (Discrete Time)</title>
+					<m:math>
+						<m:apply>
+							<m:eq/>
+							<m:ci>Range</m:ci>
+							<m:apply>
+								<m:divide/>
+								<m:apply>
+									<m:times/>
+									<m:ci>c</m:ci>
+									<m:ci>Ts</m:ci>
+									<m:ci>Td</m:ci>
+								</m:apply>
+								<m:cn>2</m:cn>
+							</m:apply>
+						</m:apply>
+					</m:math>
+				</equation></para>
+			<para id="DisscreteTimeRangeEqCharact"><title>Characteristics of discrete-time Range Equation</title>The equation that matlab will have to use to calculate range and get corresponding real world values from three paramters: <list id="DiscreteRangeEqParam">
+					<item>Td = difference in terms of actual physical location of the same value in 2 vectors</item>
+					<item>c = speed of light (3 x 10^8 m/s)      (where x = multiplication)</item>
+					<item>Ts = 1/sampling frequency (used to create LFM chirp from beginning)</item>
+				</list></para>
+<para id="WheretonExt"><title>Where to Next</title> Next, look at <link document="m11720"> "Range Results" </link> as next step.</para>
+		</section>
+	</content>
+	<bib:file>
+		<bib:entry id="Burrus">
+			<bib:book>
+				<bib:author>Burrus [ et al.]</bib:author>
+				<bib:title>Computer-Based Exerciese for Signal Processing Using MATLAB</bib:title>
+				<bib:publisher>Prentice Hall</bib:publisher>
+				<bib:year>2000</bib:year>
+			</bib:book>
+		</bib:entry>
+	</bib:file>
+</document>

@@ -1,0 +1,78 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+	<title>Time Domain Pitch Correction</title>
+	<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>ae6fd422-f9e1-4b1b-858d-11af9fce0909</md:uuid>
+</metadata>
+	<content>
+		<para id="p1"><title>Introduction</title>Time domain pitch shifting algorithms have several advantages over frequency domain approaches.  First, the formants of the original signal can be preserved, meaning that the timbre of the input signal will be largely unaffected. Second, the computational complexity is much less for time domain algorithm because there is no need to take transforms of the data.  Two different algorithms were created and utilized with the major difference being the way in which the section of signal that is to be overlapped and added is selected.</para>
+		<para id="p2">Through this overlap and add approach the signal retains most of its correct shape. For both algorithms the original signal was broken down into overlapping windows of a specified size and hop size (which should be consistent with the values provided to the detection algorithm).  Then, for each window the detected period (one divided by the detected fundamental frequency) and target period is computed and used to build up the new data for that window.  After the construction of each window, which is described further under the two approaches, the windows themselves where then overlapped and added to create the new pitch corrected output signal. When the detection algorithm decides that a given window is unvoiced (i.e. has no fundamental frequency), both algorithms just copy that window as is, without any modification.  A Hanning window is used to filter out the inconsistencies created from adding together overlapping windows of the output signal.  This helps in the smoothing process so that there are not large discontinuities between added segments.<figure id="idp5737616">
+				<title>Sample of Human Voice</title>
+				<media id="idp5900960" alt=""><image src="../../media/tgraph1.jpg" mime-type="image/jpeg"/></media>
+				<caption>Several periods of a human voice holding a note.</caption>
+			</figure></para>
+		<section id="idp5662720">
+			<title>PSOLA : Pitch-Synchronous Overlap-Add</title>
+			<para id="a">The key to PSOLA is the determination and utilization of pitch markers in the original signals. The idea is that these markers should be equally spaced throughout the signal (at intervals equal to the detected fundamental period), but also that they should be placed at a location for which the signal has a maximum value (a peak).  These two constraints are often in conflict, especially since our assumption that the fundamental period is constant for the entire window is not entirely true.  As a result, following the highest peak in the signal from period to period may require relaxing the requirement that the markers be exactly equally spaced.  On the other hand, if we only follow the maximum peak without regard for the fundamental period, our markers no longer have any regard for the pitch of the window and are not useful.  </para>
+			<para id="b">In order to strike this compromise, we created a matrix where each column contains two periods of the signal and the center row starts at 0 and increments by one period each column.  Then we used a dynamic path finding algorithm (created by Vladimir Goncharoff and Patrick Gries from the University of Chicago in Illinois) to find a path that went through the maximum peak as much as possible, but which did not exceed a given slope as it went through the matrix.  Since a slope of 0 (horizontal line) means the markers are equally spaced, the slope is the factor that is adjusted to strike the compromise between following peaks and maintaining periodicity.  Empirically, we found a suitable value of this slope to be around 4.  In the diagram below these pitch marks are labeled as mi-1, mi and mi+1.<figure id="idm1059744">
+					<title>Pitch Markers across windows</title>
+					<media id="idp5924848" alt=""><image src="../../media/tgraph3.jpg" mime-type="image/jpeg"/></media>
+				</figure></para>
+			<para id="c">The matrix described is pictured graphically in the top graph of the figure above (cyan is zero, dark blue is negative, red is positive).  Below that is a matrix that shows the two periods around these pitch markers (found by this path), which the pitch marker itself in the center of each column.  As you can see, the peaks seem to move across the matrix in a straight line, meaning that when we overlap and add these segments, the peaks will be added on top of one another.  This reduces phase problems with constructive and destructive interference between the peaks (which is why the algorithm is pitch-synchronous).  </para>
+			<para id="d">Having marked the boundaries of the regions to extract from the original signal, their new locations need to be defined (where they will end up in the output signal).  A vector of new pitch markers is created, which begins with the first old pitch marker (found above), which is the phase offset, and then equally spaced at intervals equal to the desired fundamental period.  For each new marker, the closest marker in the original signal is found and the two periods centered around that marker are Hanning windowed and copied to the output signal, centered about the new marker.  Depending on whether the frequency is being raised or lowered, some pitch markers in the original signal may be used more than once, or not at all.  The result of all this is a signal whose waveform retains the shape of the original, but has a shorter or longer period (depending on the amount of shift and in which direction).  Hence, the pitch is shifted without altering the qualities of the voice that produced the sound.<figure id="idp6091920">
+					<title>Original signal modified using PSOLA algorithm</title>
+					<media id="idp6249216" alt=""><image src="../../media/tgraph2.jpg" mime-type="image/jpeg"/></media>
+					<caption>The sample shown at the beginning of the module after having had a pitch-shift performed using the PSOLA algorithm.</caption>
+				</figure></para>
+		</section>
+		<section id="idp7309504">
+			<title>Time Shifting</title>
+			<para id="e">This algorithm is based loosely on a paper written by Keith Lent from the University of Texas.  As our project already had a separate component for pitch detection, many of the topics in the paper did not apply.</para>
+			<para id="f">First, the first two periods of the original signal are located (using our knowledge of the detected frequency for the window).  We then apply a Hanning window to these two periods and copy them at intervals of the new desired frequency.  This is very similar to PSOLA, except that we do not place pitch markers throughout the original signal and locate the closest to our output.  Instead, we always use the first two periods in the window and copy it centered on each new pitch marker, under the assumption that each period of the signal will be largely the same in a window that covers only a few milliseconds.  Again, the result is a waveform with much the same shape as the original (at least in general) but a different period, and thus a modified fundamental frequency.<figure id="idm567184">
+					<title>Overview of Time-Shifting algorithm</title>
+					<media id="idp5088896" alt=""><image src="../../media/tgraph5.jpg" mime-type="image/jpeg"/></media>
+					<caption>One period of the original signal is shown in the topmost graph.  Pitch markers calculated by the algorithm are shown in the second and third graphs, along with a copy of the single period placed after them.  The sum of these signals is the corrected output, shown in the bottommost graph.</caption>
+				</figure></para>
+			<para id="g">The figure presented below offers a visual comparison of these two algorithms.  The graph on the left is about two periods from the original signal, whereas the graph on the right shows the output signal during the same time interval for both the PSOLA (red) and time-shifting algorithms (blue).  By inspection, it should be clear that while both algorithms produce similar output, the PSOLA algorithm more closely resembles the shape of the original signal.  An informal listening test confirms that the PSOLA algorithm sounds better.<figure id="idm1207184">
+					<title>Comparison</title>
+					<media id="idm1206320" alt=""><image src="../../media/n1.jpg" mime-type="image/jpeg"/></media>
+				</figure><figure id="idm1205568">
+					<title>Original signal corrected with Time Shifting algorithm</title>
+					<media id="idp6936000" alt=""><image src="../../media/tgraph4.jpg" mime-type="image/jpeg"/></media>
+					<caption>This is the original signal after having been pitch-shifted using the Time Shifting algorithm.</caption>
+				</figure></para>
+		</section>
+	</content>
+	<bib:file>
+		<bib:entry id="b0">
+			<bib:article>
+				<bib:author>Schnell N., Peeters G., Lemouton S., Manoury P., and Rodet X</bib:author>
+				<bib:title>Synthesizing a choir in real-time using Pitch Synchronous Overlap Add(PSOLA)</bib:title>
+				<bib:journal>International Computer Music Conference 2000</bib:journal>
+				<bib:year>2000</bib:year>
+			</bib:article>
+		</bib:entry>
+		<bib:entry id="b1">
+			<bib:article>
+				<bib:author>Harmon C., Moulines E., and Charpentier F</bib:author>
+				<bib:title>A diphone synthesis system based on time-domain prosodic modifications of speech</bib:title>
+				<bib:journal>Centre National d'Etudes des Telecommunications, France, S5.7, p. 238.</bib:journal>
+				<bib:year>1995</bib:year>
+			</bib:article>
+		</bib:entry>
+		<bib:entry id="b2">
+			<bib:article>
+				<bib:author>Lent K. </bib:author>
+				<bib:title>An efficient method for pitch shifting digitally sampled sounds</bib:title>
+				<bib:journal>Computer Music Journal Vol. 13 No.4</bib:journal>
+				<bib:year>1989</bib:year>
+			</bib:article>
+		</bib:entry>
+		<bib:entry id="b3">
+			<bib:article>
+				<bib:author>Goncharoff V. and Gries P</bib:author>
+				<bib:title>An algorithm for accurately marking pitch pulses in speech signals</bib:title>
+				<bib:journal>International Conference Signal and Image Processing</bib:journal>
+				<bib:year>1998</bib:year>
+			</bib:article>
+		</bib:entry>
+	</bib:file>
+</document>

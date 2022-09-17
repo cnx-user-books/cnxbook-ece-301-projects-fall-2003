@@ -1,0 +1,73 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Music Classification by Genre: System Performance</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>0bbd2bc7-b319-4337-a422-4447c5bfbf7e</md:uuid>
+</metadata>
+
+  <content>
+ 
+<figure id="evsi">
+  <media id="idm1701024" alt=""><image src="../../media/errorvsiteration.gif" mime-type="image/gif"/></media>
+  <caption>
+    Performance of the neural network improved with successive inputs of training vectors.  It begins to recognize characteristics of each music genre!
+  </caption>
+</figure>
+
+<figure id="train1">
+  <media id="idm7513808" alt=""><image src="../../media/trainingvectors.gif" mime-type="image/gif"/></media>
+  <caption>
+When tested with the training vectors, the system is 87.5% accurate.  Higher accuracy implies that the system has memorized the training set and is unable to generalize when given new inputs.  Lighter background stripes indicate greater certainty in identification, while increasingly darker hues note greater uncertainty.  Horizontal black bars indicate actual genre, and the stems indicate predicted genre.
+  </caption>
+</figure>
+
+    <para id="training">
+These plots show how well the first three genres separate in the output of the network.  Even the testing vectors are separated by a high degree of confidence.  
+    </para> 
+
+<figure id="train2">
+  <media id="idm1006800" alt=""><image src="../../media/trainingvectors2.gif" mime-type="image/gif"/></media>
+  <caption>
+Spatial separation, weighted by sureness level, of classical (red), jazz (blue), and rap (green) in the training vectors. 
+  </caption>
+</figure>
+
+<figure id="train3">
+  <media id="idm7639552" alt=""><image src="../../media/trainingvectors3.gif" mime-type="image/gif"/></media>
+  <caption>
+Spatial separation, weighted by sureness level, of punk (red), techno (blue), and country (green) in the training vectors. 
+  </caption>
+</figure>
+
+<figure id="t1">
+  <media id="idm964880" alt=""><image src="../../media/testvectors.gif" mime-type="image/gif"/></media>
+  <caption>
+    Though worthy of the Museum of Modern Art, this depicts the output of the neural network for each of the six genres.
+  </caption>
+</figure>
+
+<figure id="t2">
+  <media id="idm7919072" alt=""><image src="../../media/testvectors2.gif" mime-type="image/gif"/></media>
+  <caption>
+    Provided songs that the network has never seen, it performs perfectly and with high confidence for rap, while classification of techno is comparably poor.  However, the system is aware of this: error coincides with lack of confidence.  Lighter background stripes indicate greater certainty in identification, while increasingly darker hues note greater uncertainty.  Horizontal black bars indicate actual genre, and the stems indicate predicted genre.
+  </caption>
+</figure>
+
+<figure id="t3">
+  <media id="idm7222912" alt=""><image src="../../media/testvectors3.gif" mime-type="image/gif"/></media>
+  <caption>
+Spatial separation, weighted by sureness level, of classical (red), jazz (blue), and rap (green) in the training vectors. 
+  </caption>
+</figure>
+
+<figure id="t4">
+  <media id="idm7220576" alt=""><image src="../../media/testvectors4.gif" mime-type="image/gif"/></media>
+  <caption>
+Spatial separation, weighted by sureness level, of punk (red), techno (blue), and country (green) in the training vectors. 
+  </caption>
+</figure>
+
+    <para id="conclusion">
+Our system successfully determined the genre of the vast majority of the test songs. Not only did the system choose a genre, it quantified its output with a level of sureness.  When the system was in error, there was a corresponding uncertainty.  The genre that gave our system the most difficulty was techno.  The output of the DSP functions for techno had a very high standard deviation, making it hard for the neural network to distinguish its pattern from those of the other genres.   Given an unknown song, there is an 84% chance that the system can determine the genre successfully.
+    </para> 
+  </content>
+  
+</document>

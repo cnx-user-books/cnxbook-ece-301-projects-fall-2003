@@ -1,0 +1,47 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Neural Networks</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>775f9797-6931-4c1e-a3e5-a226f0cd0d8a</md:uuid>
+</metadata>
+
+  <content>
+    <para id="intro">
+At their core, neural networks are pattern recognition systems.  They predict an output given a sequence of inputs and their corresponding classification.  They are based on biological nervous systems, in which there are many inputs and numerous outputs to a single neuron.  On the highest level, the neural network is a primitive learning machine that can be used to process data such as stock market quotes, DNA sequences, and in our case, music classification. 
+    </para>  
+
+    <para id="more">
+Neural networks are systems that take a lengthy input, process the data, and predict an output.  
+<figure id="neuralnet">
+  <media id="idm6189248" alt=""><image src="../../media/neuralnet.gif" mime-type="image/gif"/></media>
+</figure>
+
+
+    </para> 
+
+    <para id="processing">
+The processing is done by multiple, weighted layers of nodes.  Each node is connected to every node in the next layer, and at each interface between nodes are connecting fibers weighted by a sum.  Neural networks are given a vector of inputs, usually longer than the output.  The first layer of nodes is the same length as the input.  The nodes at each successive layer sum their inputs, weight the sum, and produce an output.  The output of the final layer is the output of the system.  In this manner, an output is predicted given an input.
+    </para> 
+
+    <para id="weights">
+The remaining question is how the weights are determined.  The use of neural networks is twofold: you must first "train" the network by giving it inputs and their corresponding outputs, and then you may test the network by giving it inputs with no outputs.  The training determines the weighting on the nodes.  For example, we train the neural network by giving it the vectors of signal processing data (bandwidth, power spectral density, etc.) as well as the corresponding classification of music.  Classical music is denoted as [1 0 0 0 0 0], jazz is denoted as [0 1 0 0 0 0], etc., as shifted delta functions.
+    </para> 
+
+    <para id="training">
+There are many methods to train neural networks, but the one we use is called backpropogation.  The neural network takes the input and feeds it through the system, evaluating the output.  It then changes the weights in order to get a more accurate output.  It continues to run the inputs through the network multiple times until the error between its output and the output you gave it is below a defined tolerance level.
+    </para> 
+
+    <para id="end">
+After training is completed, we test the neural network with songs that it has never seen before.  It predicts a classification of genre based on the weights it created during training.  
+    </para>   
+
+    <para id="realend">
+To train the neural network, we used the method of back propagation.  There were 15 nodes in the hidden layer, and we used an adaptive learning rate training function.  This means that the network analyzed its learning rate after each iteration, changing it to remain relatively constant.  For instance, if the learning curve is too steep, and the network is learning too quickly, it decreases its learning rate, and vice-versa.  This is a graph of the error (learning rate) versus time: 
+    </para>
+
+<figure id="neural">
+  <media id="idm7538416" alt=""><image src="../../media/errorvsiteration.gif" mime-type="image/gif"/></media>
+  <caption>Error in the neural network decreases with each successive iteration.</caption>
+</figure>
+
+  </content>
+  
+</document>

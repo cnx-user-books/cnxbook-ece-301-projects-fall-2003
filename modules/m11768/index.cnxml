@@ -1,0 +1,109 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Length/Width Ratio Test for Fish Classification</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>3d41b12b-0d1b-4d75-a954-5d7c3eb62e7b</md:uuid>
+</metadata>
+
+  <content>
+    <para id="para1">
+      One simple way to tell different fish apart is due to their
+      ratio of length to width.  For every species of fish, that ratio
+      is essentially the same.  On reason salmon are unique in that
+      regard is because during spawning season, they grow wider and
+      thus their length to width ratio becomes much smaller
+      (approximately 2:1 or 3:1).  Other fish, such as steelhead
+      trout, which maintain a much more sleek, approximately 3:1 to
+      4:1 length to width ratio even during spawning season.
+    </para>
+    
+    <para id="para2">
+      This test is done using primarily the Canny Edge Detection
+      method which is performed by Matlab using the command <code display="inline">edge</code>.  It takes the image of the fish and
+      finds an outline of it.
+    </para>
+<figure id="pic1">
+<title>Canny edge detection Image</title>
+<media id="idm8461088" alt=""><image src="../../media/cannytest.jpg" mime-type="image/jpeg"/></media>
+<caption>The Fish image after the canny edge detection is run on it.</caption>
+</figure>
+    <section id="canny">
+      <title>Canny Edge Detection</title>
+      <para id="CannyEdgeDetection">
+	Image edges contain strong contrasts in intensity.  The Canny Edge
+	Detector tries to find only true edges by only selecting
+	localized edge points and only responding once to a single real
+	edge.  The Canny method also filters noise with a convolution
+	mask built through Canny's algorithm.  The edge detector then
+	uses the gradient of the image and summing along the x direction
+	and y direction to obtain the edge value.  Direction of the edge
+	is easily determined by looking at each directions value and
+	seeing which one is larger.  However, it is important to test for
+	errors when one direction is zero, so Canny looks at the angle
+	between the x-direction and y-direction.  Canny also uses
+	suppression to connect values along the direction of the edge.
+      </para>
+      <note type="See Also" id="idp729664"><label>See Also</label>
+	<link url="http://www.pages.drexel.edu/~weg22/can_tut.html">Canny
+	  Method Edge Detection</link>
+      </note>
+    </section>
+    <para id="para3">
+      After the edge detection has been run, the image is binary and
+      all the edges are represented by ones.  The rows and columns are
+      then each summed up.  The algorithm then starts at each edge of
+      the image and moves toward the center until it finds a row with
+      a significant amount of values in it.  This signals the edge of
+      the fish closest to that side.  Then, through simple
+      calculations, the length, width, and ration can be calculated.
+    </para>
+
+    <example id="codeex">
+      <title>Code for Length/Width Test</title>
+      <code display="block" id="idp733712">% This function uses canny edge detection to try to find an outline of the 
+% fish in the grayscale image and then it calculates the length to width 
+% ratio of the fish.
+function [length,width,lwratio] = fishedge(image)
+
+imagegray = rgb2gray(image);
+imageedge = edge(imagegray,'canny');
+
+l4rowedge = sum(imageedge);
+l4coledge = sum(imageedge')';
+l4size = size(imageedge);
+
+j = 1;
+% Find the top edge of the fish
+while l4coledge(j)&lt; 4
+    top = j;
+    j = j+1;
+end
+j = 1;
+% Find the bottom edge of the fish
+while l4coledge(l4size(1)-j+1)&lt; 4
+    bottom = l4size(1)-j+1;
+    j = j+1;
+end   
+
+width = bottom - top; 
+
+j = 1;
+% Find the left edge of the fish
+while l4rowedge(j)&lt; 4
+    left = j;
+    j = j+1;
+end
+j = 1;
+% Find the right edge of the fish
+while l4rowedge(l4size(2)-j+1)%lt; 4 
+    right = l4size(2)-j+1;
+    j = j+1;
+end   
+
+length = right - left;
+
+lwratio = length./width;
+      </code>
+    </example>
+
+  </content> 
+
+</document>

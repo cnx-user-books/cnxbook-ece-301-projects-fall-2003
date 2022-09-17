@@ -1,0 +1,161 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Approach</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>f2375a52-a6ba-443c-a28d-20bc03547ac6</md:uuid>
+</metadata>
+
+  <content>
+
+<section id="approach_section_title">
+			<title>Control Flow</title>
+			<para id="approach_para1">The classification is based upon a <term>branching flow</term>, with an appropriate test at each node. The emotions are divided into broad categories and further tests are performed to identity each emotion individually. For this, we divided our set of four emotions into <term>good</term> and <term>bad</term><emphasis> </emphasis>emotions with happy and surprised being the happy moods and sad and angry being the bad moods. </para>
+			<para id="aprroach_para15">Before any of the tests were performed, the image of the face woudl be cropped to the mouth which is our primary interest. This can be done in one of two ways, either using Matlab's ginput command or the function <link target-id="goodcrop_section">goodcrop</link>.The highest level test, <link target-id="test1_section_title">Test 1</link>, distinguishes between pictures representing a happy or positive emotion from those representing a bad or negative emotion. Once a mood was detected as either being a happy or  a sad mood it would then be tested again to classify it as one of the two moods in each category. The two pictures which are identified as having positive emotions are then sent to <link target-id="test2_section">Test 2</link> which distinguishes between an happy and a surprised emotion. The other two pictures are sent to <link target-id="test3_section">Test 3</link> which distinguishes between sad and angry. <figure orient="horizontal" id="approach_fig1">
+					
+					<media id="idm6599312" alt=""><image src="../../media/flowchart.jpg" id="flowchart_img" mime-type="image/jpeg"/></media>
+					<caption>Control flow</caption>
+				</figure></para>
+			<para id="approach_para2">This method was quite effective as it reduced the total number of tests to be performed to three. Having a single test to correctly detect a emotion was not feasible because it involved setting thresholds which wouldnt hold over a wide variety of test cases and also increase the total number of tests being performed.</para>
+		</section>
+		<section id="goodcrop_section">
+			<title>GoodCrop : Image Cropping Routine</title>
+			<para id="goodcrop_para1">This function is used to crop the mouth from an image. It is called with the original image and returns the part of the image containing the mouth. It is based on the sobel edge detector. Due to the image specifications, it is safe to assume that the mouth is located in the lower third of the picture. The function makes this basic assumption and does an inital crop to this size. It then perform the edge detection and counts the number of edge points along each row and column. It also does a 11 point smoothing on the row and column summations to negate the effects of the nose being part of the intial crop.<figure id="idm6148560">
+					<media id="idm6148208" alt=""><image src="../../media/crop1.jpg" mime-type="image/jpeg"/></media>
+				</figure></para>
+			<para id="goodcrop_para2">It then chooses the peak correponding to the mouth and the extent of the peak to decide on the location and extent of the mouth vertically and horizontally.<figure id="idp2906400">
+					<media id="idm7184592" alt=""><image src="../../media/crop2.jpg" mime-type="image/jpeg"/></media>
+					<caption>Pre and Post Cropping</caption>
+				</figure></para>
+		</section>
+
+		<section id="test1_section_title">
+			<title>Test 1: Good Mood or Sad Mood</title>
+			<para id="test1_para1">This test is used to distinguish between a good mood and a sad mood. It is based on the use of the <term>2D Gabor wavelet</term> transformation. Use of the 2D Gabor wavelet representation was pioneered by Daugman in the 1980s.  A complex-valued 2D Gabor function is a plane wave restricted  by a Gaussian envelope. </para>
+
+<para id="eqn_para">
+<m:math display="block">
+<m:apply>
+<m:eq/>
+  <m:apply>
+  <m:ci type="fn">ψ</m:ci>
+    <m:ci>k</m:ci>
+    <m:ci>x</m:ci>
+  </m:apply>
+
+  <m:apply>
+  <m:times/>
+    <m:apply>
+    <m:divide/>
+      <m:apply>
+      <m:power/>
+        <m:ci>k</m:ci>
+        <m:cn>2</m:cn>
+      </m:apply>
+      <m:apply>
+      <m:power/>
+        <m:ci>x</m:ci>
+        <m:cn>2</m:cn>
+      </m:apply>
+    </m:apply>
+
+    <m:apply>
+    <m:exp/>
+      <m:apply>
+      <m:divide/>
+        <m:apply>
+        <m:minus/>
+          <m:apply>
+          <m:times/>
+            <m:apply>
+            <m:power/>
+              <m:ci>k</m:ci>
+              <m:cn>2</m:cn>
+            </m:apply>
+            <m:apply>
+            <m:power/>
+              <m:ci>x</m:ci>
+              <m:cn>2</m:cn>
+            </m:apply>
+          </m:apply>
+        </m:apply>
+        <m:apply>
+        <m:times/>
+          <m:cn>2</m:cn>
+          <m:apply>
+          <m:power/>
+            <m:ci>σ</m:ci>
+            <m:cn>2</m:cn>
+          </m:apply>
+        </m:apply>
+      </m:apply>
+    </m:apply>
+
+    <m:apply>
+    <m:minus/>
+      <m:apply>
+      <m:exp/>
+        <m:apply>
+        <m:times/>
+          <m:imaginaryi/>
+          <m:ci>k</m:ci>
+          <m:ci>x</m:ci>
+        </m:apply>
+      </m:apply>
+      <m:apply>
+      <m:exp/>
+        <m:apply>
+        <m:minus/>
+          <m:apply>
+          <m:divide/>
+            <m:apply>
+            <m:power/>
+              <m:ci>σ</m:ci>
+              <m:cn>2</m:cn>
+            </m:apply>
+            <m:cn>2</m:cn>
+          </m:apply>
+        </m:apply>
+      </m:apply>
+    </m:apply>
+  </m:apply>
+</m:apply>
+</m:math>
+</para>
+
+
+
+		<para id="test1_para2">The Gabor wavelet representation  allows description of spatial frequency structure in the image  while preserving information about spatial relations. The complex  amplitude of the transforms is used to test for features.<m:math/></para>
+			<para id="test1_para3"><figure orient="horizontal" id="test1_fig1">
+					
+					<media id="idm297408" alt=""><image src="../../media/output1.jpg" id="test1_output" mime-type="image/jpeg"/></media>
+					<caption>Gabor representation of the four moods for subject 1.</caption>
+				</figure></para>
+			<para id="test1_para4">Since the Gabar wavelet highlights and extracts features from a facial image, those images with stronger expressions have greater intensity in their transforms relative to those with weaker expressions. As can be seen from <link target-id="test1_fig1">Figure 1</link> the happy and suprised pictures which are on top have relatively higher values when compared to the sad and angry picctures. After taking the 2-norm of each transform, we are able to classify the strongest two as happy or surprised and the weaker two as sad or angry. </para>
+		</section>
+		<section id="test2_section">
+			<title>Test 2 : Happy or Surprised</title>
+			<para id="test2_para1">Intuitively, the distinguishing feature between a smile and a surprise is the teeth and a measure of how open the mouth is. While more teeth are visible during  a smile, a surprise d emoution has a more open mouth. Because teeth are white (hopefully!) and because white corresponds to a high intensity, we apply a process to determine how much of the mouth is high intensity and consequently, whether the person is smiling or not.   <figure id="test2_fig1">
+					<media id="idp2459872" alt=""><image src="../../media/output2.jpg" id="test2_output" mime-type="image/jpeg"/></media>
+					<caption>Surf plots for happy and surprised</caption>
+				</figure></para>
+			<para id="test2_para2">The detector first creates high-contrast versions of our original cropped pictures. It then designates a threshold value that is 95% of the maximum value, which is usually white, and determines the number of such peaks that exist. The image with the greater number is designated "happy", and the other as "surprised".</para>
+		</section>
+		<section id="test3_section">
+			<title>Test 3 : Sad or Angry</title>
+			<para id="test3_para1">From the start of our project we had anticipated difficulty in deciphering a sad from angry image since both emotions usually entail a closed mouth. With a closed mouth there was no way for us to compare intensity or even edges, as teeth create in a happy picture. To our advantage early in the project we had consulted with CAAM Professor Dr. Mark Embree, who suggested that we try using a Singular Value Decomposition (SVD) transform to analyze our images.    </para>
+			<para id="test3_para2">The equation of  SVD: </para>
+			<media id="idm5496480" alt="" display="block"><image src="../../media/svdeqn.jpg" mime-type="image/jpeg"/></media>
+			<para id="test3_para3">Where u.v*  creates a <emphasis>m*n</emphasis>   matrix that is essentially a basis for the matrix A and 
+
+<m:math><m:ci>σ</m:ci></m:math>
+
+is the coefficient relating the matrix A to the corresponding basis matrix. The most remarkable aspect of SVD is that the first few <m:math><m:ci>σ</m:ci></m:math> values and corresponding basis are nearly sufficient to reconstruct an image. For our project the matrix A corresponds to the cropped rectangle of the mouth.    To utilize the SVD transform we used  MATLABS built in function S=SVD(S) where S corresponds to the vector of the  values pertaining to a particular matrix.  After A few test cases we quickly realized that the   norm of S for a sad image compared to an angry image where roughly greater in magnitude by 1,000-2000, or 10%-20%. This discovery allowed us to take the images that have been passed into this branch of testing and correctly discern the sad image from the angry image by a simple comparison.   Here is an image to help visualize the method used for this branch of testing:  <figure id="test3_fig1">
+					<media id="idm129168" alt=""><image src="../../media/output3.jpg" mime-type="image/jpeg"/></media>
+					<caption>Image and corresponding svd plot for sad and angry emotions</caption>
+				</figure></para>
+			<code id="idm127696" display="block"/>
+		</section>
+
+
+
+  </content>
+  
+</document>

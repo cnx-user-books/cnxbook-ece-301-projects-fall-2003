@@ -1,0 +1,33 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Music Classification by Genre</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>58098cff-957e-4941-8053-7c56d006cb9c</md:uuid>
+</metadata>
+
+  <content>
+<list id="menu">
+
+  <item><link document="m11661">Project Summary</link></item>
+  <item><link document="m11675">System Diagram</link></item>
+
+  <item><link document="m11672">Bandwidth</link></item>
+  <item><link document="m11684">Frequency Cutoff</link></item>
+  <item><link document="m11671">Frequency Smoothness</link></item>
+  <item><link document="m11685">Beat Variation</link></item>
+  <item><link document="m11683">High Pass Filter</link></item>
+  <item><link document="m11679">Power Spectral Density</link></item>
+  <item><link document="m11673">Total Power</link></item>
+
+  <item><link document="m11667">Neural Networks</link></item>
+  <item><link document="m11690">System Performance</link></item>
+  <item><link document="m11689">Overall Results</link></item>
+  <item><link document="m11663">Chris Hunter</link></item>
+  <item><link document="m11664">Melodie Chu</link></item>
+  <item><link document="m11665">Mitali Banerjee</link></item>
+  <item><link document="m11666">Jordan Mayo</link></item>
+
+
+</list>
+
+  </content>
+  
+</document>

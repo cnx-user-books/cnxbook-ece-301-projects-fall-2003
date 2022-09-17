@@ -1,0 +1,93 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+	<title>DMT: Constellation Mapping</title>
+	<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>74e066e1-6895-4428-9dd1-a289b9bd2a37</md:uuid>
+</metadata>
+	<content>
+		<section id="sec1">
+			<title>Constellation Mapping</title>
+			<para id="cm1">In the constellation mapping process, length <emphasis>B</emphasis> segments of the bitstreams are assigned a single complex value in a <term>constellation</term>. This is similar to quadrature ampliture modulation (QAM), because the IFFT of these complex points maps to various sinusoids with amplitudes proportional to the real part and phase shifts proportional to the complex part.  We mostly used 2-bit (4 point) and 4-bit (16 point) constellations in our system, but we also coded a function that generates a  mapping with an arbitrary number of points.  In comparison, constellations used in actual DMT systems can have as many as 240 points.  Important characteristics of these constellations include the area occupied by the points and the spacing between points.  The power neccessary to transmit the actual signal is proportional to the area, so it is key not to let the points be too far apart.  However, the channel introduces noise which results in the constellation points being recieved with error.  If the points are too close together, it is impossible to correctly match the received points with the correct value in the constellation.  We implemented constellation mapping with a home-cooked parser: it would examine every 2 or 4 bits (depending on the mapping), look up the current segment in a table and assign the next element in a new vector the corresponding constellation point.   </para>
+		</section>
+		<para id="delete_me">
+       
+    </para>
+		<example id="ex1">
+			<title>4-Bit Constellation Mapping</title>
+			<para id="cm5"/>
+		</example>
+		<para id="cm3"/>
+		<table id="table1" summary="">
+			<title>16-Point Mapping</title>
+			<tgroup align="center" cols="4">
+				<colspec colnum="1" colname="spycolgen1" colwidth="*"/>
+				<colspec colnum="2" colname="spycolgen2" colwidth="*"/>
+				<colspec colnum="3" colname="spycolgen3" colwidth="*"/>
+				<colspec colnum="4" colname="spycolgen4" colwidth="*"/>
+				<tbody valign="middle">
+					<row valign="middle">
+						<entry align="center">Bit Sequence</entry>
+						<entry>Value</entry>
+						<entry>Bit Sequence</entry>
+						<entry>Value</entry>
+					</row>
+					<row>
+						<entry valign="middle">0000</entry>
+						<entry>.354+.354j</entry>
+						<entry>1000</entry>
+						<entry>1</entry>
+					</row>
+					<row>
+						<entry valign="middle">0001</entry>
+						<entry>.707</entry>
+						<entry>1001</entry>
+						<entry>.707+.707j</entry>
+					</row>
+					<row>
+						<entry valign="middle">0010</entry>
+						<entry>.707j</entry>
+						<entry>1010</entry>
+						<entry>j</entry>
+					</row>
+					<row>
+						<entry>0011</entry>
+						<entry>-.354+.354j</entry>
+						<entry>1011</entry>
+						<entry>-.707+.707j</entry>
+					</row>
+					<row>
+						<entry>0100</entry>
+						<entry>-.707j</entry>
+						<entry>1100</entry>
+						<entry>-1</entry>
+					</row>
+					<row>
+						<entry>0101</entry>
+						<entry>.354-.354j</entry>
+						<entry>1101</entry>
+						<entry>-.707-.707j</entry>
+					</row>
+					<row>
+						<entry>0110</entry>
+						<entry>-.354-.354j</entry>
+						<entry>1110</entry>
+						<entry>-j</entry>
+					</row>
+					<row>
+						<entry>0111</entry>
+						<entry>-.707</entry>
+						<entry>1111</entry>
+						<entry>.707-.707j</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+		<para id="cm2"/>
+		<para id="cm4"/>
+		<figure orient="vertical" id="fig1">
+			<title>16-Point Constellation</title>
+			<media id="idp8380656" alt=""><image src="../../media/constmap1.jpg" mime-type="image/jpeg"/></media>
+			<caption>This is the 16-point constellation we used.  It is an approximation of the V.29 16-QAM constellation (4 amplitudes, 8 phases).</caption>
+		</figure>
+		<para id="cm6">Our related MATLAB functions: <code display="inline"><link document="m11721" resource="constmap.m">constmap.m</link></code>, <code display="inline"><link document="m11721" resource="deconstmap.m">deconstmap.m</link></code></para>
+		<para id="cm7"><link document="m11710">Home</link>  |  Previous: <link document="m11721">Implementation</link>   |   Next: <link document="m11725">Mirror/IFFT, De-Mirror/FFT</link></para>
+	</content>
+</document>

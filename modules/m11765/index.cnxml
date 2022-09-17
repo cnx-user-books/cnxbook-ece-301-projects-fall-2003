@@ -1,0 +1,315 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Feature Detection Test for Fish Classification</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>49e985af-85a6-41ed-8f94-47a6c72b586b</md:uuid>
+</metadata>
+
+  <content>
+    <para id="para1">
+       One of the most important features of different fish are the
+      colors of their heads, tails, and bodies.  This test breaks down
+      the different color matricies into blocks of similar colors and
+      uses them to detect what color the different parts of the fish's
+      body are.
+    </para>
+    <para id="para2">
+      The first part of the process is to run the <link document="m11140">2-D DWT</link> on each of the color matricies.
+	It is run 3 times so that the resulting picture is 1/8 of the
+	resolution of the original matricies, and there are only high
+	values where the color is relatively constant for a large
+	area.  This essentially provides a method for Low-Pass
+	filtering the picture and finding only large blocks of color.
+    </para>
+    <para id="para3">
+      Next, the picture is filtered by dropping any values that are
+      lower than a threshold and setting any values over that
+      threshold to 1.  This drops all areas in the picture that are
+      not very intense, or where the values are not constant for a
+      large area.  Now, the picture has only ones whereever the large
+      blocks of color are.
+    </para>
+    <para id="para4">
+      The next step is to count all the different blocks of ones,
+      which is done by using the Matlab command, <code display="inline">bwlabel</code>.  Next, each block is examined one
+      by one to see what size it is, and where in the picture its
+      located.  From this, it can be determined what color the body,
+      head, and tail of the fish is.  If they match the pattern for
+      either type of fish, then the test classifies it as that type.
+      Because this is the hardest test to satisfy, it is also the most
+      heavily weighted test in the entire process.
+    </para>
+<figure id="pic1">
+<title>Feature testing Image</title>
+<media id="idp1538400" alt=""><image src="../../media/featuretest.jpg" mime-type="image/jpeg"/></media>
+<caption>The features for each of the colors(red, green, then blue) for a sample sockeye salmon picture.</caption>
+</figure>
+    <example id="codeex">
+      <title>Code for Feature Detection</title>
+      <code display="block" id="idp1541184">% This function takes in a 3D image matrix of three colors, red, green, and blue and uses the
+% 2-D DWT to low poss filter them and decrease their resolution.  It then looks for blocks of 
+% color and outputs a matrix with the size, and location of each of the different features of
+% each color.  These can then be analyzed to see if they show evidence of a specific fish type.
+
+function [rfeats,gfeats,bfeats] = featuredet(image)
+
+redimage = image(:,:,1);
+greenimage = image(:,:,2);
+blueimage = image(:,:,3);
+
+rfeats = [0 0 0 0 0 0 0 0];
+gfeats = [0 0 0 0 0 0 0 0];
+bfeats = [0 0 0 0 0 0 0 0];
+
+% Run the 2-D DWT on the different colors to reduce the resolution of the picture and
+% effectively low-pass filter the image.
+dwtr = dwt2(redimage, 'haar');
+dwtr2 = dwt2(dwtr, 'haar');
+dwtr3 = dwt2(dwtr2, 'haar');
+%dwtr3feat = (dwtr3 &gt; 6)
+dwtr4 = dwt2(dwtr3, 'haar');
+%dwtr4feat = (dwtr4 &gt; 13);
+
+dwtg = dwt2(greenimage, 'haar');
+dwtg2 = dwt2(dwtg, 'haar');
+dwtg3 = dwt2(dwtg2, 'haar');
+dwtg4 = dwt2(dwtg3, 'haar');
+
+dwtb = dwt2(blueimage, 'haar');
+dwtb2 = dwt2(dwtb, 'haar');
+dwtb3 = dwt2(dwtb2, 'haar');
+dwtb4 = dwt2(dwtb3, 'haar');
+
+% Set everything below a threshold to 0 and everything above to 1 and then
+% number every group of ones in the binary image
+[redfeatures, numred] = bwlabel(dwtr3&gt;5);
+[greenfeatures, numgreen] = bwlabel(dwtg3&gt;5);
+[bluefeatures, numblue] = bwlabel(dwtb3&gt;5);
+
+% Cycle through each different feature and find its location and size
+for a = 1:numred
+    rowval = sum(redfeatures==a);
+    colval = sum((redfeatures==a)')';
+    sizeval = size(redfeatures);
+    j = 1;
+    left = 0;
+     while rowval(j)&lt;1
+         left = j;
+         j = j+1;
+     end
+     j = 1;
+     right = sizeval(2);
+     while rowval(sizeval(2)-j+1)&lt;1
+         right = sizeval(2)-j+1;
+         j = j+1;
+     end
+     j = 1;
+     top = 0;
+     while colval(j)&lt;1
+         top = j;
+         j = j+1;
+     end
+     j = 1;
+     bottom = sizeval(1);
+     while colval(sizeval(1)-j+1)&lt;1
+         bottom = sizeval(1)-j+1;
+         j = j+1;
+     end
+     sumval = sum(rowval);
+
+rfeats(a,:) = [top bottom bottom-top left right right-left (right-left)./(bottom-top) sumval];
+end
+
+for b = 1:numgreen
+    rowval = sum(greenfeatures==b);
+    colval = sum((greenfeatures==b)')';
+    sizeval = size(greenfeatures);
+    j = 1;
+     while rowval(j)&lt;1
+         left = j;
+         j = j+1;
+     end
+     j = 1;
+     while rowval(sizeval(2)-j+1)&lt;1
+         right = sizeval(2)-j+1;
+         j = j+1;
+     end
+     j = 1;
+     while colval(j)&lt;1
+         top = j;
+         j = j+1;
+     end
+     j = 1;
+     while colval(sizeval(1)-j+1)&lt;1
+         bottom = sizeval(1)-j+1;
+         j = j+1;
+     end
+     sumval = sum(rowval);
+gfeats(b,:) = [top bottom bottom-top left right right-left (right-left)./(bottom-top) sumval];
+end
+
+for c = 1:numblue
+    rowval = sum(bluefeatures==c);
+    colval = sum((bluefeatures==c)')';
+    sizeval = size(bluefeatures);
+    j = 1;
+     while rowval(j)&lt;1
+         left = j;
+         j = j+1;
+     end
+     j = 1;
+     while rowval(sizeval(2)-j+1)&lt;1
+         right = sizeval(2)-j+1;
+         j = j+1;
+     end
+     j = 1;
+     while colval(j)&lt;1
+         top = j;
+         j = j+1;
+     end
+     j = 1;
+     while colval(sizeval(1)-j+1)&lt;1
+         bottom = sizeval(1)-j+1;
+         j = j+1;
+     end
+     sumval = sum(rowval);
+bfeats(c,:) = [top bottom bottom-top left right right-left (right-left)./(bottom-top) sumval];
+end
+      </code>
+    </example>
+    <example id="idp10781792">
+      <title>Code for Feature Analysis</title>
+       <code display="block" id="idp10782688">% This function takes a 3D image and runs the feature detector on it, which gives matricies
+% containing the sizes and shapes of the different features.  It then decides what color the
+% fish's body, head, and tail are, or whether the can't be determined by the features.
+function [body,head,tail] = featureanalyzer(fishimage);
+
+[rfeats,gfeats,bfeats] = featuredet(fishimage);
+
+impfeats = [0 0 0; 0 0 0; 0 0 0];
+
+% This section takes each feature located by the feature detector and decides if they
+% are evidence or a body, head, or tail of the fish being that color.
+for a = 1:size(rfeats,1)
+    % If the feature is extremely long, it is a body
+    if and(rfeats(a,6)&gt;30, rfeats(a,8)&gt;30)
+        impfeats(1,1) = 1;
+    end
+    % If the feature is far to the right, it is a head
+    if and(rfeats(a,4)&gt;38, rfeats(a,8)&gt;20)
+        impfeats(1,2) = 1;
+    end
+    % If the features is far to the left, it is a tail
+    if and(rfeats(a,5)&lt;25, rfeats(a,8)&gt;6)
+        impfeats(1,3) = 1;
+    end
+end
+
+for b = 1:size(gfeats,1)
+    if and(gfeats(b,6)&gt;30, gfeats(b,8)&gt;30) 
+        impfeats(2,1) = 1;
+    end 
+    if and(gfeats(b,4)&gt;38, gfeats(b,8)&gt;10)
+        impfeats(2,2) = 1;
+    end
+    if and(gfeats(b,5)&lt;25, gfeats(b,8)&gt;6)
+        impfeats(2,3) = 1;
+    end
+end
+
+for c = 1:size(bfeats,1)
+    if and(bfeats(c,6)&gt;30, bfeats(c,8)&gt;30)
+        impfeats(3,1) = 1;
+    end
+    if and(bfeats(c,4)&gt;38, bfeats(c,8)&gt;10)
+        impfeats(3,2) = 1;
+    end
+    if and(bfeats(c,5)&lt;25, bfeats(c,8)&gt;6)
+        impfeats(3,3) = 1;
+    end
+end
+
+% This section looks at each of the columns of the feature matrix and then
+% outputs which color pattern they are.
+if and(impfeats(1,1) == 1, and(impfeats (2,1) == 1, impfeats (3,1) == 1))
+    body = 'rgb';
+end
+if and(impfeats(1,1) == 1, and(impfeats (2,1) == 1, impfeats (3,1) == 0))
+    body = 'rg ';
+end
+if and(impfeats(1,1) == 1, and(impfeats (2,1) == 0, impfeats (3,1) == 1))
+    body = 'rb ';
+end
+if and(impfeats(1,1) == 1, and(impfeats (2,1) == 0, impfeats (3,1) == 0))
+    body = 'r  ';
+end
+if and(impfeats(1,1) == 0, and(impfeats (2,1) == 1, impfeats (3,1) == 1))
+    body = 'gb ';
+end
+if and(impfeats(1,1) == 0, and(impfeats (2,1) == 1, impfeats (3,1) == 0))
+    body = 'g  ';
+end
+if and(impfeats(1,1) == 0, and(impfeats (2,1) == 0, impfeats (3,1) == 1))
+    body = 'b  ';
+end
+if and(impfeats(1,1) == 0, and(impfeats (2,1) == 0, impfeats (3,1) == 0))
+    body = 'cbd';
+end
+    
+
+if and(impfeats(1,2) == 1, and(impfeats (2,2) == 1, impfeats (3,2) == 1))
+    head = 'rgb';
+end
+if and(impfeats(1,2) == 1, and(impfeats (2,2) == 1, impfeats (3,2) == 0))
+    head = 'rg ';
+end
+if and(impfeats(1,2) == 1, and(impfeats (2,2) == 0, impfeats (3,2) == 1))
+    head = 'rb ';
+end
+if and(impfeats(1,2) == 1, and(impfeats (2,2) == 0, impfeats (3,2) == 0))
+    head = 'r  ';
+end
+if and(impfeats(1,2) == 0, and(impfeats (2,2) == 1, impfeats (3,2) == 1))
+    head = 'gb ';
+end
+if and(impfeats(1,2) == 0, and(impfeats (2,2) == 1, impfeats (3,2) == 0))
+    head = 'g  ';
+end
+if and(impfeats(1,2) == 0, and(impfeats (2,2) == 0, impfeats (3,2) == 1))
+    head = 'b  ';
+end
+if and(impfeats(1,2) == 0, and(impfeats (2,2) == 0, impfeats (3,2) == 0))
+    head = 'cbd';
+end
+    
+
+if and(impfeats(1,3) == 1, and(impfeats (2,3) == 1, impfeats (3,3) == 1))
+    tail = 'rgb';
+end
+if and(impfeats(1,3) == 1, and(impfeats (2,3) == 1, impfeats (3,3) == 0))
+    tail = 'rg ';
+end
+if and(impfeats(1,3) == 1, and(impfeats (2,3) == 0, impfeats (3,3) == 1))
+    tail = 'rb ';
+end
+if and(impfeats(1,3) == 1, and(impfeats (2,3) == 0, impfeats (3,3) == 0))
+    tail = 'r  ';
+end
+if and(impfeats(1,3) == 0, and(impfeats (2,3) == 1, impfeats (3,3) == 1))
+    tail = 'gb ';
+end
+if and(impfeats(1,3) == 0, and(impfeats (2,3) == 1, impfeats (3,3) == 0))
+    tail = 'g  ';
+end
+if and(impfeats(1,3) == 0, and(impfeats (2,3) == 0, impfeats (3,3) == 1))
+    tail = 'b  ';
+end
+if and(impfeats(1,3) == 0, and(impfeats (2,3) == 0, impfeats (3,3) == 0))
+    tail = 'cbd';
+end
+</code>
+</example>
+
+
+
+  </content>
+  
+</document>

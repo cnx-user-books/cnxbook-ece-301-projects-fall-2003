@@ -1,0 +1,191 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Results</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>8acf4bbc-96a1-49f8-a5f6-66b3a99bbe39</md:uuid>
+</metadata>
+
+  <content>
+
+			<para id="results_para1">Using the Matlab command ginput to isolate the mouth from an image and then performing tests to detect mood we had the following results.<table id="tab1" summary="">
+					<title>Results with user defined cropping</title>
+					<tgroup cols="4">
+						<colspec colnum="1" colname="spycolgen1" colwidth="0.510640*"/>
+						<colspec colnum="2" colname="spycolgen2" colwidth="1.306995*"/>
+						<colspec colnum="3" colname="spycolgen3" colwidth="1.276600*"/>
+						<colspec colnum="4" colname="spycolgen4" colwidth="0.905778*"/>
+						<tbody>
+							<row>
+								<entry>Subject #</entry>
+								<entry>           Input Sequence</entry>
+								<entry>                   Output</entry>
+								<entry> Accuracy</entry>
+							</row>
+							<row>
+								<entry>Subject 1</entry>
+								<entry>Angry, Happy, Sad, Surprised</entry>
+								<entry>Angry, Happy, Sad, Surprised</entry>
+								<entry>  100%</entry>
+							</row>
+							<row>
+								<entry>Subject 2</entry>
+								<entry>Happy, Surprised, Sad, Angry</entry>
+								<entry>Happy, Surprised, Sad, Angry</entry>
+								<entry>  100%</entry>
+							</row>
+							<row>
+								<entry>Subject 3</entry>
+								<entry>Surprised, Sad, Angry, Happy</entry>
+								<entry>Surprised, Sad, Angry, Happy</entry>
+								<entry>  100%</entry>
+							</row>
+							<row>
+								<entry>Subject 4</entry>
+								<entry>Sad, Happy, Surprised, Angry</entry>
+								<entry>Angry, Happy, Surprised, Sad </entry>
+								<entry>    50%</entry>
+							</row>
+							<row>
+								<entry>Subject 5</entry>
+								<entry>Angry, Happy, Sad, Surprised</entry>
+								<entry>Angry, Happy, Sad, Surprised</entry>
+								<entry>  100% </entry>
+							</row>
+							<row>
+								<entry>Subject 6</entry>
+								<entry>Happy, Surprised, Sad, Angry</entry>
+								<entry>Happy, Surprised, Sad, Angry</entry>
+								<entry>  100%</entry>
+							</row>
+							<row>
+								<entry>Subject 7</entry>
+								<entry>Surprised, Sad, Angry, Happy</entry>
+								<entry>Surprised, Sad, Angry, Happy</entry>
+								<entry>  100%</entry>
+							</row>
+							<row>
+								<entry>Subject 8</entry>
+								<entry>Sad, Happy, Surprised, Angry</entry>
+								<entry>Sad, Surprised, Happy, Angry </entry>
+								<entry>    50%</entry>
+							</row>
+							<row>
+								<entry>Subject 9</entry>
+								<entry>Angry, Happy, Sad,Surprised </entry>
+								<entry>Angry, Happy, Sad,Surprised </entry>
+								<entry>  100%</entry>
+							</row>
+							<row>
+								<entry>Subject 10</entry>
+								<entry>Happy, Surprised,Sad, Angry  </entry>
+								<entry>Happy, Surprised,Sad, Angry </entry>
+								<entry>  100%</entry>
+							</row>
+							<row>
+								<entry>Subject 11</entry>
+								<entry>Surprised, Sad, Happy, Angry </entry>
+								<entry>Surprised, Angry, Happy, Sad </entry>
+								<entry>    50%</entry>
+							</row>
+							<row>
+								<entry>Subject 12</entry>
+								<entry>Sad, Happy, Surprised, Angry  </entry>
+								<entry>Angry, Happy, Surprised, Sad  </entry>
+								<entry>    50%</entry>
+							</row>
+						</tbody>
+					</tgroup>
+				</table></para>
+			<para id="results_para2">We then ran the test using the function <link resource="goodcrop.xml">goodcrop</link> instead of doing the cropping manually using ginput. We obtained the following results<table id="tabres2" summary="">
+					<title id="tab2">Results using goodcrop</title>
+					<tgroup cols="4">
+						<colspec colnum="1" colname="spycolgen1" colwidth="0.474164*"/>
+						<colspec colnum="2" colname="spycolgen2" colwidth="1.294833*"/>
+						<colspec colnum="3" colname="spycolgen3" colwidth="1.367781*"/>
+						<colspec colnum="4" colname="spycolgen4" colwidth="0.863222*"/>
+						<tbody>
+							<row>
+								<entry>Subject #</entry>
+								<entry>           Input Sequence</entry>
+								<entry>Output</entry>
+								<entry>Accuracy</entry>
+							</row>
+							<row>
+								<entry>Subject 1</entry>
+								<entry>Angry, Happy, Sad, Surprised</entry>
+								<entry>Angry, Happy, Sad, Surprised</entry>
+								<entry>  100%</entry>
+							</row>
+							<row>
+								<entry>Subject 2</entry>
+								<entry>Angry, Happy, Sad, Surprised </entry>
+								<entry>Angry, Happy, Sad, Surprised</entry>
+								<entry>  100%</entry>
+							</row>
+							<row>
+								<entry>Subject 3</entry>
+								<entry>Angry, Happy, Sad, Surprised </entry>
+								<entry>Sad, Happy, Angry, Surprised</entry>
+								<entry>    50%</entry>
+							</row>
+							<row>
+								<entry>Subject 4</entry>
+								<entry>Angry, Happy, Sad, Surprised </entry>
+								<entry>Surprised, Happy, Angry, Sad</entry>
+								<entry>    25%</entry>
+							</row>
+							<row>
+								<entry>Subject 5</entry>
+								<entry>Angry, Happy, Sad, Surprised </entry>
+								<entry>Angry, Happy, Sad, Surprised</entry>
+								<entry>  100%</entry>
+							</row>
+							<row>
+								<entry>Subject 6</entry>
+								<entry>Angry, Happy, Sad, Surprised </entry>
+								<entry>Sad, Surprised, Happy, Angry  </entry>
+								<entry>    25%</entry>
+							</row>
+							<row>
+								<entry>Subject 7</entry>
+								<entry>Angry, Happy, Sad, Surprised </entry>
+								<entry>Angry, Happy, Sad, Surprised</entry>
+								<entry>  100%</entry>
+							</row>
+							<row>
+								<entry>Subject 8</entry>
+								<entry>Angry, Happy, Sad, Surprised </entry>
+								<entry>Angry, Surprised, Happy, Sad  </entry>
+								<entry>    25%</entry>
+							</row>
+							<row>
+								<entry>Subject 9</entry>
+								<entry>Angry, Happy, Sad, Surprised </entry>
+								<entry>Angry, Happy, Sad, Surprised</entry>
+								<entry>  100%</entry>
+							</row>
+							<row>
+								<entry>Subject 10</entry>
+								<entry>Angry, Happy, Sad, Surprised </entry>
+								<entry>Angry, Happy, Sad, Surprised</entry>
+								<entry>  100%</entry>
+							</row>
+							<row>
+								<entry>Subject 11</entry>
+								<entry>Angry, Happy, Sad, Surprised </entry>
+								<entry>Angry, Happy, Sad, Surprised</entry>
+								<entry>  100%</entry>
+							</row>
+							<row>
+								<entry>Subject 12</entry>
+								<entry>Angry, Happy, Sad, Surprised </entry>
+								<entry>Sad, Happy, Surprised, Angry</entry>
+								<entry>    25%</entry>
+							</row>
+						</tbody>
+					</tgroup>
+				</table> </para>
+			<para id="results_para3">The overall accuracy of the mood detection algorithm , when using the matlab function ginput, was 83%. The overall accuracy when using the goodcrop routine was 71%.</para>
+
+
+  </content>
+  
+</document>

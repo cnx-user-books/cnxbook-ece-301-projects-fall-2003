@@ -1,0 +1,45 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+	<title>DMT: Results and Conclusions</title>
+	<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>467ca58a-6451-43f4-a143-6c28541f9f85</md:uuid>
+</metadata>
+	<content>
+		<section id="sec1">
+			<title>Results</title>
+			<para id="rc1">In order to test our DMT system, we investigated how the probability of bit error changed with the signal-to-noise ratio of the transmitted signal in our channel.  In particular, we compared how these PE - SNR curves changed as the cyclic pad length was varied.  As a comparison, we also looked at how DMT stacked up with a simple model of single-carrier modulation in these same regards.    </para>
+			<section id="sec2">
+				<title>DMT vs Single - Carrier (SC)</title>
+				<para id="rc2">We ran our tests of the system with the following constraints: <list list-type="bulleted" id="list1">
+						<item>Bitstream length: 512</item>
+						<item>Block-size: 128 (DMT), 1 (SC)</item>
+						<item>AWGN amplitude: .00001 - 1</item>
+						<item>Channel impulse response length: 1 (wire), 16</item>
+						<item>Cyclic prefix length (DMT): 0, 8, 16</item>
+						<item>Impulse noise: 0</item>
+						<item>Constellation size: 16-point</item>
+					</list>The results of our tests were as expected.  For wire channel, SC and DMT were comparable.  They both demonstrated a Q-function behavior, dropping to zero error once the SNR was high enough and leveling off to about 0.5 (i.e. a coin flip) for very low SNR.  For impulse response length <emphasis>L</emphasis> less than cyclic prefix <emphasis>C</emphasis>, DMT dropped to a error fell from 0.5 as SNR increased, but leveled off once ISI began to have a more prominent effect.  Single-carrier also demonstrated this same behavior, though there was no cyclic prefix involved.  This was a little strange, but this project's goal was to study DMT, not SC.  Once the cyclic pad length was larger than the impulse response length, DMT again displayed Q-function behavior as ISI was no longer a problem. <figure orient="vertical" id="fig1">
+						<title>L = 1</title>
+						<media id="idp8358448" alt=""><image src="../../media/DMTSC_L1.jpg" mime-type="image/jpeg"/></media>
+						<caption>This is shows how bit error probabilities compare for DMT (red) and SC (blue) with a wire channel impulse response (length <emphasis>L</emphasis> = 1).</caption>
+					</figure><figure orient="vertical" id="fig2">
+						<title>L &gt; C</title>
+						<media id="idp399504" alt=""><image src="../../media/DMTSC_L8.jpg" mime-type="image/jpeg"/></media>
+						<caption>This is shows how bit error probabilities compare for DMT (red) and SC (blue) with a length <emphasis>L</emphasis> = 16 channel impulse response and a DMT cyclic prefix of length <emphasis>C</emphasis> = 8.</caption>
+					</figure><figure orient="vertical" id="fig3">
+						<title>L &lt; C</title>
+						<media id="idp9031856" alt=""><image src="../../media/DMTSC_L16.jpg" mime-type="image/jpeg"/></media>
+						<caption>This is shows how bit error probabilities compare for DMT (red) and SC (blue) with a length <emphasis>L</emphasis> = 16 channel impulse response and a DMT cyclic prefix of length <emphasis>C </emphasis>= 16.</caption>
+					</figure></para>
+			</section>
+		</section>
+		<section id="sec3">
+			<title>Conclusions</title>
+			<para id="rc4">From our results and experience implementing our DMT system, we reached the following conclusions:<list list-type="bulleted" id="list2">
+					<item>It is possible to implement a working DMT system in MATLAB.  It looks as though a more complicated extension of the system, possibly involving variable frequency allocation, a time-varying channel freq. response, more complicated constellations or a transmitter-receiver synchronization process, should also be quite feasible.</item>
+					<item>DMT's advantages over other modulation schemes are difficult to see with such a simple system; they would be more apparent in a system including a more realistic model of data assignment to the various frequencies (instead of evenly distributing all data over the first 256).</item>
+					<item>The need for a cyclic prefix is readily verifiable; as soon as the prefix length is correct, bit error drops to zero at high SNR.</item>
+					<item>Communications engineering and DSP are fun (except when you have to stay up all night writing connexions modules)!  Looking forward to 431 next semester!</item>
+				</list></para>
+		</section>
+		<para id="rc3"><link document="m11710">Home</link>  |  Previous: <link document="m11721">Implementation</link>   |   Next: <link document="m11730">Group Members</link><!-- Insert module text here --></para>
+	</content>
+</document>

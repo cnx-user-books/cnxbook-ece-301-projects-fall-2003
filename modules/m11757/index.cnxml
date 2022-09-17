@@ -1,0 +1,77 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+	<title>RADAR: Velocity Analysis</title>
+ 	<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>11689311-2d75-4a94-ae04-f8b989e39ea3</md:uuid>
+</metadata>
+
+	<content>
+		<section id="velanalysis">
+			<title>Approach: Simulating Signal</title>
+			<para id="velexplain">Another part of the RADAR system is that it can determine the velocity of objects. For our project, we had to build up a signal to send out. Then we simulated what that signal would be if it bounced off of an object in space moving at a certain velocity.</para>
+			<para id="velsigsim1">We decided that the simplest waveform to send out was a pulse train with each pulse being a certain width of L samples (like a boxcar signal in continuous time). Here is the function: <link resource="pulsetrain.m">pulsetrain.m</link>. The pulses occured every M samples. There are N total pulses in the sent signal. An example is given below for L=7, M=19, and N=8.</para>
+			<figure id="sentsignal">
+				<title>Signal of train pulses</title>
+				<media id="idm2395152" alt=""><image src="../../media/sentsig.jpg" mime-type="image/jpeg"/></media>
+				<caption>Signal sent for L=7, M=19, and N=8.</caption>
+			</figure>
+			<figure id="blockdiagram">
+				<title>Velocity Analysis Block Diagram</title>
+				<media id="idp175696" alt=""><image src="../../media/velocityflowchart.JPG" mime-type="image/jpeg"/></media>
+				<caption>Velocity Analysis Block Diagram</caption>
+			</figure>
+			<para id="velsigsim2">Then to simulate the channel, we added noise to the signal (complex Gaussian noise). To simulate the signal reflecting off of a moving object, we added a phase shift to the signal (multiplied the signal by a complex exponential with a certain phase.)</para>
+			<para id="dopplerexplanation">Why a phase shift? When a wave bounces off of a moving object, the frequency of the returning signal changes. This effect is well known as the Doppler shift. An other example of this would be the siren of an ambulance. While the ambulance is moving towards you, the sound of the siren is higher in frequency because the movement of the ambulance compresses the soundwaves a little bit. If the ambulance is moving away, the siren sounds lower in pitch. This is similar to what the RADAR does. The wave bounces off the object, and if the object is moving towards the RADAR device, then the waves are compressed and the frequency is shifted up. On the other hand, if the object is moving away from the RADAR device, then the frequency is shifted down.</para>
+		</section>
+		<section id="veldetection">
+			<title>Approach: Analyzing the Signal For Veloctiy</title>
+			<para id="velcalc1"> After simulating the signal, we had to design a system that would analyze this received signal and approximate the velocity of the object moving.  In order to detect the frequency shift between the original sent signal and the received signal, we first had to take into account the DC offset. This is easily managed by subtracting the mean of the signal from the signal itself. Now it is possible to take the FFT of both the sent and received signal and to see the spectrum of the two. The shift of the spectrum from the one to the other signal shows the Doppler shift.<figure id="origspec">
+					<title>Original FFT</title>
+					<media id="idp132608" alt=""><image src="../../media/FFToriginal.jpg" mime-type="image/jpeg"/></media>
+					<caption>FFT of sent signal</caption>
+				</figure><figure id="velfftfig2">
+					<title>Shifted FFT</title>
+					<media id="idp154736" alt=""><image src="../../media/FFTshifted.jpg" mime-type="image/jpeg"/></media>
+					<caption>FFT of received signal (notice the phase shift?)</caption>
+				</figure></para>
+			<para id="velcalc2">Once we had the two spectrum to compare, we had to find a way to detect the shift between the two. What we decided was that we would look at the peaks of each and tell what frequencies represented them. In order to improve on this, we initially found the peak from the fft, then we did another fft of higher resolution on a tighter range around the initially detected peak in order to get a more accurate location of it.  After this, we compared the two peak frequencies by subtracting the peak of the received signal from that of the sent signal. This was the doppler shift that we were looking for.</para>
+			<para id="velcalc3">Now the math was simple. There is an equation (given below) that can calculate the velocity given your doppler shift, the carrier frequency of the radar, and the speed of light.  Note that because we were sampling the signal at a given sampling rate, this equation needs to be modified a little by dividing the right hand side by the sampling frequency as well. 
+			<equation id="dopplervelocity">
+					<m:math>
+      <m:apply>
+       <m:eq/>
+       <m:ci><m:msub>
+         <m:mi>f</m:mi>
+         <m:mi>d</m:mi>
+        </m:msub></m:ci>
+       <m:apply>
+        <m:divide/>
+        <m:apply>
+         <m:times/>
+         <m:cn>2</m:cn>
+         <m:ci>v</m:ci>
+         <m:ci><m:msub>
+           <m:mi>f</m:mi>
+           <m:mi>c</m:mi>
+          </m:msub></m:ci>
+        </m:apply>
+        <m:ci>c</m:ci>
+       </m:apply>
+      </m:apply>
+     </m:math>
+    </equation></para>
+
+			<para id="velwrapup">Solving this equation for the velocity (v), we came up with the approximation for the velocity of the moving object. The Matlab function that combines many of these steps can be seen here: <link id="implink" resource="imptrainconv.m">imptrainconv.m</link>
+</para>
+<para id="matcode">Other Matlab functions that helped: 
+<link id="ptsamp" resource="ptsamp.m">ptsamp.m</link>,
+<link id="chirptrain" resource="chirptrain.m">chirptrain.m</link>,
+<link id="convchirp" resource="convchirp.m">convchirp.m</link>.
+</para>
+</section>
+<section id="next">
+<para id="linknext">
+Now to Results:<link document="m11761"> Results for Velocity</link>
+</para></section>
+		
+	</content>
+</document>

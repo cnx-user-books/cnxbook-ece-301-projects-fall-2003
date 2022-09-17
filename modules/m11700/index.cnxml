@@ -1,0 +1,11 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Introduction</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>9340bf36-3769-4eca-a00a-e5f2d8eff35e</md:uuid>
+</metadata>
+
+	<content>
+					<para id="intro_para1">It is human instinct to interact with others for the purpose of accomplishing a goal, and an integral part of this interaction is the ability to interpret the emotions of one another. Emotions can be reflected through speech, gestures, and most importantly in facial expression. In a world of ever-increasing technology, many human tasks are becoming outdated and being replaced with efficient automated systems, such as computers. However, these new computer systems are not able to recognize a person's emotion nor can they display realistic emotions themselves.  </para>
+			<para id="intro_para2">For our project we developed a computer algorithm rooted in digital signal processing that would allow a computer to discern a user's emotion through the examination of facial expressions found in an image.  </para>
+			</content>
+  
+</document>

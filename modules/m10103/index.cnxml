@@ -1,0 +1,58 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+
+  <title>Ideal Filters</title>
+
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>b765a722-3d42-4c92-9f04-a391bac269d4</md:uuid>
+</metadata>
+
+  <content>
+
+    <para id="para1">
+      There are four fundamental filters.  They are
+      <list id="filterlist" list-type="bulleted">
+	<item>
+	  Lowpass -- blocks high frequencies, allowing low frequencies through
+	</item>
+	<item>
+	  Highpass -- blocks low frequencies, allowing high frequencies through
+	</item>
+	<item>
+	  Bandpass -- blocks all frequencies except those within a certain range
+	</item>
+	<item>
+	  Bandstop -- blocks only the frequencies within a certain range, allowing
+	  all others to pass through
+	</item>
+      </list>
+    </para>
+
+    <figure id="fig1" orient="horizontal">
+      <subfigure id="fig1a">
+	<media id="idp1347840" alt=""><image src="../../media/idealfilters1.png" mime-type="image/png"/></media>
+	<caption>Lowpass</caption>
+      </subfigure>
+      <subfigure id="fig1b">
+	<media id="idm6278448" alt=""><image src="../../media/idealfilters2.png" mime-type="image/png"/></media>
+	<caption>Highpass</caption>
+      </subfigure>
+      <subfigure id="fig1c">
+	<media id="idm55360" alt=""><image src="../../media/idealfilters3.png" mime-type="image/png"/></media>
+	<caption>Bandpass</caption>
+      </subfigure>
+      <subfigure id="fig1d">
+	<media id="idp540976" alt=""><image src="../../media/idealfilters4.png" mime-type="image/png"/></media>
+	<caption>Bandstop</caption>
+      </subfigure>
+      <caption>Ideal frequency domain representations of the four fundamental
+	filters.</caption>
+    </figure>
+
+    <para id="para2">
+      Another term one may come across in the study of filters is an "allpass"
+      filter.  This is one that allows all frequencies through.  The only
+      meaningful effect an allpass filter can have is on the phase of the
+      signal.
+    </para>
+
+  </content>
+</document>

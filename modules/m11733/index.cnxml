@@ -1,0 +1,48 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Background on Formants</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>902bbf4a-8178-499a-be85-14f404df1ed5</md:uuid>
+</metadata>
+<content>
+		<para id="formants">  Formants are the resonant frequencies of the vocal tract when vowels are pronounced.  While vowels are attributed to this periodic resonance, consonants are not periodic. They are produced by restriction of air flow with the mouth, tongue, and jaw.</para>
+		<para id="formants2">  Linguists classify each type of speech sound (called phenomes) into different categories.  In order to identify each phenome, it is oftentimes useful to look at its spectrogram or frequency response where one can find the characteristic formants.  Formants can be found where there are large concentrations or peaks of energy in the spectrogram reading of a voiced sample.  In other words, a formant is a frequency range in which a phenome has its most distinctive and characteristic pitch.    </para>
+		<para id="formants3">  Although all phenomes have their own formants, vowel sound formants are usually the easiest to identify.  Almost all formants have the trait of waxing and waning in energy in all frequencies, which is caused by the repeated closing and opening of the human vocal tract.  On average, this repeated closing and opening occurs at a rate of 125 times per second in an adult male and 250 times per second in an adult female.  This rate gives the sensation of pitch (higher frequencies result in higher pitches).  Formant values can vary widely from person to person, but the spectrogram reader learns to recognize patterns which are independent of particular frequencies and which identify the various phonemes with a high degree of reliability.  For instance, in the vowels, the first formant (F1) can vary from 300 Hz to 1000 Hz. The lower it is, the closer the tongue is to the roof of the mouth. The vowel /i:/ as in the word 'beet' has one of the lowest F1 values - about 300 Hz; in contrast, the vowel /A/ as in the word 'bought' (or 'Bob' in speakers who distinguish the vowels in the two words) has the highest F1 value - about 950 Hz.  </para>
+
+<figure orient="horizontal" id="horfig">
+ <subfigure id="subfig1">
+<media id="idp3904800" alt=""><image src="../../media/a2.png" mime-type="image/png"/></media>
+<caption>Vowel 'A' Vocal Model</caption>
+</subfigure>
+<subfigure id="subfig2">
+<media id="idp2377360" alt=""><image src="../../media/e2.png" mime-type="image/png"/></media>
+<caption>Vowel 'E' Vocal Model</caption>
+</subfigure>
+</figure>
+
+<figure orient="horizontal" id="horfig2">
+ <subfigure id="subfig3">
+<media id="idm5757312" alt=""><image src="../../media/i2.png" mime-type="image/png"/></media>
+<caption>Vowel 'I' Vocal Model</caption>
+</subfigure>
+<subfigure id="subfig4">
+<media id="idp2718448" alt=""><image src="../../media/o2.png" mime-type="image/png"/></media>
+<caption>Vowel 'O' Vocal Model</caption>
+</subfigure>
+</figure>
+
+<figure orient="horizontal" id="horfig3">
+ <subfigure id="subfig5">
+<media id="idm5322480" alt=""><image src="../../media/u2.png" mime-type="image/png"/></media>
+<caption>Vowel 'U' Vocal Model</caption>
+</subfigure>
+<subfigure id="subfig6">
+<media id="idm5320256" alt=""><image src="../../media/consonant.png" mime-type="image/png"/></media>
+<caption>Consonant Vocal Model</caption>
+</subfigure>
+</figure>
+
+
+
+</content>
+
+  
+</document>

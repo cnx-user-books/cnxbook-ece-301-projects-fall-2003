@@ -1,0 +1,23 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Image Querying with Complex Wavelets: The 2D Discrete Fourier Transform</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>8f6d4b0e-cb5f-4d8b-a744-325408f4f01d</md:uuid>
+</metadata>
+
+  <content>
+    <para id="par1">
+The two-dimensional Discrete Fourier Transform is another important transform in image processing.  It is taken by applying the one-dimensional transform to each row, and then to each column, as seems to be the common practice for increasing the dimension of transforms in signal and image processing.  
+</para>
+
+<para id="par2">
+The 2D DFT has many properties that are useful in image processing; however, most useful is its shift invariance.  The DFT of an image and its shifted version differ only by the multiplication with a complex exponential.  Since multiplication by a complex exponential changes the phase but not the magnitude, taking the magnitude of the DFT of an image can give us a different kind of “shift-invariance”; that is, the DFT of two versions of the same thing will, rather than being shifted versions of one another, be identical.  
+    </para>   
+
+     <figure id="fig1">
+        <title>High frequency basis function.</title>
+        <media id="idp319504" alt=""><image src="../../media/real.jpg" mime-type="image/jpeg"/></media>
+	<caption>Real part of a 2D DFT basis function</caption>
+      </figure>
+
+  </content>
+  
+</document>

@@ -1,0 +1,57 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Methods</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>c079f7cb-481a-4498-afea-64c49b3b2a1e</md:uuid>
+</metadata>
+
+  <content>
+		<para id="goal"><title>Goal</title>Analyze an input speech sample and return the vowels that are present. </para>
+		<para id="start"><title>Approach</title>Vowels are highly periodic, so they have distinctive Fourier representations. That is, there are large values at a particular frequency, in this case the lower end of the spectrum. By using Fourier analysis on an input signal, we will be able to detect via matched filters the input vowel sound.</para>
+<para id="approach">
+Initially, we decided to build a database of the five fundamental vowel sounds.  We used the MATLAB program.  A project member recorded a voice sample of each vowel several times, ran the samples through the auto-regressive filter, and then calculated the first two formant frequencies from the frequency response of the vowel.  Each voice sample was recorded at 8 kHz, and 256-sample windows were input into the auto-regressive model.  The purpose of the auto-regressive model on each window was to get the transfer function of the vocal tract and output the frequency response of each voice sample.  
+After the database was built, the next step was to record several samples of words or phrases and input them into the filter.  To filter out the consonants, our program checked the magnitude values of the frequency response of each window.  Normally, consonants will have significantly lower magnitudes than vowel sounds, and our program utilized a threshold to filter out only consonants.  Next, we used a type of match filter to determine which vowel sound the sample corresponded to.  We did this by setting up a series of five flags in our program, one for each vowel.  At first, when each window came through, all the flags were set to true.  The program then began comparing the known formant frequencies of each vowel to the voice sample.  If the sample did not pass a threshold of a known vowel formant frequency, then the flag of that vowel was set to false.  If there were multiple flags set true when comparing the first formant frequency of the voice sample, then the program then moved on to compare the second formants.  After each 256 window was processed, we used a smoother to eliminate anomalies (due to unclear pronunciation, noise in the sample, etc.) and then output each vowel. 
+
+<link resource="formants.txt">Our final code used to detect vowels.</link> </para>
+
+<figure id="id">
+<media id="idp1946800" alt=""><image src="../../media/flowchart.gif" mime-type="image/gif"/></media>
+<caption>Flowchart of Approach</caption>
+</figure>
+
+		<section id="ara">
+			<title>Auto Regressive Model</title>
+			<para id="ar">In our project, the only data for the vocal tract that we have is the windowed sound chunk that was produced at a particular time.  Assuming a standard impulse input, the autoregressive model will take this chunk and compute a model for the vocal tract at the particular moment the sound was uttered.  The vocal tract can be modeled simply as a series of linked cylindrical tubes, with the formants appearing due to the transition between these different tubes.  Since the autoregressive model for this model of the vocal tract produces an all-pole transfer function (because we only have the output), ideally we should notice peaks at all of the particular resonant frequencies.  These peaks do appear, and they are our formants.</para>
+		</section>
+
+
+<section id="hamm">
+			<title>Hamming Window</title>
+			<para id="hamming">Our windowing method that we used was a hamming window; you can see a very similar window, the hanning window, in the images below.  The hamming window looks roughly like one period of a sine wave, as opposed to a rectangular window.  This tapering at the ends is needed because otherwise you get anomalous behavior in the frequency domain.  A hamming or hanning window provides a truer representation of the frequency content of the signal.</para>
+		</section>
+
+<figure id="id2">
+<media id="idp3029312" alt=""><image src="../../media/hanning1.png" mime-type="image/png"/></media>
+<caption>The top waveform is a segment 1024 samples long taken from
+the beginning of the "Rice University" phrase. Computing figure 1
+involved creating frames, here demarked by the vertical lines, that were
+256 samples long and finding the spectrum of each. If a rectangular
+window is applied (corresponding to extracting a frame from the signal),
+oscillations appear in the spectrum (middle of bottom row). Applying a
+Hanning window gracefully tapers the signal toward frame edges, thereby
+yielding a more accurate computation of the signal's spectrum at that
+moment of time. (From <link document="m0505">Spectrograms</link>)</caption>
+</figure>
+
+<figure id="id3">
+<media id="idp128944" alt=""><image src="../../media/hanning2.png" mime-type="image/png"/></media>
+<caption>In comparison with the original speech segment shown in the
+upper plot, the non-overlapped Hanning windowed version shown below it
+is very ragged. Clearly, spectral information extracted from the bottom
+plot could well miss important features present in the original. (From <link document="m0505">Spectrograms</link>)</caption>
+</figure>
+
+
+<para id="linkto3"><link resource="formants.txt">Final code - formants.m</link></para>
+
+  </content>
+  
+</document>

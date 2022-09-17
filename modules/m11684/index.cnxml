@@ -1,0 +1,20 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Music Classification by Genre: Frequency Cutoff</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>d29ed8c4-3b77-494f-b6e7-ab35057ac0ef</md:uuid>
+</metadata>
+
+  <content>
+    <para id="freqcutoff">
+Like most of our other filters, the frequency cutoff had mixed results that varied on the genre in question.  Some samples it is readily able to identify, while others if finds quite difficult to pin point directly.  For instance, if you fed the filter a sample of classical and a sample of techno, it would have no problem telling you the difference between them.  This is because techno has a majority of its energy concentrated at only a few frequencies while classical has its power spread more evenly over a wider band.  On the other hand if you were to input samples of punk and country, the filter might tell you that The Ramones sound like Hank Williams.  Looking at these results though is not the whole story.  A more telling relationship is isolated when the Standard Deviations of these outputs are analyzed.   It becomes difficult to isolate any one genre but it does separate them into two main categories:
+<list id="categories" list-type="enumerated">
+  <item>Classical, Punk and Country</item>
+  <item>Techno, Jazz, and Rap</item>
+</list>
+Group one consists of the genres who retained only 40-50 coefficients above the thresh hold, while the genres of group two consistently preserved at least 90 coefficients per sample.  This wide gap between them should paint a fairly clear picture of the differences between genres with respect to their cutoff frequencies.  This alone isn’t very helpful, but when used in conjunction with other filters, this could prove to the first step in a very powerful tool to help classify music.
+    </para>   
+<figure id="frequencycutoff">
+  <media id="idm5642928" alt=""><image src="../../media/frequencycutoff.gif" mime-type="image/gif"/></media>
+</figure>
+  </content>
+  
+</document>

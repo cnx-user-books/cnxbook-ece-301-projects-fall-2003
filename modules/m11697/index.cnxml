@@ -1,0 +1,43 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>The Complex Wavelet Approach</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>ddca142a-d319-4b05-b2ba-4b9ed658b768</md:uuid>
+</metadata>
+
+  <content>
+    <para id="p1">
+Our basic approach remains the same as that proposed by Jacobs et al. We compute the signatures of images in the database and compare them to the signature of the query. However, we propose a novel method to compute the signatures:
+</para>
+
+	<list id="algolist" list-type="enumerated">
+	  <item>Compute the CDWT of the image and find the magnitudes of the coefficients.</item> 
+	  <item>Set all but the highest magnitude coefficients to 0.</item> 
+	  <item>Set the remaining coefficients to +1. (No way to use –1 since magnitudes of complex numbers are always positive).</item>
+<item>Compute the two-dimensional DFT of each subband.</item>
+	</list>
+
+      <figure id="shift1">
+        <media id="idm5942784" alt=""><image src="../../media/our-approach.gif" mime-type="image/gif"/></media>
+      </figure>
+
+
+
+<para id="p2">
+
+After step 3, the signature matrices correspond to the major feature points in an image. The +1’s characterize the image structure. Note that due to the high degree shift-invariance offered by the CDWT, the signature of a shifted image after step 3 will just be a shifted version of the signature of the original image (after step 3). Now, computing the DFT in each subband gets rid of these shift effects, since the magnitude of the DFT of both the signatures (after step 3) will be the same. In this manner, our proposed algorithm incorporates the multiresolution characteristics of the CDWT in addition to accounting for translations in the query image. We compare signatures by computing the L1 norm of the difference between the signature of an image in the database and that of its query.
+
+    </para>   
+
+<para id="p3">
+An implementation of our algorithm is available on Owlnet at 
+</para>
+	<code id="idm5854432" display="block">    ~venkatc/elec301/tmproject/code/cdwt
+        </code>
+<para id="p4">
+The m-file for generating signatures is <code>sig_gen.m</code>, and the metric function for comparing signatures is <code>metric.m</code>.
+</para>
+
+
+
+  </content>
+  
+</document>

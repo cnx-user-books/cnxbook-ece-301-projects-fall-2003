@@ -1,0 +1,28 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+	<title>DMT: The Channel</title>
+	<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>e9cd3d7d-4320-47f4-a0af-74ba3fdcc29f</md:uuid>
+</metadata>
+	<content>
+		<section id="sec1">
+			<title>Channel Characteristics</title>
+			<para id="para1"/>
+		</section>
+		<para id="para2"><title>Frequency Response</title>As mentioned in our introduction, DMT is used to send data both wirelessly and through copper phone lines.  In both of these mediums, high frequency electro-magnetic waves are quickly attenuated while low frequency waves retain much of their power, even over long distances.  On this basis, we model the frequency response of our channel as a low-pass filter.  To account for irregularities in the channel (and to make sure the frequency reponse is invertible), we make it non-ideal low-pass; essentially, the impulse response is an <emphasis>M</emphasis>-point smoother with random amplitude variations.  This portion of the channel was simply implemented by using MATLAB's built-in convolution function with a constructed impulse response.  <figure orient="vertical" id="fig1">
+				<title> Impulse response of channel</title>
+				<media id="idp7195552" alt=""><image src="../../media/chanimpresp.jpg" mime-type="image/jpeg"/></media>
+				<caption>This is the length-16 impulse response of the channel. Note that the amplitudes are random, but the overall shape is still that of a smoother (no negative values like an edge detector).</caption>
+			</figure><figure orient="vertical" id="fig2">
+				<title>Frequency response of channel</title>
+				<media id="idp10014784" alt=""><image src="../../media/channelxfer1.jpg" mime-type="image/jpeg"/></media>
+				<caption>This is the length-256 FFT of the impulse response in Figure 2.  Note its overall low-pass characteristics, as well as the absence of any zeros. </caption>
+			</figure></para>
+		<para id="para3"><title>Additive Noise</title>In addition to low-pass filtering the input signal, the channel also incorporates additive white Gaussian noise (<term>AWGN</term>), which models random, natural fluctuations.  AWGN is zero-mean and is called "white" because it has equal energy at all frequencies (like white light).  We implemented this aspect of the channel by adding a "randn" vector to the signal after low-pass filtering.</para>
+		<para id="para4">The channel for a DMT system can also have other types of noise.  These include impulse noise (spikes in the time domain signal), occupied frequencies (spikes in the frequency domain) and crosstalk (which we did not consider).  We incorporated impulse noise by setting a fixed number of elements at individual random locations in the signal to twice the amplitude of the signal mean.  We did not include frequency spikes or crosstalk; these would be good things to add in an extended study of DMT.<figure orient="vertical" id="fig3">
+				<title>AWGN with TD Impulses</title>
+				<media id="idp7722544" alt=""><image src="../../media/noise.jpg" mime-type="image/jpeg"/></media>
+				<caption>This is the sum of our AWGN and impulse noise signals in time.</caption>
+			</figure></para>
+		<para id="para5">Our related MATLAB functions: <code display="inline"><link document="m11721" resource="channel.m">channel.m</link></code></para>
+		<para id="para6"><link document="m11710">Home</link>  |  Previous: <link document="m11721">Implementation</link>   |   Next: <link document="m11728">Equalization &amp; Approximation</link></para>
+	</content>
+</document>

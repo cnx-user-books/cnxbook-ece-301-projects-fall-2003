@@ -1,0 +1,63 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Distortion Results</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>62bb9157-2185-49ec-be17-d2672d87db1a</md:uuid>
+</metadata>
+
+  <content>
+    <section id="s1">
+      <title>The Distortion</title>
+      <para id="s1p1">
+	We start off with our <code display="inline">wav</code> file. The very first
+	thing we need to do with this file is convert it into a vector
+	format that matlab using <code display="inline">wavread</code><footnote id="idp8539968">For help in using this function, use MATLAB's
+	<code display="inline">help</code> command.</footnote>.  After converting the the
+	file to a vector, we play around with the coefficients and
+	powers, making sure each power is less than one.  To check out
+	the sound of each try, <code display="inline">soundsc</code> is a helpful
+	function.  Our group found 10*note.5+10*note.9+1*note
+
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci>y</m:ci>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:times/>
+		<m:cn>10</m:cn>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>x</m:ci>
+		  <m:cn>.5</m:cn>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:cn>10</m:cn>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>x</m:ci>
+		  <m:cn>.9</m:cn>
+		</m:apply>
+	      </m:apply>
+	      <m:ci>x</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>, where <m:math><m:ci>y</m:ci> </m:math> is the
+	distorted song and <m:math><m:ci>x</m:ci> </m:math> is the
+	original song, to be our favorite.
+      </para>
+    </section>
+    <section id="s2">
+      <title>Getting Rid of the Noise</title>
+      <para id="s2p1">
+	To get rid of all the noise, our group created a simple <code display="inline">.m</code> <link resource="RemoveNoise.m">file</link>:
+	The first part of the code is the band pass filter, then
+	second utilizes the FFT.
+      </para>
+    </section>
+	
+		  
+  </content>
+  
+</document>

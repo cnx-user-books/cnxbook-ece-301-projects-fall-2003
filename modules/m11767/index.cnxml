@@ -1,0 +1,46 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Intensity Test for Fish Classification</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>9997b33a-0b64-4e2b-9db6-7a92fb73275f</md:uuid>
+</metadata>
+
+  <content>
+    <para id="para1">
+       This test relys on the fact that salmon get extremely red when
+       they are swimming upstream to spawn.  Sockeye salmon, which we
+       were specifically trying to detect are among the brightest of
+       the salmon.  The other fish we were trying to classify,
+       steelhead trout, remain silver even during spawning season.
+       This means that it is easy to distinguish between the bright
+       red overall color of the salmon pictures and the relatively
+       even color of the trout.
+    </para>
+    <para id="para2">
+      When Matlab takes in a picture, it stores it as three different
+      matricies, one for each color, red, green, and blue.  This test
+      simply looks at the energy in each matrix and compares them.  The
+      important thing to test for is whether the red matrix energy is
+      significatnly larger than the blue matrix or the green matrix.
+    </para>
+<figure id="pic1">
+<title>Intensity testing Image</title>
+<media id="idp1094480" alt=""><image src="../../media/colortest.jpg" mime-type="image/jpeg"/></media>
+<caption>Fish intensity testing broken into red, green, and blue.</caption>
+</figure>
+    <example id="codeex">
+      <title>Code for Intensity Test</title>
+      <code display="block" id="idp1097184">% Check to see how much intensity there is in each of the color spectrums
+    for i = 1:3
+        fishnorm(:,:,i) = fishimage(:,:,i)./norm((fishimage(:,:,i)));
+        
+        intensitymatrix(:,:,i) = reshape(fishimage(:,:,i), 1, prod(size(fishimage(:,:,1))));
+        intensity(:,:,i) = mean(intensitymatrix(:,:,i));
+    end
+   
+    rgintens = intensity(:,:,1)-intensity(:,:,2);
+    rbintens = intensity(:,:,1)-intensity(:,:,3);
+      </code>
+    </example>
+
+  </content>
+  
+</document>

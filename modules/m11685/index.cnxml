@@ -1,0 +1,25 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Music Classification by Genre: Beat Detection</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>a5f9528b-bc4f-48cf-b47c-4bfac89cb188</md:uuid>
+</metadata>
+
+  <content>
+    <para id="beat1">
+Beat detection emphasizes the sudden impulses of sound in the song and then finds the fundamental period at which these impulses appear. It convolves a signal with itself and finds frequency peaks.  Then it measures the distance between these frequency peaks.  This is done by breaking the signal into frequency bands, extracting the envelope of these frequency-banded signals, differentiating them to emphasize sudden changes in sound, and running the signals through a filter to choose the highest energy result as the tempo. Variation in tempo, found by detecting beat in different windows of the song, helps determine musical genres.
+    </para>  
+
+    <para id="beat2">
+The filter can only separate rap from all other genres effectively, because it has the steadiest backbeat, consistent across the genre!  Classical and jazz have too much variability, which makes sense, considering that each piece is often long and divided into sections.
+    </para> 
+
+<figure id="beatdetect">
+  <media id="idm78736" alt=""><image src="../../media/beatdetection.gif" mime-type="image/gif"/></media>
+</figure> 
+
+<figure id="beatsd">
+  <media id="idm506384" alt=""><image src="../../media/sdbeat.gif" mime-type="image/gif"/></media>
+</figure> 
+
+  </content>
+  
+</document>

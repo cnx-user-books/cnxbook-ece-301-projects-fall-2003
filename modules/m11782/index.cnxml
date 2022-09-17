@@ -1,0 +1,49 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Team</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>e8597506-5e52-40de-84d9-bffd151a5f0f</md:uuid>
+</metadata>
+
+  <content>
+<section id="team">
+			<title>Team</title>
+			<para id="group">The work for the project was broken down into the following parts: Research, developing an approach, coding the algorithms, testing and debugging the code, making the poster and writing the connexions report. The work for the project was evenly distributed between the four members of the team.</para>
+<para id="chrispar"><figure id="chris">
+					<title>Christian Omidiran</title>
+					<media id="idp2272832" alt=""><image src="../../media/chris-3fb8.jpg" mime-type="image/jpeg"/></media>
+					<caption>Sophomore at Jones College. email: chriso@rice.edu</caption>
+				</figure></para>
+			<para id="picazopar"><figure id="picazo">
+					<title>Genaro Picazo</title>
+					<media id="idm7289712" alt=""><image src="../../media/picazo.jpg" mime-type="image/jpeg"/></media>
+					<caption>Junior at Wiess College. email: picazo@rice.edu</caption>
+				</figure></para>
+
+			<para id="ianpar"><figure id="ian">
+					<title>Ian Wells</title>
+					<media id="idm7286512" alt=""><image src="../../media/ian.jpg" mime-type="image/jpeg"/></media>
+					<caption>Sophomore at Baker College. email: ianwells@rice.edu</caption>
+				</figure></para>
+			<para id="danielpar"><figure id="daniel">
+					<title>Daniel Wu</title>
+					<media id="idm7283312" alt=""><image src="../../media/daniel.jpg" mime-type="image/jpeg"/></media>
+					<caption>Sophomore at Martel College. email: danielwu@rice.edu</caption>
+				</figure></para>
+					</section>
+		<section id="continue">
+			<title>Continue</title>
+			<para id="links">
+<list list-type="bulleted" id="bullets">
+<item><link document="m11778">Background Information</link></item>
+<item><link document="m11780">Procedure</link></item>
+<item>
+<link document="m11783">Results</link></item>
+<item><link document="m11781">Conclusion</link></item>
+<item><link document="m11779">Our Code</link></item>
+<item><link document="m11782">Team Members</link></item>
+<item><link document="m11784">References</link></item>
+				</list></para>
+		</section>
+
+  </content>
+  
+</document>

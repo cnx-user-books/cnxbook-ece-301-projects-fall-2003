@@ -1,0 +1,62 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Results for Velocity</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>c609af67-dd0a-4ab6-a7db-b55d6399dbbe</md:uuid>
+</metadata>
+
+  <content>
+   		<para id="velres1">The results for velocity were not quite as successful as we had hoped, but we did get some results. We were able to detect the velocity for objects moving at extremely large velocities (this equated to a large phase shift). </para>
+		<para id="sampletable"><table id="sampveltable" summary="">
+				<title id="restable">Sample Test Results</title>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="spycolgen1" colwidth="*"/>
+					<colspec colnum="2" colname="spycolgen2" colwidth="*"/>
+					<colspec colnum="3" colname="spycolgen3" colwidth="*"/>
+					<colspec colnum="4" colname="spycolgen4" colwidth="*"/>
+					<colspec colnum="5" colname="spycolgen5" colwidth="*"/>
+					<tbody>
+						<row>
+							<entry>Test Case:</entry>
+							<entry>1</entry>
+							<entry>2</entry>
+							<entry>3</entry>
+							<entry>4</entry>
+						</row>
+						<row>
+							<entry>Target Velocity</entry>
+							<entry>4.5654x10^9</entry>
+							<entry>9.1308x10^9</entry>
+							<entry>2.0106x10^10</entry>
+							<entry>4.5654x10^8</entry>
+						</row>
+						<row>
+							<entry>Measured Velocity</entry>
+							<entry>4.4151x10^9</entry>
+							<entry>8.9776x10^9</entry>
+							<entry>1.3548x10^10</entry>
+							<entry>3.0494x10^8</entry>
+						</row>
+						<row>
+							<entry>Phase Shift</entry>
+							<entry>2x10^6</entry>
+							<entry>4x10^6</entry>
+							<entry>9x10^6</entry>
+							<entry>2x10^5</entry>
+						</row>
+						<row>
+							<entry>Percent Error</entry>
+							<entry>3.29%</entry>
+							<entry>1.678%</entry>
+							<entry>  32.61%</entry>
+							<entry>32.21%</entry>
+						</row>
+					</tbody>
+				</tgroup>
+			</table></para>
+		<para id="velres2">These results showed that our system can detect the velocity, but only for a narrow range and when the object is moving extremely fast.</para>
+<section id="next">
+<para id="linknext">
+Now to Conclusion:<link document="m11759"> Conclusions</link>
+</para></section>
+
+	</content>
+</document>

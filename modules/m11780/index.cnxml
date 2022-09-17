@@ -1,0 +1,26 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Procedure</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>9148e895-db36-45cf-afe4-1cd41d4bb393</md:uuid>
+</metadata>
+  <content>
+		<section id="app">
+<para id="disc1">Our project's goal to test a series of overcomplete dictionaries composed of varied standalone bases on a few standard test images, and then analyze the results.  Working towards this, we selected 3 bases and 3 pictures.  Our three bases, the fourier basis, the dct basis, and the dirac basis (a basis of shifted dirac deltas), were selected based on our familiarity with them and their nature as "foundation" bases in signal processing; the dirac basis is nothing more than the canonical basis, the dct basis has use in the jpeg image format, and the fourier basis is the cornerstone of modern signal analysis.  Our three images are very generalized; Lena represents a "real" image, Hobbes (of Calvin and Hobbes fame) is a grayscale line drawing with lots of "edges," and a cartoonish portrait of Edward norton provides solid blocks of color, ideal for a wavelet (or in our case, dirac) basis. While it would seem most appropriate to include a wavelet basis in our test set, we elected not to on the grounds that a) there are many, many wavelet bases out there, and b) we are too inexperienced to select an appropriately generalized one, let alone understand the transform as it occurs.  Instead, the dirac basis offers a compromise - it contains the "edges" of the wavelet, arguably the best part. Our two overcomplete bases are the "dft dct" basis and the "dirac dct" basis.  We ran BP and OMP with each overcomplete basis (as well as with just the dct basis, as a control) on each of the three images for 4 iterations, 16 iterations, 64 iterations, and 128 iterations.  We generated our conclusions based on the compressed images produced.</para>
+
+		</section>
+		<section id="continue">
+			<title>Continue</title>
+			<para id="links"><list list-type="bulleted" id="bullets">
+				<item><link document="m11778">Background Information</link></item>
+<item><link document="m11780">Procedure</link></item>
+<item>
+<link document="m11783">Results</link></item>
+<item><link document="m11781">Conclusion</link></item>
+<item><link document="m11779">Our Code</link></item>
+<item><link document="m11782">Team Members</link></item>
+<item><link document="m11784">References</link></item>
+				</list></para>
+		</section>
+
+  </content>
+  
+</document>

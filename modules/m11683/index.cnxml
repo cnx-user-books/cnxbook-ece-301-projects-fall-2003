@@ -1,0 +1,21 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Music Classification by Genre: High Pass Filter</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>3cb31e5c-16d8-4046-8fe1-02e9516d4761</md:uuid>
+</metadata>
+
+  <content>
+    <para id="hpf">
+  	Like most of the filters run on our music samples, the High Pass filter does a good job of identifying some genres, while it has difficulty with others.  Like one would expect, classical had the smallest error of any genre tested.  This should be intuitive since it uses the lower frequency part of the spectrum.  One can think of classical music as being very fluid with few sudden changes in frequency.  Conversely, punk and jazz had the highest amount of error, which is a good indication of higher frequencies being utilized.  Compared to classical music, these genres are much less fluid and often exhibit rapid changes in tempo.  Somewhere between these two extremes are techno, rap and country.   The filter has an especially tough time telling the difference between the latter two.  Who would have ever thought Garth Brooks and Tupac might get confused with one another.  Overall, while the filter cannot explicitly identify the different genres, it does give the user a starting point to isolate between two main groups.  This means that another tool must be used along side the high pass filter in order to obtain an effective music matcher.
+    </para>   
+
+<figure id="highpass">
+  <media id="idp2034624" alt=""><image src="../../media/highpassfilter.gif" mime-type="image/gif"/></media>
+</figure>
+
+<figure id="sdhighpass">
+  <media id="idm6582048" alt=""><image src="../../media/highpass.gif" mime-type="image/gif"/></media>
+</figure>
+
+  </content>
+  
+</document>

@@ -1,0 +1,56 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Approaching Good Distortion</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>22f638e2-3e01-4eed-832b-20a872402263</md:uuid>
+</metadata>
+
+  <content>
+    <section id="s1">
+      <title>Creating the Distortion</title>
+      <para id="s1p1">
+	As we discovered in <link document="m">Problems with
+	Distortion</link>, when we work with the modified power
+	series, we do not get the expected result.  In fact, we only
+	get a lower quality version of our original sound file!
+	However, taking a look at the minimum and maximum of our sound
+	vector, we soon discover the problem: all values of our signal
+	are between 1 and -1!  When we take these numbers to the ten
+	power, or even the five power, all we do is make our sound
+	values smaller.  Therefore, a quick fix would be to take these
+	numbers to the <emphasis>one-tenth</emphasis> power or the
+	<emphasis>one-fifth</emphasis> power, in effect dividing each
+	power by ten.  Upon checking out our signal, we get the
+	wonderful distortion that we needed!  As we play around with
+	different coefficients and powers (all less than one), our own
+	discerning ears determine which coefficients and powers are
+	best for the distortion we want.  However, in all of this
+	playing around, a particular evil has crept in among our
+	distortion: noise!
+      </para>
+    </section>
+    <section id="s2">
+      <title>Dealing with the Noise</title>
+      <para id="s2p1">
+	Several different methods can be used to take out the noise
+	from our signal.  In fact, an <link url="http://www.owlnet.rice.edu/~elec301/Projects02/lorisFor/">entire
+	project</link> was dedicated to noise-elimination in 2002.
+	However, since this project focuses mainly on a MATLAB
+	approach rather than a C approach, we'll leave implimenting
+	that noise filter to a more adventurous group.
+      </para>
+      <para id="s2p2">
+	The simplest way to get rid of the noise would be to impliment
+	a band pass filter in MATLAB, allowing only for the frequency
+	range of the guitar (about 100Hz to about 4000Hz, perhaps
+	higher depending on the high notes you play).  This filter
+	will get rid of most of the noise, except for the noise that
+	lies within those frequencies.
+      </para>
+      <para id="s2p3">
+	Another easy way to get rid of the noise involves the FFT.
+	After taking the FFT of the signal, you can decrease noise by
+	throwing out the frequencies below a certain threshold.
+      </para>
+    </section>
+  </content>
+  
+</document>

@@ -1,0 +1,18 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Formant Analysis and Vowel Detection</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>a7310a87-968e-4665-a66f-4530be5839b8</md:uuid>
+</metadata>
+<content>
+<section id="sectionone">
+			<title>Abstract</title>
+			<para id="abstract">  In the past few years, Voice Recognition software applied to word processing and other computer tasks has received much media hype.  One of the methods employed by this software is the use of formants, harmonics found in vowels due to resonance in the vocal tract, that are inherent in speech. To limit the amount of variables, only five fundamental vowel sounds in a group member's speech were recorded and analyzed to serve as a database for vowel detection.  The frequency values of the formants and their magnitudes were logged.  Simple words with these fundamental vowel sounds were recorded and analyzed to detect the vowels.  The first detection method employed was a Cartesian distance method.  The distance between an ideal vowel's formants and the possible vowel's formants in the word were calculated.  The shortest distance, which was also below a defined threshold, signified the vowel our input contained.  When this proved inaccurate with certain input vowels, a second and ultimately more effective method was implemented.  This method employed systematically eliminating the vowels that the input vowel could not be.  This was done by comparing the first and second formants with those in the database.  With this method, it is possible that an input vowel could be detected as two or more vowels.  However, with proper threshold leveling, we found this could be largely circumvented.</para>
+			<section id="sectiontwo">
+				<title>Motivation</title>
+				<para id="motivation">Our motivation to work on this project was to gain insight on the nature of speech recognition systems.  We now realize how difficult it is to build such a system reliably.</para>
+			</section>
+		</section>
+
+	</content>
+
+  
+</document>

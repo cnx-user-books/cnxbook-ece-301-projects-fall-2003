@@ -1,0 +1,31 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Image Querying with Complex Wavelets: Summary and Potential Future Work</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>048aa713-ad03-48a9-b9e6-26328f45b1ca</md:uuid>
+</metadata>
+
+  <content>
+<section id="conc">
+  <title>Conclusions</title>
+
+    <para id="p1">
+Our work shows promising results in finding shifted versions of an image in a reasonably sizeable database, in addition to finding blurred and hand-drawn images.  The approach of Jacobs, et al. has a significantly lower hit rate for shifted images.  
+</para>
+</section>
+
+<section id="futwork">
+  <title>Possible Future Work</title>
+<para id="p2">
+While our approach is more accurate for shifted images, it is somewhat less space efficient and takes somewhat longer to compute signatures using our scheme.  Therefore, something we would like to see is a transform that does the work of the 2D CDWT and the DFT together.  While this doesn’t greatly effect search time, this would speed up preprocessing time by requiring only a single computation per image, and webcrawlers could be twice as effective at finding images and adding them to the database of image signatures.  It could also lead to a more natural way of performing image querying.  
+</para>
+
+<para id="p3">
+We would also like to see how well our algorithm could be optimized, though this was not a major goal of our project.  For example, what kind of space versus time versus accuracy tradeoff would be made by taking the hundred highest magnitude coefficients versus the top sixty?
+</para>
+
+<para id="p4">
+A final aim of potential future research could be to apply this sort of querying scheme with low resolution queries to databases of other kinds of data.  Video might be an option, though it is unclear as to how the query data would be created.  Music might be a more reasonable option, where the user could hum a favorite song which could be matched to a MIDI version of the song.  The hum could represent a coarse-scale version of the desired song just as the query image represented a coarse-scale version of the desired image.  
+    </para>
+</section>
+  </content>
+  
+</document>

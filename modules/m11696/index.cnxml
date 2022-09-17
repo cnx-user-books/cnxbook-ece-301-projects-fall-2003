@@ -1,0 +1,25 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Content-Based Image Querying with Complex Wavelets: The Complex Discrete Wavelet Transform</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>4246002b-1335-4ae1-bb4b-49ba2721958d</md:uuid>
+</metadata>
+
+  <content>
+
+    <para id="p1">
+Because of its desirable multiresolution properties, the two-dimensional wavelet transform happens to be highly applicable to many areas, very notably to the field of image processing.  However, its lack of shift-invariance tends to be a major inconvenience, and a transform that provides multiresolution as well as shift-invariance would be highly useful almost everywhere wavelets are used.  Complex wavelets are an answer to this problem, and a solid mathematical foundation that allowed practical use of complex wavelets in image processing was originally set up in 1997 by Nick Kingsbury of Cambridge University.  
+</para>
+
+    <para id="p2">
+The complex two-dimensional wavelet transform provides all of the advantages that the separable discrete wavelet transform provides – multiresolution, sparse representation, and useful characterization of the structure of an image.  What makes the complex wavelet basis exceptionally useful for our purposes is that it provides a high degree of shift-invariance in its magnitude.  A drawback to this transform is that it is four-times redundant.  That is, if you have an original N x N image, and take the DWT, you get back N x N numbers, whereas using the CDWT, you get back 4 N x N numbers.  So, for the price of four-times redundancy, you get a high degree of shift-invariance in magnitude – which seems like a reasonable tradeoff for applications that need a shift-invariant, multiresolution transform.  
+</para>
+
+     <figure id="fig1">
+        <title>A 1-dimensional complex wavelet</title>
+        <media id="idm7235408" alt=""><image src="../../media/cw.png" mime-type="image/png"/></media>
+	<caption>Figure generated using Ivan Selesnick's code.</caption>
+      </figure>
+
+
+  </content>
+  
+</document>

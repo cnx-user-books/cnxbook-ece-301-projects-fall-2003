@@ -1,0 +1,243 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Results of the Fish Classification Project</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>00395439-64b2-4c98-8e2e-2a6bd8cc6194</md:uuid>
+</metadata>
+
+  <content>
+<section id="sect1">
+<title>General Results</title>
+<para id="para1">
+Two different sets of general tests were run.  The first set was when an ideal picture is used and the fish is on a completely black background.  The other set of tests that was run was for the situation when a non-ideal picture is used and the background on the picture must be subtracted.
+</para>
+<section id="ideal">
+<title>Ideal Cases</title>
+<para id="para2">
+The ideal cases were extremely accurate with low levels of noise.  With no noise, the classifier was able to correctly determine all the trout and 85% of the salmon.  As noise was increase, the accuracy of the trout dropped off drastically, whereas the salmon continued to be detected more accurately as noise was added.  Overall, this system works well and was extremely accurate.
+</para>
+
+
+<figure id="pic2" orient="vertical">
+<title>Sample Pictures for the Ideal Tests</title>
+<subfigure id="idm1601184">
+<title>Sockeye Salmon</title>
+<media id="idm1600288" alt=""><image src="../../media/plainsockeye.jpg" mime-type="image/jpeg"/></media>
+<caption>plain black background</caption>
+</subfigure>
+
+<subfigure id="idm1997472">
+<title>Steelhead Trout</title>
+<media id="idm1996576" alt=""><image src="../../media/plainsteelhead.jpg" mime-type="image/jpeg"/></media>
+<caption>plain black background</caption>
+</subfigure>
+
+<subfigure id="idm1995008">
+<title>Tree Log</title>
+<media id="idm1994112" alt=""><image src="../../media/plainLog.jpg" mime-type="image/jpeg"/></media>
+<caption>with black background</caption>
+</subfigure>
+</figure>
+
+<table id="ideal1" summary="">
+<title>Ideal Tests Accuracy Results</title>
+<tgroup cols="4">
+  <thead>
+   <row>
+    <entry/>
+    <entry>Sockeye Salmon</entry>
+    <entry>Steelhead Trout</entry>
+    <entry>Trash/Unknown Items</entry>
+   </row>
+  </thead>
+  <tbody>
+    <row>
+     <entry>No Noise</entry>
+     <entry>85%</entry>
+     <entry>100%</entry>
+     <entry>66.67%</entry>
+    </row>
+    <row>
+     <entry>Low Noise</entry>
+     <entry>85%</entry>
+     <entry>65%</entry>
+     <entry>20%</entry>
+    </row>
+    <row>
+     <entry>Moderate Noise</entry>
+     <entry>85%</entry>
+     <entry>20%</entry>
+     <entry>60%</entry>
+    </row>
+    <row>
+     <entry>Heavy Noise</entry>
+     <entry>50%</entry>
+     <entry>0%</entry>
+     <entry>80%</entry>
+    </row>
+   </tbody>
+  </tgroup>
+</table>
+<table id="ideal2" summary="">
+<title>Ideal Tests Confusion Results</title>
+<tgroup cols="4">
+  <thead>
+   <row>
+    <entry/>
+    <entry>Sockeye Salmon</entry>
+    <entry>Steelhead Trout</entry>
+    <entry>Trash/Unknown Items</entry>
+   </row>
+  </thead>
+  <tbody>
+    <row>
+     <entry>No Noise</entry>
+     <entry>94.4%</entry>
+     <entry>87%</entry>
+     <entry>76.9%</entry>
+    </row>
+    <row>
+     <entry>Low Noise</entry>
+     <entry>68%</entry>
+     <entry>86.7%</entry>
+     <entry>28.6%</entry>
+    </row>
+    <row>
+     <entry>Moderate Noise</entry>
+     <entry>68%</entry>
+     <entry>100%</entry>
+     <entry>24%</entry>
+    </row>
+    <row>
+     <entry>Heavy Noise</entry>
+     <entry>83%</entry>
+     <entry>N/A</entry>
+     <entry>28.5%</entry>
+    </row>
+   </tbody>
+  </tgroup>
+</table>
+</section>
+
+<section id="nonideal">
+<title>Non-Ideal Cases</title>
+<para id="para10">
+The non-ideal cases occur when the image start with a set background, instead of having the fish placed on a black background.  They are harder to detect because the picture of the fish is not completely accurate to begin with.  Most of the test still work well, though, as the results below show.
+</para>
+
+
+
+<figure id="pic3" orient="vertical">
+<title>Sample Pictures for Non-Ideal Tests</title>
+<subfigure id="pic1">
+<title>Sockeye Salmon</title>
+<media id="idp137280" alt=""><image src="../../media/bksockeye.jpg" mime-type="image/jpeg"/></media>
+<caption>with background</caption>
+</subfigure>
+<subfigure id="idp138784">
+<title>Steelhead Trout</title>
+<media id="idp139680" alt=""><image src="../../media/bksteelhead.jpg" mime-type="image/jpeg"/></media>
+<caption>with background</caption>
+</subfigure>
+<subfigure id="pic5">
+<title>Tree Log</title>
+<media id="idp142352" alt=""><image src="../../media/bklog.jpg" mime-type="image/jpeg"/></media>
+<caption>with background</caption>
+</subfigure>
+</figure>
+
+<table id="nonideal1" summary="">
+<title>Non-Ideal Tests Accuracy Results</title>
+<tgroup cols="4">
+  <thead>
+   <row>
+    <entry/>
+    <entry>Sockeye Salmon</entry>
+    <entry>Steelhead Trout</entry>
+    <entry>Trash/Unknown Items</entry>
+   </row>
+  </thead>
+  <tbody>
+    <row>
+     <entry>No Noise</entry>
+     <entry>46.7%</entry>
+     <entry>90%</entry>
+     <entry>10%</entry>
+    </row>
+    <row>
+     <entry>Low Noise</entry>
+     <entry>80%</entry>
+     <entry>100%</entry>
+     <entry>0%</entry>
+    </row>
+    <row>
+     <entry>Moderate Noise</entry>
+     <entry>73.3%</entry>
+     <entry>90%</entry>
+     <entry>10%</entry>
+    </row>
+    <row>
+     <entry>Heavy Noise</entry>
+     <entry>73.3%</entry>
+     <entry>80%</entry>
+     <entry>0%</entry>
+    </row>
+   </tbody>
+  </tgroup>
+</table>
+<table id="nonideal2" summary="">
+<title>Ideal Tests Confusion Results</title>
+<tgroup cols="4">
+  <thead>
+   <row>
+    <entry/>
+    <entry>Sockeye Salmon</entry>
+    <entry>Steelhead Trout</entry>
+    <entry>Trash/Unknown Items</entry>
+   </row>
+  </thead>
+  <tbody>
+    <row>
+     <entry>No Noise</entry>
+     <entry>58.3%</entry>
+     <entry>47.4%</entry>
+     <entry>25%</entry>
+    </row>
+    <row>
+     <entry>Low Noise</entry>
+     <entry>60%</entry>
+     <entry>66.7%</entry>
+     <entry>N/A</entry>
+    </row>
+    <row>
+     <entry>Moderate Noise</entry>
+     <entry>55%</entry>
+     <entry>64%</entry>
+     <entry>100%</entry>
+    </row>
+    <row>
+     <entry>Heavy Noise</entry>
+     <entry>50%</entry>
+     <entry>61.5%</entry>
+     <entry>N/A</entry>
+    </row>
+   </tbody>
+  </tgroup>
+</table>
+</section>
+
+<para id="para20">
+The ideal cases performed basically as expected, with accuracy dropping as the noise was increased.  As more and more noise was introduced into the system, more pictures were classified as unknown and fewer as fish.  This is the way the system should behave and classify pictures which it is not sure of as unknown.
+</para>
+<para id="para21">
+The non-ideal cases actually showed an increase in accuracy as small noise was added to the pictures.  Unlike the ideal cases, as noise was added, pictures became more likely to be classified as fish than they should be.  The recognition of unknown pictures was very low and they were almost always classified as fish.  This is not perfect behavior and if countries were to instal the system in a nonideal setting, they would want to improve the threshold values of the tests for their specific setting.
+</para>
+<para id="para22">
+All of the test worked very will with no noise in the system, but it was found that the accuracy of the fin detection test quickly decreased as noise was added to the system, and the length to width test began to fail once moderate noise was added.  The intensity test and the feature detection tests continued to work well even through the high noise range, so they were definately the most reliable tests.
+</para>
+
+
+
+</section>
+
+</content>
+  
+</document>

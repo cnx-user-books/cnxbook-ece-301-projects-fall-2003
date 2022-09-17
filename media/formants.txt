@@ -1,0 +1,151 @@
+function answer = formants(x)
+%input is a file at 8000 Hz at 8 bits
+%windows input into sample sections, finding formants for each section
+%after formants are found, it associates each set with a vowel or consonant
+%returns a string which indicates the order of consonant and vowel sounds in the word
+%example: formants('mexico.wav') = CeCiCoC
+%note: Consonant will be returned at beginning and end regardless of actually content of input
+
+%constants: window size is size of window; n is order of AR model
+winsize=256;
+n=10;
+
+%reads input file into vector, establishes how many windows will be utilized
+x=wavread(x);
+[b1,b2]=size(x);
+j = (b1 - rem(b1,winsize))/winsize;
+
+%vowel database
+%values shown are values of frquency of first and second formant
+a=[.650; 1.150];
+e=[.430; 1.650];
+i=[.250; 1.950];
+o=[.420; 1.075];
+u=[.325; 1.350]; for k=1:j
+    %windowing/normalization process
+    c = x(1+winsize*(k-1):winsize*k,1);
+    c = (c-mean(c))/max(abs((c-mean(c))));
+    c = c.*hamming(winsize);
+    
+    %AR model
+    fn=ar(c,n);
+    [num,den]=tfdata(fn,'v');
+    
+    %freq. response of AR model
+    [h,w]=freqz(num,den);
+    f=w.*8000/(2000*pi);
+    
+    %finds all formant frequency and magnitude values
+    hnorm=abs(h);
+    z=zeros(1,2);
+    for(d=1:510)
+        if max(hnorm(d:d+2,1)) == hnorm(d+1,1)
+            z=[z; [f(d+1,1) hnorm(d+1,1)]];
+        end
+    end
+    
+    %generates graphs of frequency response of each window for troubleshooting purposes
+    %figure
+    %semilogy(f,hnorm)
+    %xlabel('Frequency(kHz)')
+    %ylabel('Response')
+    %title('Vocal Model')
+    %k
+    
+    %makes v vector which contains 0 for definite consonant, 1 for possible vowel
+    [blip,blop]=size(z);
+    g = z(2:blip,1:2);
+    if g(1,1) >= .225 & g(1,2) >= 5
+        v(k,1)=1;
+    else v(k,1)=0;
+    end
+    
+    %running log of all formant frequency and magnitude values
+    t(1:blip-1,k)=g(1:blip-1,1);
+    mag(1:blip-1,k)=g(1:blip-1,2);
+end
+
+%initial smoother, eliminates 1 long strings of possible vowels as being anomolous
+for k=2:j-1
+    if (v(k,1) ~= v(k-1,1)) & (v(k,1) ~= v(k+1,1))
+        v(k,1)=0;
+    end
+end
+
+%v(:,2) will label row numbers of output for troubleshooting reference
+v(:,2)=(1:j)';
+v(:,3) = 0; %systematic elimination method
+for k=1:j;
+    if v(k,1) ~= 0
+       flaga = 1;
+       flage = 1;
+       flagi = 1;
+       flago = 1;
+       flagu = 1;        %weeds out negative matches by first formant
+       if abs(a(1,1)-t(1,k)) > .15
+           flaga = 0;
+       end
+       if abs(e(1,1)-t(1,k)) > .125
+           flage = 0;
+       end
+       if abs(i(1,1)-t(1,k)) > .05
+           flagi = 0;
+       end
+       if abs(o(1,1)-t(1,k)) > .100
+           flago = 0;
+       end
+       if abs(u(1,1)-t(1,k)) > .075
+           flagu = 0;
+       end        %weeds out negative matches by second formant
+       if flaga == 1 & abs(a(2,1)-t(2,k)) > .250
+           flaga = 0;
+       end
+       if flage == 1 & abs(e(2,1)-t(2,k)) > .200
+           flage = 0;
+       end
+       if flagi == 1 & t(2,k) < 1.6
+           flagi = 0;
+       end
+       if flago == 1 & abs(o(2,1)-t(2,k)) > .150
+           flago = 0;
+       end
+       if flagu == 1 & abs(u(2,1)-t(2,k)) > .200
+           flagu = 0;
+       end        %assesses what vowel(s) it thinks it has
+       if flaga == 1
+           v(k,3) = v(k,3) + 1;
+       end
+       if flage == 1
+           v(k,3) = v(k,3) + 10;
+       end
+       if flagi == 1
+           v(k,3) = v(k,3) + 100;
+       end
+       if flago == 1
+           v(k,3) = v(k,3) + 1000;
+       end
+       if flagu == 1
+           v(k,3) = v(k,3) + 10000;
+       end
+   end end  %final smoother, eliminates 1 long strings of specific vowels
+for k=2:j-1
+    if v(k,3) ~= v(k-1,3) & v(k,3) ~= v(k+1,3)
+        v(k,3) = 0;
+    end
+end %converts the numeric values into letters
+answer = 'C';
+for k=2:j
+   if v(k,3) == 0 & v(k-1,3) ~= 0
+      answer = [answer 'C'];
+  elseif v(k,3) == 1 & v(k-1,3) ~= 1
+      answer = [answer 'a'];
+  elseif v(k,3) == 10 & v(k-1,3) ~= 10
+      answer = [answer 'e'];
+  elseif v(k,3) == 100 & v(k-1,3) ~= 100
+      answer = [answer 'i'];
+  elseif v(k,3) == 1000 & v(k-1,3) ~= 1000
+      answer = [answer 'o'];
+  elseif v(k,3) == 10000 & v(k-1,3) ~= 10000
+      answer = [answer 'u'];
+  end
+end

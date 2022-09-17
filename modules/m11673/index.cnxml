@@ -1,0 +1,38 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Music Classification by Genre: Total Power</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>316d8d26-9280-41f1-82df-1ef22dd93b74</md:uuid>
+</metadata>
+
+  <content>
+    <para id="totalpower">
+The power in a signal is the norm squared of the frequency components of the signal.  The vectors are first normalized to the maximum value in the vector such that we are not analyzing loudness, but more accurately, the L-2 norm divided by the L-infinity norm.  It measures how many harmonics are present in the signal and how much of each harmonic.  In our case, the music samples have a wide range of total power: classical piano has low power with few harmonics, whereas punk has high power.   You can see from these two plots of the spectrum, on the same scale, that jazz has much smaller power.  Jazz has fewer frequency components of smaller power.
+    </para>   
+
+<figure id="jazz">
+  <media id="idp8256240" alt=""><image src="../../media/totalpowerjazz.gif" mime-type="image/gif"/></media>
+</figure>
+
+<figure id="punk">
+  <media id="idp9055520" alt=""><image src="../../media/totalpowerpunk.gif" mime-type="image/gif"/></media>
+</figure>
+
+<section id="results">
+  <title>Results</title>
+    <para id="r1">
+The total power of a signal changes radically between genres.  Jazz has the lowest total power, while punk tops the list.  Punk also has the lowest standard deviation; there should be very little confusion with the rest of the genres.  Techno is the least discernable: its standard deviation encapsulates all the other genres.  Looking closely at the graph, the spread of the standard deviations of classical and country does not encapsulate any other genres, so they should be easily identified.  
+    </para>  
+
+    <para id="r2">
+The standard deviations of rap and techno are very distinct, whereas the others are all about the same value.  Although the average total power of techno may not be a good indicator, the standard deviation should be able to pick out techno.   
+    </para>   
+</section> 
+
+
+<figure id="tp">
+  <media id="idp1157888" alt=""><image src="../../media/totalpower.gif" mime-type="image/gif"/></media>
+</figure>
+
+
+  </content>
+  
+</document>

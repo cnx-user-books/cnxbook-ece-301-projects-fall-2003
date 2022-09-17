@@ -1,0 +1,43 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE document PUBLIC "-//CNX//DTD CNXML 0.5//EN" "http://cnx.rice.edu/cnxml/0.5/DTD/cnxml_mathml.dtd">
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns:bib="http://bibtexml.sf.net/" id="bgInfo">
+	<name>Background</name>
+	<content>
+		<section id="algos">
+			<name>Algorithms</name>
+			<para id="general">The two algorithms that we are concerned with are <term>basis pursuit</term> (BP) and <term>orthogonal matching pursuit </term> (OMP). What these two algorithms have in common is a requirement to use waveforms from a <term>dictionary</term> to represent an image. One advantage of these two algorithms is that they are very flexible in terms of the  dictionary used, which in turn allows for faster, sparser compression. It has been previously shown that while OMP is a faster algorithm, BP yields a mroe accurate approximation.</para>
+			<section id="BS">
+				<name>Basis Pursuit</name>
+				<para id="basis"><term>Basis pursuit</term> is an effective algorithm which replace the sparse approximation problem by a linear programming problem. It selects the coefficients that will represent the signal to be those with the minimum L1 coefficients. Essentially what it does is the following: Given a signal X, it takes the inner product of X with each element in the dictionary and at the end takes selects the one that yields the larger result (this will be the element the most closely resembles X). This element is added to previously selected elements, and subtracted from the signal X. It does repeat this process on the residual signal until N elements have been chosen, where N is the number of desired coefficients in the approximate representation of X.</para>
+			</section>
+			<section id="OMP">
+				<name>Orthogonal Matching Pursuit</name>
+				<para id="matching"><term>Orthogonal matching pursuit</term> is an iterative greedy algorithm that chooses the dictionary element that best represents the residual part of the signal at each iteration (just like the BP algorithm). It then projects this element onto those elements which have already been selected, which yields a new approximant signal. This differs from the BP algorithm in that redundant information is not repeated.</para>
+			</section>
+		</section>
+		<section id="continue">
+			<name>Continue</name>
+			<para id="links"><list type="bulleted" id="bullets">
+					<item><link src="procedure.xml">Procedure</link></item>
+					<item><link src="results.xml">Results</link></item>
+					<item><link src="conclusion.xml">Conclusion</link></item>
+					<item><link src="code.xml">Our Code</link></item>
+					<item><link src="team.xml">Team Members</link></item>
+					<item><link src="references.xml">References</link></item>
+				</list></para>
+		</section>
+	</content>
+	<glossary>
+		<definition id="dict">
+			<term>dictionary</term>
+			<meaning>a collection of parameterized waveforms used as a basis for analysis.</meaning>
+		</definition>
+<definition id = "bp">
+<term>basis pursuit</term>
+<meaning>the most fundamental algorithm for sparse approximation - creates a running approximation of a signal based on the basis signals which most closely resemble it.</meaning></definition>
+
+<definition id = "omp">
+<term>basis pursuit</term>
+<meaning>the same as <term>basis pursuit</term>, except each new approximation is orthogonalized against the existing approximation before it is added on. </meaning></definition>
+	</glossary>
+</document>

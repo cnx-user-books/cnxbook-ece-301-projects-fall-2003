@@ -1,0 +1,55 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+  <title>References and Thanks</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>79244fe1-39b9-4d73-8820-7071ed6eea51</md:uuid>
+</metadata>
+
+  <content>
+<section id="ack">
+			<title>Acknowledgements</title>
+			<para id="thanks"><emphasis>Special thanks to Richard Baraniuk and Joel Tropp for their generous assistance on the project.</emphasis></para>
+		</section>
+	</content>
+	<bib:file>
+		<bib:entry id="tropp1">
+			<bib:article>
+				<bib:author>Tropp, Joel A.</bib:author>
+				<bib:title>Greed Is Good: Algorithmic Results for Sparse Approximation</bib:title>
+				<bib:journal/>
+				<bib:year>2003</bib:year>
+			</bib:article>
+		</bib:entry>
+		<bib:entry id="tropp2">
+			<bib:article>
+				<bib:author>Tropp, J. A., Gilbert, A. C., Muthukrishnan, S., Strauss, M. J.</bib:author>
+				<bib:title>Improved Sparse Approximation Over Quasi-Incoherent Dictionaries</bib:title>
+				<bib:journal/>
+				<bib:year>2003</bib:year>
+			</bib:article>
+		</bib:entry>
+		<bib:entry id="pati">
+			<bib:article>
+				<bib:author>Pati, Y. C, Rezaifer, R., Krishnaprased, P. S.,</bib:author>
+				<bib:title>Orthogonal Matching: Recursive Function Approximation with Application to Wavelet Decomposition, in Asiloman Configuration on Signals, Systems, and Computer</bib:title>
+				<bib:journal/>
+				<bib:year>1993</bib:year>
+			</bib:article>
+		</bib:entry>
+		<bib:entry id="skretting">
+			<bib:phdthesis>
+				<bib:author>Skretting, K., Husoy, J. H.</bib:author>
+				<bib:title>Partial Search Vector Selection for Sparse Signal Representation</bib:title>
+				<bib:school>Stavanger University</bib:school>
+				<bib:year>2003</bib:year>
+			</bib:phdthesis>
+		</bib:entry>
+		<bib:entry id="seng">
+			<bib:mastersthesis>
+				<bib:author>Seng, N.,</bib:author>
+				<bib:title>Adaptive Decomposition in Electromagnetics</bib:title>
+				<bib:school>St. John's College</bib:school>
+				<bib:year>2003</bib:year>
+			</bib:mastersthesis>
+		</bib:entry>
+	</bib:file>
+  
+</document>

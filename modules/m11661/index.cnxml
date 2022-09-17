@@ -1,0 +1,30 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Project Summary: Music Classification by Genre</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>132f4b80-a4cb-42fe-b566-5ac67c66b861</md:uuid>
+</metadata>
+
+  <content>
+<para id="intro">
+Widespread access to the Internet popularized digital music. People download large collections of music files sorted into directory structures by artist or genre.  For example, a student at Rice University may want to search a library of files stored on the computer of a student in Bremen, Germany for classical music.  Language differences and foreign preferences for file naming would make it difficult for the Rice student to determine music genres.  A collection of filters to classify music based on DSP analysis tools would allow users to search a collection of files and extract only those that have certain chosen characteristics.  
+</para>
+
+<para id="thesis">
+We designed a classification system that analyzes the contents of a .wav music file in order to sort it into specific categories: classical, jazz, country, rap, punk, and techno.  In order to classify music samples, we examine characteristics in both the time and frequency domains: 
+<list id="analysistools">
+  <item>bandwidth</item>
+  <item>beat(tempo) variability</item>
+  <item>high pass filtering</item>
+  <item>number of FFT coefficients above threshold</item>
+  <item>power spectral density</item>
+  <item>smoothness in frequency domain</item>
+  <item>total power</item>
+</list>
+</para>
+
+<para id="implementation">
+Then a neural network classifies each song based on its similarity to other songs in various genres.  Previous classification projects have directly analyzed song clips in neural networks.  However, we take a slightly different approach by providing the neural network with the previously listed DSP characteristics that represent the song.  This method proves 84% accurate, having most difficulty classifying techno music.
+</para>
+  
+  </content>
+  
+</document>

@@ -1,0 +1,31 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Conclusion</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>002d08d4-07af-42b8-a808-cc1997def7a2</md:uuid>
+</metadata>
+
+<content>
+		<section id="conc_sect1">
+			<title>Further issues</title>
+			<para id="sect1_para1"><term>Our emotion detector was able to achieve very accurate results (83%) with user-defined inputs </term>for the main features.When combined with our automatic-cropping tool, <term>we were still able to achieve a success rate of 71%.</term> For the sets where our detector misclassified a pair of images, there were one of two reasons for failure:    </para>
+			<para id="sect1_para2"><term>The expressiveness between emotions was conveyed through facial regions other than the mouth. </term>To rectify this, our detector could be adapted to examine the forehead region for furrows and wrinkles, the cheeks for dimples, and the eyes for squinting or widening. For instance, Subject 12 failed in the distinction between sad   and angry. In this case, the ambiguity of emotion could be resolved by examining the eyes:                 <figure orient="horizontal" id="conc_fig1">
+					
+					<media id="idm6419008" alt=""><image src="../../media/faces1.jpg" id="faces1_img" mime-type="image/jpeg"/></media>
+					<caption>Subject 12 (sad and angry images)</caption>
+				</figure> In this case, we could set a certain theshold value on the test. If examining the mouth does not meet this theshold, the program should examine other portions of the face to resolve the ambiguity.</para>
+			<para id="sect1_para3"><term>There was little to no expressiveness of emotions</term>. For instance, Subject 4 also failed in the distinction between sad and angry. However, in these cases, it is extremely difficult for any detector (even the human brain) to accurately classify the pictured emotions.   <figure orient="horizontal" id="conc_fig2">
+					
+					<media id="idm115744" alt=""><image src="../../media/faces2.jpg" id="faces2_img" mime-type="image/jpeg"/></media>
+					<caption>Subject 2 (sad and angry images)</caption>
+				</figure></para>
+			
+		</section>
+
+<section id="conc_sect2">
+			<title>Conclusion</title>
+			<para id="sect2_para1">We feel that overall our emotion detection system produced consistent and accurate results. Future systems built on these methods could be expanded to include a wider range of emotions (with corresponding additions to the branching-flow network), real-time processing from a video feed, and more interactive applications. </para>
+</section>	
+
+</content>
+
+  
+</document>

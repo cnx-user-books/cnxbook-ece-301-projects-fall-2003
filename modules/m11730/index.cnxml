@@ -1,0 +1,69 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+	<title>DMT: Group Members, etc.</title>
+	<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>b8e97367-ece2-499c-a1c9-e8f6c22d3c55</md:uuid>
+</metadata>
+	<content>
+		<para id="group_para1">
+       Our group consisted of Chris Sramek, Travis White, and Eric Garza.  I can't believe this bunch of screw-ups actually put all of this together.</para>
+		<figure id="fig1">
+			<title>Travis White</title>
+			<media id="idm503440" alt=""><image src="../../media/KTravis.jpg" mime-type="image/jpeg"/></media>
+			
+		</figure>
+		<figure id="fig2">
+			<title>Chris Sramek</title>
+			<media id="idm7041264" alt=""><image src="../../media/chrispic.jpg" mime-type="image/jpeg"/></media>
+			
+		</figure>
+		<figure id="fig3">
+			<title>Eric Garza</title>
+			<media id="idm768480" alt=""><image src="../../media/ej1.jpg" mime-type="image/jpeg"/></media>
+			
+		</figure>
+		<section id="ack">
+			<title>Acknowledgements</title>
+			<list id="list1">
+				<item>Nadeen Ahmed, for taking time to help us understand DMT.</item>
+				<item>RichB, for giving us a few pointers along the way.</item>
+				<item>The other students at Ryon Lab, for not noticing that I hadn't showered in three days while I worked on all of these modules.</item>
+			</list>
+		</section>
+		<para id="para3"><link document="m11710">Home</link>  |  Previous: <link document="m11729">Results and Conclusions</link></para>
+		<section id="bib">
+			<title>Bibliography</title>
+			<para id="para2"/>
+		</section>
+	</content>
+	<bib:file>
+		<bib:entry id="id1">
+			<bib:techreport>
+				<bib:author>Yaakov J. Stein</bib:author>
+				<bib:title>Introduction  to to  xDSL</bib:title>
+				<bib:institution>RAD Data Communications</bib:institution>
+				<bib:year>2001</bib:year>
+			</bib:techreport>
+		</bib:entry>
+		<bib:entry id="id2">
+			<bib:phdthesis>
+				<bib:author>Michael Schlegel</bib:author>
+				<bib:title>High Bit Rate Data Transmission over the Telephone loop plant, Emphasizing on DMT Modulation</bib:title>
+				<bib:school>Technological Educational Institute of Piraeus</bib:school>
+				<bib:year>2001</bib:year>
+			</bib:phdthesis>
+		</bib:entry>
+		<bib:entry id="id3">
+			<bib:unpublished>
+				<bib:author>http://www.oscail.ie/students/assign/ctbunit12.pdf</bib:author>
+				<bib:title>Local Loop Technology</bib:title>
+				<bib:note>12-14</bib:note>
+			</bib:unpublished>
+		</bib:entry>
+		<bib:entry id="id4">
+			<bib:unpublished>
+				<bib:author>Elmustafa Erwa</bib:author>
+				<bib:title>Implementation of a Data Transmission Subsystem of an ADSL Transceiver</bib:title>
+				<bib:note>June. 5 2002</bib:note>
+			</bib:unpublished>
+		</bib:entry>
+	</bib:file>
+</document>

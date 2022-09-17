@@ -1,0 +1,75 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Content-Based Image Querying with Complex Wavelets</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>f71b08bb-89c6-4052-ba06-2815f8b31850</md:uuid>
+</metadata>
+
+
+  <content>
+
+<section id="introsection">
+<title>Introduction</title>
+
+    <para id="paragraph1">
+Thanks to the growth of the World Wide Web over the past decade or so, vast amounts of information are available to anyone in possession of a personal computer with a modem and an Internet connection.  Tasks such as finding a favorite poem have been made easy by search engines like Google.  One can simply type in a few lines from the poem, and then it’s just a matter of sorting through a few top matches before one has the entire poem on the screen.  
+    </para>   
+
+    <para id="paragraph2">
+While searching textual media is fairly trivial, looking for an image that you have seen before can be a huge problem.  If you remember seeing an interesting painting, say Leonardo da Vinci’s Mona Lisa, after walking through a museum, and you’d like to find information on it online, unless you have a word or phrase associated with the painting, such as <emphasis>da Vinci</emphasis> or <emphasis>Mona Lisa</emphasis>, it would be difficult to find any information about the particular work of art.  You might be able to find the painting online in some subject-specific database such as an online art gallery; however, such databases for most subjects are fairly uncommon.
+    </para>
+
+  <example id="monalisa">
+    <figure id="monalisafig">
+      <title>Mona Lisa</title>
+      <media id="idm6184656" alt=""><image src="../../media/monalisa.jpg" mime-type="image/jpeg"/></media>
+    </figure>
+  </example>
+
+    <para id="paragraph3">
+	When in search of this work of art, while one may not have textual information related to the painting, one usually does have some information about the image in question; that is, the person has a coarse-scale idea of what the Mona Lisa, for instance, looks like.  This information should be fairly useful for finding an actual image of the Mona Lisa, but given current techniques, searches for visual data break down as effective strategies when the database size increases to even a small fraction of the number of images on the World Wide Web.  
+    </para>   
+
+</section>
+
+
+<section id="ourgoalsection">
+<title>Our Goal</title>
+
+    <para id="paragraph4">
+	We would like to come up with some sort of a scheme that allows a user to search through a large database of images.  The system would likely work by having the user enter a query image, a low-detail, coarse-scale version of the image he or she would like to find, and then returning small thumbnails of several matching images for the user to skim over.  Ideally, we would like such a system to satisfy several properties.  
+    </para>   
+
+    <para id="paragraph5">
+Firstly, our algorithm should be reasonably fast and efficient.  It’s fairly obvious that this property is desirable for any algorithm, but would be especially so in our case, where it is likely that such a system is used on a search engine such as Google where there would potentially be thousands, if not millions, of query images entered every minute.  
+    </para>   
+
+    <para id="paragraph6">
+Our algorithm should also be well suited to matching coarse-scale versions of images to high detail versions of the same image.  Users should be able to sketch an image in a simple drawing application where a lot of detail is not easy to add to the query image.  They should also be able to enter images that have been digitized by the use of a scanner, which we assume introduces blurriness and additional noise such as scratches, dust, etc, to the extent that they would find it highly useful to search for a higher-resolution version of the image online.  
+    </para>   
+
+    <para id="paragraph7">
+Ideally, we would also like our algorithm to be able to handle affine transformations, such as translation, rotation, and scaling.  It is unreasonable to expect a user to be able to draw parts of an image in exactly the same region that they appear in the original image.  While these three transformations are all important components of an image querying system, we made the decision to focus on translation because it seems like the most likely type of error that a user would make.  
+    </para>   
+</section>
+
+<section id="pastworksection">
+<title>Past Work</title>
+
+    <para id="paragraph8">
+We structure our approach after that of Jacobs, Finkelstein, and Salesin, who, while at the University of Washington, published a paper on <cite><cite-title>Fast Multiresolution Image Querying</cite-title></cite>, which used the wavelet basis to decompose images to provide a low-resolution version of an image which is highly effective for image matching.  The primary drawback is that the approach is ineffective for detecting shifts of an image since the separable discrete wavelet basis is not shift-invariant.  Therefore, we propose the use of the complex discrete wavelet basis which possesses a high degree of shift-invariance in its magnitude.  When coupled appropriately with the two-dimensional Discrete Fourier Transform, the two-dimensional Complex Discrete Wavelet Transform allows us to match shifted versions of an image with a significantly higher degree of certainty than does the approach of Jacobs, et al.
+    </para>   
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+  </content>
+  
+</document>

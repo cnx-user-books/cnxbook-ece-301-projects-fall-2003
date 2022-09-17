@@ -1,0 +1,36 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Music Classification by Genre: Frequency Smoothness</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>b30b157f-b797-4c04-a8d4-a776893deeed</md:uuid>
+</metadata>
+
+  <content>
+    <para id="intro">
+A spectrogram is a tool that belongs to a set of tools called time-frequency representations.  Music, on a CD, is a time-vector. Performing an FFT of this time-vector would give us its frequency content. However, a single FFT would lose all time information since it gives us the frequency content of the time-vector as a whole. We need something like an instantaneous frequency response so we have both frequency and time information. A spectrogram essentially breaks a signal up into many different time-vectors and performs FFTs of each. These FFTs are then placed as columns in the spectrogram. In the end, we have a time-frequency representation of our music.
+    </para>   
+
+<figure id="techno">
+  <media id="idp747728" alt=""><image src="../../media/spectechno.gif" mime-type="image/gif"/></media>
+</figure>
+
+<figure id="classical">
+  <media id="idp408000" alt=""><image src="../../media/specclassical.gif" mime-type="image/gif"/></media>
+</figure>
+
+    <para id="figexplain">
+This is a spectrogram of a techno song and a classical song. freqsmooth.m quantifies the differences seen in these spectrograms. To do this, freqsmooth calculates the variance in the indices of the max values of each column. In other words, a song with a clear, loud melody will show small variance in these indices while a song with a harder-to-identify melody will show a large variance.
+    </para> 
+
+<section id="results">
+  <title>Results</title>
+    <para id="endresults">
+While freqsmooth does give a different value for each genre, it also gives a radically different value for songs within a given genre. In other words, it does not give a good representation of a genre as a whole. Given the plus and minus standard deviation bars, each genre overlaps heavily.
+    </para> 
+
+<figure id="findings">
+  <media id="idp161952" alt=""><image src="../../media/freqsmooth.gif" mime-type="image/gif"/></media>
+</figure>
+
+</section>
+  </content>
+  
+</document>

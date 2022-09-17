@@ -1,0 +1,37 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+	<title>DMT: Cyclic Prefix</title>
+	<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>283b6af2-8820-47dd-928c-10fda0fcb712</md:uuid>
+</metadata>
+	<content>
+		<section id="sec1">
+			<title>Why the Prefix?</title>
+			<para id="cp1">In an ideal world, we wouldn't have to worry about cyclic prefixes; the channel would be a wire and everything we send would be received in exactly the same form.  However, implementing our DMT system in an ideal world would be pretty useless, as all the cool benefits from DMT would go to waste.  Thus, we implemented a channel with an ugly (but not too ugly) frequency response, which added two forms of interference: <term>inter-symbol-interference</term> (ISI) and <term>inter-channel-interference</term> (ICI), which we will discuss next.</para>
+		</section>
+		<section id="sec2">
+			<title>Inter-Symbol-Interference (ISI)</title>
+			<para id="cp2">ISI arises from the fact that the channel performs a linear convolution of its impulse response with the time-domain waveform.  By this time, the blocks (now known as <term>symbols</term>) have been mirrored, IFFT'd and concatenated.  At the intersection of adjacent symbols, the linear convolution of the signal with the impulse response (whose support is assumed to be less than the symbol length but greater than unity) overlaps parts of both symbols.  This means that independent symbols affect each other; one symbol "bleeds" into another.  The addition of a prefix provides a buffer between symbols that prevends this.  <figure orient="vertical" id="fig1">
+					<title>ISI</title>
+					<media id="idp1602992" alt=""><image src="../../media/isi.jpg" mime-type="image/jpeg"/></media>
+					<caption>Inter-symbol-interference (ISI): This indicates the linear convolution of the channel impulse response <emphasis>h</emphasis> with the time-domain input to the channel <emphasis>x</emphasis>.  Notice the overlap at the intersection of the two symbols.</caption>
+				</figure></para>
+		</section>
+		<section id="sec3">
+			<title>Inter-Channel-Interference (ICI)</title>
+			<para id="cp3">ICI comes from the fact that the carrier frequencies for DMT lose their orthogonality due to the frequency response of the channel.   If we looked at the FFT of a block at the input to the channel, we'd see a sinc function at each carrier frequency since the IFFT modulates each carrier with a rectangular pulse.  The DFT basis is orthonormal, so each of the basis vectors (sinusoids) are orthogonal to all the rest;  this means each of the sincs are orthogonal (zero inner product) as well.  The frequency response of the channel has the effect of attenuating certain frequencies more than others, so each of the sincs is changed by a different amount.  Since the inner product is a measure of the similarity of two vectors, two previously "completely dissimilar" sinc functions now have at least some degree of similarity; i.e they are no longer orthogonal.  Without orthogonal carriers, the FFT cannot exactly recover the correctspectral coefficients.  Cyclic padding solves this problem by turning the linear convolution of the channel inpulse response with the signal into a cyclic convolution. <figure orient="vertical" id="fig2">
+					<title>ICI</title>
+					<media id="idm7960160" alt=""><image src="../../media/ICI.jpg" mime-type="image/jpeg"/></media>
+					<caption>Inter-channel-interference (ICI): This represents two carrier frequencies as sincs in the frequency-domain.  The frequency response of the channel causes the carrier frequencies for the transmitted signal to lose orthogonality.</caption>
+				</figure></para>
+		</section>
+		<section id="sec4">
+			<title>Cyclic Prefix</title>
+			<para id="cp6">The addition of a cyclic prefix to each symbol solves both ISI and ICI.  In our system, we assume the channel impulse response has a known length <emphasis>L</emphasis>.  The prefix consists simply of copying the last <emphasis>L</emphasis>-1 values from each symbol and appending them in the same order to the front of the symbol.  By having this buffer of essentially junk data in the front, the convolution of the impulse response with the signal at the end of a symbol does not affect any of the actual data at the beginning of the next symbol.  In addition, by repeating the last elements at the beginning, the first real "data" elements of each symbol experience overlap with the "end" of the symbol, just as in cyclic convolution.  This means the linear convolution of the channel impulse response with the concatenated symbols becomes concatenated cyclic convolutions of the impulse response with the individual symbols.  Since cyclic convolution directly corresponds to multiplication in the frequency domain, this has great import with respect to equalization, as we will see later.  After the time-domain signal passes through the channel, it is broken back into the parallel symbols and the prefix is simply discarded.  <figure orient="vertical" id="fig3">
+					<title>Cyclic Prefix</title>
+					<media id="idm7721760" alt=""><image src="../../media/cyclic.jpg" mime-type="image/jpeg"/></media>
+					<caption>This is one time-domain symbol with the cyclic prefix and last <emphasis>L</emphasis> elements shown in red (This is a slightly exaggerated pad length).</caption>
+				</figure></para>
+		</section>
+		<para id="cp4">Our related MATLAB functions: <code display="inline"><link document="m11721" resource="cyclicpad.m">cyclicpad.m</link></code>, <code display="inline"><link document="m11721" resource="decyclicpad.m">decyclicpad.m</link></code><!-- Insert module text here --></para>
+		<para id="cp5"><link document="m11710">Home</link>  |  Previous: <link document="m11721">Implementation</link>   |   Next:  <link document="m11727">The Channel</link></para>
+	</content>
+</document>

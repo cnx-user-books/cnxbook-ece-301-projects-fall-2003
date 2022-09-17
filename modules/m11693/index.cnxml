@@ -1,0 +1,174 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Image Querying with Complex Wavelets: Results of Experiments</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>d06921e2-8cc3-4d7d-b573-8ce7f5747569</md:uuid>
+</metadata>
+
+  <content>
+    <para id="intro">
+We decided that for testing purposes we would test images from three categories:
+    </para>   
+
+<list id="cats" list-type="enumerated">
+<item>hand-drawn images (using mspaint)</item>
+<item>blurred images (which emulates scanned images)</item>
+<item>shifted images</item>
+</list>
+
+<para id="p2">
+From each category, we performed five tests using query images based on images from our database.  For every test image we used, except for hand drawn image 5 (shown below), the expected image was returned in the top three percent of matched images when using the complex wavelet algorithm.  Results using the real wavelet algorithm were similar, except for on shifted images, where the query images had significantly lower rankings (on the range of top 15%) than from our algorithm.
+</para>
+
+      <figure id="hand1">
+        <title>hand drawn 1</title>
+        <media id="idp304656" alt=""><image src="../../media/hand1.jpg" mime-type="image/jpeg"/></media>
+      </figure>
+
+      <figure id="hand1act">
+        <title>actual image</title>
+        <media id="idp1533248" alt=""><image src="../../media/hand1act.jpg" mime-type="image/jpeg"/></media>
+      </figure>
+
+      <figure id="hand2">
+        <title>hand drawn 2</title>
+        <media id="idm21600" alt=""><image src="../../media/hand2.jpg" mime-type="image/jpeg"/></media>
+      </figure>
+
+      <figure id="hand2act">
+        <title>actual image</title>
+        <media id="idp2692160" alt=""><image src="../../media/hand2act.jpg" mime-type="image/jpeg"/></media>
+      </figure>
+
+      <figure id="hand3">
+        <title>hand drawn 3</title>
+        <media id="idm6510464" alt=""><image src="../../media/hand3.jpg" mime-type="image/jpeg"/></media>
+      </figure>
+
+      <figure id="hand3act">
+        <title>actual image</title>
+        <media id="idm6508304" alt=""><image src="../../media/hand3act.jpg" mime-type="image/jpeg"/></media>
+      </figure>
+
+      <figure id="hand4">
+        <title>hand drawn 4</title>
+        <media id="idp361968" alt=""><image src="../../media/hand4.jpg" mime-type="image/jpeg"/></media>
+      </figure>
+
+      <figure id="hand4act">
+        <title>actual image</title>
+        <media id="idp2870112" alt=""><image src="../../media/hand4act.jpg" mime-type="image/jpeg"/></media>
+      </figure>
+
+      <figure id="hand5">
+        <title>hand drawn 5</title>
+        <media id="idp1424864" alt=""><image src="../../media/hand5.jpg" mime-type="image/jpeg"/></media>
+      </figure>
+
+      <figure id="hand5act">
+        <title>actual image</title>
+        <media id="idp1765120" alt=""><image src="../../media/hand5act.jpg" mime-type="image/jpeg"/></media>
+      </figure>
+
+      <figure id="blur1">
+        <title>blurred 1</title>
+        <media id="idp1767280" alt=""><image src="../../media/blur1.jpg" mime-type="image/jpeg"/></media>
+      </figure>
+
+      <figure id="blur1act">
+        <title>actual image</title>
+        <media id="idm7110720" alt=""><image src="../../media/blur1act.jpg" mime-type="image/jpeg"/></media>
+      </figure>
+
+      <figure id="blur2">
+        <title>blurred 2</title>
+        <media id="idm6961664" alt=""><image src="../../media/blur2.jpg" mime-type="image/jpeg"/></media>
+      </figure>
+
+      <figure id="blur2act">
+        <title>actual image</title>
+        <media id="idm5994320" alt=""><image src="../../media/blur2act.jpg" mime-type="image/jpeg"/></media>
+      </figure>
+
+      <figure id="blur3">
+        <title>blurred 3</title>
+        <media id="idp2274016" alt=""><image src="../../media/blur3.jpg" mime-type="image/jpeg"/></media>
+      </figure>
+
+      <figure id="blur3act">
+        <title>actual image</title>
+        <media id="idp2276176" alt=""><image src="../../media/blur3act.jpg" mime-type="image/jpeg"/></media>
+      </figure>
+
+      <figure id="blur4">
+        <title>blurred 4</title>
+        <media id="idp2897872" alt=""><image src="../../media/blur4.jpg" mime-type="image/jpeg"/></media>
+      </figure>
+
+      <figure id="blur4act">
+        <title>actual image</title>
+        <media id="idp2464944" alt=""><image src="../../media/blur4act.jpg" mime-type="image/jpeg"/></media>
+      </figure>
+
+      <figure id="blur5">
+        <title>blurred 5</title>
+        <media id="idm6209504" alt=""><image src="../../media/blur5.jpg" mime-type="image/jpeg"/></media>
+      </figure>
+
+      <figure id="blur5act">
+        <title>actual image</title>
+        <media id="idm5912016" alt=""><image src="../../media/blur5act.jpg" mime-type="image/jpeg"/></media>
+      </figure>
+
+      <figure id="shift1">
+        <title>shifted 1</title>
+        <media id="idm5909856" alt=""><image src="../../media/shift1.jpg" mime-type="image/jpeg"/></media>
+      </figure>
+
+      <figure id="shift1act">
+        <title>actual image</title>
+        <media id="idp3675472" alt=""><image src="../../media/shift1act.jpg" mime-type="image/jpeg"/></media>
+      </figure>
+
+      <figure id="shift2">
+        <title>shifted 2</title>
+        <media id="idp3390464" alt=""><image src="../../media/shift2.jpg" mime-type="image/jpeg"/></media>
+      </figure>
+
+      <figure id="shift2act">
+        <title>actual image</title>
+        <media id="idm5489120" alt=""><image src="../../media/shift2act.jpg" mime-type="image/jpeg"/></media>
+      </figure>
+
+      <figure id="shift3">
+        <title>shifted 3</title>
+        <media id="idm5350096" alt=""><image src="../../media/shift3.jpg" mime-type="image/jpeg"/></media>
+      </figure>
+
+      <figure id="shift3act">
+        <title>actual image</title>
+        <media id="idm5347936" alt=""><image src="../../media/shift3act.jpg" mime-type="image/jpeg"/></media>
+      </figure>
+
+      <figure id="shift4">
+        <title>shifted 4</title>
+        <media id="idp1296560" alt=""><image src="../../media/shift4.jpg" mime-type="image/jpeg"/></media>
+      </figure>
+
+      <figure id="shift4act">
+        <title>actual image</title>
+        <media id="idm6166272" alt=""><image src="../../media/shift4act.jpg" mime-type="image/jpeg"/></media>
+      </figure>
+
+      <figure id="shift5">
+        <title>shifted 5</title>
+        <media id="idm5464928" alt=""><image src="../../media/shift5.jpg" mime-type="image/jpeg"/></media>
+      </figure>
+
+      <figure id="shift5act">
+        <title>actual image</title>
+        <media id="idp2618400" alt=""><image src="../../media/shift5act.jpg" mime-type="image/jpeg"/></media>
+      </figure>
+
+
+  </content>
+  
+</document>

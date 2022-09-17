@@ -1,0 +1,46 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE document PUBLIC "-//CNX//DTD CNXML 0.5//EN" "http://cnx.rice.edu/cnxml/0.5/DTD/cnxml_mathml.dtd">
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns:bib="http://bibtexml.sf.net/" id="members">
+    
+      <link rel="stylesheet" type="text/css" href="/stylesheets/sky/ns4.css" />
+
+      <link rel="stylesheet" title="Sky" type="text/css" href="/stylesheets/sky/document.css" />
+      <link rel="alternate stylesheet" title="Desert" type="text/css" href="/stylesheets/desert/document.css" />
+      <link rel="alternate stylesheet" title="Charcoal" type="text/css" href="/stylesheets/charcoal/document.css" />
+      <link rel="alternate stylesheet" title="Playland" type="text/css" href="/stylesheets/kid/document.css" />
+    
+    
+	<name>The Team</name>
+	<content>
+		<section id="team">
+			<name>Team</name>
+			<para id="group">The work for the project was broken down into the following parts: Research, developing an approach, coding the algorithms, testing and debugging the code, making the poster and writing the connexions report. The work for the project was evenly distributed between the four members of the team. Each member of the team worked on all parts of the project to some degree. We each feel that every member of the group did their fair share of the project.</para>
+			<para id="ianpar"><figure id="ian">
+					<name>Ian Wells</name>
+					<media type="image/jpg" src="ian.jpg"></media>
+					<caption>Sophomore at Baker College. email: ianwells@rice.edu</caption>
+				</figure></para>
+			<para id="danielpar"><figure id="daniel">
+					<name>Daniel Wu</name>
+					<media type="image/jpg" src="daniel.jpg"></media>
+					<caption>Sophomore at Martel College. email: danielwu@rice.edu</caption>
+				</figure></para>
+			<para id="chrispar"><figure id="chris">
+					<name>Christian Omidiran</name>
+					<media type="image/jpg" src="chris.jpg"></media>
+					<caption>Sophomore at Jones College. email: chriso@rice.edu</caption>
+				</figure></para>
+			<para id="picazopar"><figure id="picazo">
+					<name>Genaro Picazo</name>
+					<media type="image/jpg" src="picazo.jpg"></media>
+					<caption>Junior at Wiess College. email: picazo@rice.edu</caption>
+				</figure></para>
+		</section>
+		<section id="continue">
+			<name>Continue</name>
+			<para id="links"><list type="bulleted" id="bullets">
+					<item><link src="references.xml">References</link></item>
+				</list></para>
+		</section>
+	</content>
+</document>

@@ -1,0 +1,41 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Conclusion and Future Improvement of the Fish Classification Project</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>653089df-4f06-4fec-8cb2-9c1aeef66f84</md:uuid>
+</metadata>
+
+  <content>
+<para id="Conclusion">
+We ran the images first with the ideal background at 4 levels of noise and then again with the background subtracted off and almost ideal.  The ideal cases have better values than the background values and random noise on the images effects the accuracy dramatically.  It is interesting that as noise is added the length/width ratio test fails early and since trout is based heavily on this test we receive more error there.  Even with little error, poor picture quality effects the performance.
+     </para>
+<para id="para1">
+The project was overall a success because it was able to detect most of the fish pictures correctly.  Several of the tests even stood up well as noise was added to the system, although several did not work very will with large amounts of noise.  This is a feasable system to install someplace, though, if it had a bit of work to focus it on exact fish that would be found in that area and thus could have the tolerance values adjusted a bit.
+</para>
+<para id="para2">
+Another large source of error for this project was the pictures that were used to test.  Pictures were just taken from the internet and many were not as close to actual test cases as we would have liked.  The picture quality was so low on some pictures that they couldn't even be detected with no noise.  If the system was installed someplace, much more standardized pictures could be taken and thus, results would be expected to improve.
+</para>
+<para id="para3">
+The project could also be improved by altering some of the threshold values used.  With massive amounts of testing, and more test cases, ideal threshold values for several of the tests could be experimented with and found to improve the exact accuracy of the tests, even though the process is still good.  Also, the weights of the different tests could be changed so that the tests that hold up better with large amounts of noise were more important in the decision process than the tests that only work will with low noise.
+</para>
+<section id="FutureImpTitle">
+<title>Future Improvements</title>
+<para id="FutureImprovements">
+The future improvments are as follows:
+<list id="list1" list-type="bulleted">
+	<item>Noise Filtering Images – Noise Errors at Many Levels</item>
+	<item>Different Species – Other Fish types Yield Other Possibilities</item>
+	<item>Moving Images -  How Fish Swim and The Motion Vectors</item>
+	<item>Matched Filter Techniques – Possible Tracking of Exact Fish</item>
+</list>     
+</para> 
+</section>
+   <section id="team">
+     <title>Team</title>
+     <list id="teamlist">
+        <item>Ian Clark (ianclark@rice.edu) - Responsible for Fin Detection Test, Intensity Test, and Poster Design</item>
+        <item>Kyle Clarkson (kclarks@rice.edu) - Responsible for Length/Width Test, Feature Detection Test, Website, and other Matlab Code </item>
+        <item>Jason Second (jjsedano@rice.edu) - Responsible for Photo Collection and Preparation, Website, and Poster Design</item>
+</list>
+</section>
+  </content>
+  
+</document>

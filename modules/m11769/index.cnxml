@@ -1,0 +1,353 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Miscellaneous Code</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>e1b0a953-2841-4058-809b-155462167acd</md:uuid>
+</metadata>
+
+  <content>
+<example id="code1">
+<title>Code for the Fish Classifier</title>
+<code display="block" id="idp973184">% This function is one of the top level files that call all the tests and 
+% figure out which fish their results indicate.  It also adds noise to the image
+% to start with.
+function [fishtype] = fishcounterback(file)
+
+fish = imread(file);
+fishimage1 = im2double(fish);
+
+% Add noise to the picture
+noise = randn(size(fishimage1));
+noiselevel = .00;
+
+fishimagenoise = fishimage1 + noiselevel.*noise;
+fishimagenoisevals = and(fishimagenoise&lt;1, fishimagenoise&gt;0);
+fishimage = fishimagenoise.*fishimagenoisevals;
+
+
+fishmod = 0;
+
+if  sum(sum(rgb2gray(fishimage)))&gt;100
+    
+    % If the length to width ratio is less than 2.85 and greater than 2, 
+    % its a salmon, and if its greater than 3.5, the fish is a trout.
+    [length,width,lwratio] = fishedge(fishimage);
+    if  and(lwratio &lt;= 2.85, lwratio&gt;2)
+        fishmod = fishmod + 1;
+    elseif lwratio &gt;=3.5
+        fishmod = fishmod - 1;
+    end
+    
+    % Check to see how much intensity there is in each of the color spectrums
+    for i = 1:3
+        fishnorm(:,:,i) = fishimage(:,:,i)./norm((fishimage(:,:,i)));
+        
+        intensitymatrix(:,:,i) = reshape(fishimage(:,:,i), 1, prod(size(fishimage(:,:,1))));
+        intensity(:,:,i) = mean(intensitymatrix(:,:,i));
+    end
+   
+    rgintens = intensity(:,:,1)-intensity(:,:,2);
+    rbintens = intensity(:,:,1)-intensity(:,:,3);
+    
+    % If the red is greater than one ofthe other spectrums by at least .4, then
+    % it is a trout, if they are within .1 of each other, it is a trout.  Otherwise
+    % it is an unknown item.
+    if rgintens &gt;.04
+        fishmod = fishmod + .5;
+    elseif rgintens &lt;.01
+        fishmod = fishmod - .5;
+    end
+    
+    if rbintens &gt;.04
+        fishmod = fishmod + .5;
+    elseif rbintens &lt;.01
+        fishmod = fishmod - .5;
+    end
+    
+    % Check the features of the fish.
+    [body,head,tail] = featureanalyzer(fishimage);
+    
+    % If the body is red and the head is green, blue, or both, then its a trout.
+    % If the body is all three colors and either the head or the tail or both
+    % are the same color and included in the body, then it is a trout.
+    if and(body == 'r  ', or(head == 'g  ', or(head == 'gb ', head == 'b  ')))
+        fishmod = fishmod + 1.5;
+    end
+    if and(body == 'rgb', and(head == 'cbd', tail == 'cbd'))
+        fishmod = fishmod - 1.5;
+    elseif and(body == 'rgb', or(head == 'cbd', tail == 'cbd'))
+        fishmod = fishmod - 1;
+    end
+    
+
+    %Count the fins on the fish.  If it is zero, then its probably trash,
+    % otherwise, keep the modifier in its present state.
+    numfins = findet(fishimage);
+    
+    if and(numfins == 0, abs(fishmod)&lt;=2)
+        fishmod = 0;
+    end
+    
+else 
+    fishmod = 0;
+end
+
+% If most of the tests think the fish is a salmon, call it a salmon
+% If most of the tests think the fish is a trout, call it a trout
+% If the tests all don't know, or if they disagree, call it unknown
+if fishmod &gt;0
+    fishtype = 'salmon ';
+elseif fishmod &lt;0
+    fishtype = 'trout  ';
+else
+    fishtype = 'unknown';
+end
+
+</code>
+</example>
+<example id="code2">
+<title>Code for the Mass Fish Counter</title>
+<code display="block" id="idp978656">% This is the top file for the whole system.  It takes in a matrix of filenames and
+% a matrix of what type of fish each of the files is.  It then runs the classification
+% program on one fish at a time and then computes the accuracy of the outputs.
+function [fishmatrix,statsmat,correct,wrong] = massfishcounter(filematrix,typematrix);
+
+for fishnum = 1:size(filematrix,1)
+    
+    fishnum
+    % Classify the current fish
+fishmatrix(fishnum,:) = fishcounter(filematrix(fishnum,:));
+
+end
+
+salmoncount = 0;
+troutcount = 0;
+undetermined = 0;
+correct = 0;
+wrong = 0;
+salcor = 0;
+troutcor = 0;
+undetcor = 0;
+salwrong = 0
+troutwrong = 0;
+undetwrong = 0;
+salmonpercent = 0;
+troutpercent = 0;
+undetpercent = 0;
+% Check all of the output types to the input matrix of which type each
+% fish should be and see how accurate the results were.
+for z = 1:size(fishmatrix,1)
+    switch fishmatrix(z,:)
+    case 'salmon '
+        salmoncount = salmoncount + 1;
+        if fishmatrix(z,:)==typematrix(z,:);
+            salcor = salcor + 1;
+        else
+            salwrong = salwrong + 1;
+        end
+    case 'trout  '
+        troutcount = troutcount + 1;
+        if fishmatrix(z,:)==typematrix(z,:);
+            troutcor = troutcor + 1;
+        else
+            troutwrong = troutwrong + 1;
+        end
+    case 'unknown'
+        undetermined = undetermined + 1;
+        if fishmatrix(z,:)==typematrix(z,:);
+            undetcor = undetcor + 1;
+        else
+            undetwrong = undetwrong + 1;
+        end
+    end
+end
+
+ salmonpercent = salcor./(salcor+salwrong);
+ troutpercent = troutcor./(troutcor+troutwrong);
+ undetpercent = undetcor./(undetcor+undetwrong);
+ 
+ correct = salcor + troutcor + undetcor;
+ wrong = salwrong + troutwrong + undetwrong;
+ 
+statsmat = [salcor salwrong salmonpercent; troutcor troutwrong troutpercent; undetcor undetwrong undetpercent];
+</code>
+</example>
+<example id="code3">
+<title>Code to Subtract the background from an image</title>
+<code display="block" id="idp982576">% This function subtract a predeterminded background image from the input image
+% and returns just the plain fish.
+function [justfish] = subback(file);
+
+fish1 = double(imread(file));
+
+back1 = double(imread('bkunderwater1.jpg','jpg'));
+justfish = fish1 - back1;
+</code>
+</example>
+<example id="code4">
+<title>Code for the Classifier when the Background is Subtracted</title>
+<code display="block" id="idp984896">% This is the same as the fishcounter file, but it works for a non-ideal
+% situation, where the backgroup behind the fish must be subtracted off.
+function [fishtype] = fishcounterback(file)
+
+% Subtract the background from the picture.
+fishimage1 = subback(file);
+
+% Add noise to the picture
+noise = randn(size(fishimage1));
+noiselevel = 100;
+
+fishimagenoise = fishimage1 + noiselevel.*noise;
+fishimagenoisevals = and(fishimagenoise&lt;256, fishimagenoise&gt;0);
+fishimage = fishimagenoise.*fishimagenoisevals;
+
+fishmod = 0;
+
+if  sum(sum(rgb2gray(fishimage)))&gt;100
+    
+    % If the length to width ratio is less than 2.85 and greater than 2, 
+    % its a salmon, and if its greater than 3.5, the fish is a trout.
+    [length,width,lwratio] = fishedge(fishimage);
+    if  and(lwratio &lt;= 2.85, lwratio&gt;2)
+        fishmod = fishmod + 1;
+    elseif lwratio &gt;=3.5
+        fishmod = fishmod - 1;
+    end
+    
+    % Check to see how much intensity there is in each of the color spectrums
+    for i = 1:3
+        fishnorm(:,:,i) = fishimage(:,:,i)./norm((fishimage(:,:,i)));
+        
+        intensitymatrix(:,:,i) = reshape(fishimage(:,:,i), 1, prod(size(fishimage(:,:,1))));
+        intensity(:,:,i) = mean(intensitymatrix(:,:,i));
+    end
+    
+    rgintens = intensity(:,:,1)-intensity(:,:,2);
+    rbintens = intensity(:,:,1)-intensity(:,:,3);
+    
+    % If the red is greater than one ofthe other spectrums by at least .4, then
+    % it is a trout, if they are within .1 of each other, it is a trout.  Otherwise
+    % it is an unknown item.
+    if rgintens &gt;.04
+        fishmod = fishmod + .5;
+    elseif rgintens &lt;.01
+        fishmod = fishmod - .5;
+    end
+    
+    if rbintens &gt;.04
+        fishmod = fishmod + .5;
+    elseif rbintens &lt;.01
+        fishmod = fishmod - .5;
+    end
+
+    % Check the features of the fish.
+    [body,head,tail] = featureanalyzer(fishimage);
+    
+    % If the body is red and the head is green, blue, or both, then its a trout.
+    % If the body is all three colors and either the head or the tail or both
+    % are the same color and included in the body, then it is a trout.
+    if and(body == 'r  ', or(head == 'g  ', or(head == 'gb ', head == 'b  ')))
+        fishmod = fishmod + 1.5;
+    end
+    if and(body == 'rgb', and(head == 'cbd', tail == 'cbd'))
+        fishmod = fishmod - 1.5;
+    elseif and(body == 'rgb', or(head == 'cbd', tail == 'cbd'))
+        fishmod = fishmod - 1;
+    end
+    
+    %Count the fins on the fish.  If it is zero, then its probably trash,
+    % otherwise, keep the modifier in its present state.
+    numfins = findet(fishimage);
+    
+    if and(numfins == 0, abs(fishmod)&lt;=2)
+        fishmod = 0;
+    end
+    
+else 
+    fishmod = 0;
+end
+
+% If most of the tests think the fish is a salmon, call it a salmon
+% If most of the tests think the fish is a trout, call it a trout
+% If the tests all don't know, or if they disagree, call it unknown
+if fishmod &gt;0
+    fishtype = 'salmon ';
+elseif fishmod &lt;0
+    fishtype = 'trout  ';
+else
+    fishtype = 'unknown';
+end
+</code>
+</example>
+<example id="code5">
+<title>Code for the Mass Classifier when the Background is Subtracted</title>
+<code display="block" id="idp700032">% This is the top file for the whole system when the background must be subtracte from 
+% the image before it is analyzed.  It takes in a matrix of filenames and
+% a matrix of what type of fish each of the files is.  It then runs the classification
+% program on one fish at a time and then computes the accuracy of the outputs.
+function [fishmatrix,statsmat,correct,wrong] = massfishcounterback(filematrix,typematrix);
+
+for fishnum = 1:size(filematrix,1)
+    
+    fishnum
+    % Classify the current fish
+fishmatrix(fishnum,:) = fishcounterback(filematrix(fishnum,:));
+
+end
+
+salmoncount = 0;
+troutcount = 0;
+undetermined = 0;
+correct = 0;
+wrong = 0;
+salcor = 0;
+troutcor = 0;
+undetcor = 0;
+salwrong = 0
+troutwrong = 0;
+undetwrong = 0;
+salmonpercent = 0;
+troutpercent = 0;
+undetpercent = 0;
+
+% Check all of the output types to the input matrix of which type each
+% fish should be and see how accurate the results were.
+for z = 1:size(fishmatrix,1)
+    switch fishmatrix(z,:)
+    case 'salmon '
+        salmoncount = salmoncount + 1;
+        if fishmatrix(z,:)==typematrix(z,:);
+            salcor = salcor + 1;
+        else
+            salwrong = salwrong + 1;
+        end
+    case 'trout  '
+        troutcount = troutcount + 1;
+        if fishmatrix(z,:)==typematrix(z,:);
+            troutcor = troutcor + 1;
+        else
+            troutwrong = troutwrong + 1;
+        end
+    case 'unknown'
+        undetermined = undetermined + 1;
+        if fishmatrix(z,:)==typematrix(z,:);
+            undetcor = undetcor + 1;
+        else
+            undetwrong = undetwrong + 1;
+        end
+    end
+end
+
+ salmonpercent = salcor./(salcor+salwrong);
+ troutpercent = troutcor./(troutcor+troutwrong);
+ undetpercent = undetcor./(undetcor+undetwrong);
+ 
+ correct = salcor + troutcor + undetcor;
+ wrong = salwrong + troutwrong + undetwrong;
+ 
+statsmat = [salcor salwrong salmonpercent; troutcor troutwrong troutpercent; undetcor undetwrong undetpercent];
+</code>
+</example>
+
+
+  </content>
+  
+</document>

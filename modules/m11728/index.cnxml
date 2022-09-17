@@ -1,0 +1,27 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+	<title>DMT: Equalization and Approximation</title>
+	<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>c1ee88c6-1706-454d-ac95-0b5d414c94d9</md:uuid>
+</metadata>
+	<content>
+		<section id="sec1">
+			<title>Equalization</title>
+			<para id="ea1">In equalization, the received spectral coefficient blocks (i.e. after cyclic prefix removal and FFT) are adjusted to compensate for the frequency response of the channel (nothing can be done here about the additive noise).   Due to the <link document="m11762">cyclic prefix</link>, each block has essentially undergone cyclic convolution with the channel's impulse response.  In the frequency domain, this is the same as if the spectral coefficients were pointwise multiplied by the frequency response of the channel.  If the freq. response has no zeros and is known by the receiver, it is possible to perfectly remove the effect of the channel's filter.  Since the channel pointwise multiplied the blocks by its freq. response, all that needs to be done is multiply the blocks pointwise by the 1 over the freq. response.  Because we implemented the channel's impulse response as non-ideal low-pass, it's freq. response has no zeros and equalization is rather trivial. <figure orient="vertical" id="fig1">
+					<title>Frequency response of equalizer</title>
+					<media id="idm1469088" alt=""><image src="../../media/equalizerxfer1.jpg" mime-type="image/jpeg"/></media>
+					<caption>This is the transfer function of the equalizer.  If you compare it to the transfer function of the channel, you will see that the dips there correspond to the peaks here. </caption>
+				</figure></para>
+		</section>
+		<section id="sec2">
+			<title>Approximation</title>
+			<para id="ea2">After equalization, the effect of the channel's low-pass filter is removed, but the additive noise is still there.  It manifests itself as causing the received constellation points to deviate from their location in the original constellation.  To enable the bitstream to be recovered, a nearest-neighbor approximation is performed on each point.  As long as the noise amplitude is small or the constellation points are far apart, it is unlikely that any single point will deviate enough from it's original location such that it has a new nearest-neighbor.  With high noise power, however, the points are scattered all over the constellation; the nearest neighbor in this case is unlikely to be the original point.  In our system, we implemented this approximation with a parser and look up table; we would examine each complex value in the blocks and compare it to every point in the constellation, selecting the closest point as the approximation. <figure orient="vertical" id="fig2">
+					<title>Received constellation points (SNR = 52dB)</title>
+					<media id="idm8116816" alt=""><image src="../../media/conststar.jpg" mime-type="image/jpeg"/></media>
+				</figure><figure orient="vertical" id="fig3">
+					<title>Received constellation points (SNR = 25dB)</title>
+					<media id="idp911568" alt=""><image src="../../media/conststar2.jpg" mime-type="image/jpeg"/></media>
+				</figure></para>
+		</section>
+		<para id="ea3">Our related MATLAB functions: <code display="inline"><link document="m11721" resource="filterchannel.m">filterchannel.m</link></code>, <code display="inline"><link document="m11721" resource="approximate.m">approximate.m</link></code><!-- Insert module text here --></para>
+		<para id="ea4"><link document="m11710">Home</link>  |  Previous: <link document="m11721">Implementation</link>   |   Next: <link document="m11729">Results and Conclusions</link></para>
+	</content>
+</document>

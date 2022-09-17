@@ -1,0 +1,80 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Fin Detection Test for Fish Classification</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>591bf9d1-6d4a-4b79-81b3-b1ac750e05e7</md:uuid>
+</metadata>
+
+  <content>
+
+<para id="para1">
+So far the testing process could determine general color trends and size of the fish.  Yet the fish size ratio test treated the fish as a block and fish contours have a good amount of detail in their fin patterns.  Therefore, we decide that fins on a fish are important to examine.  
+</para>
+<para id="para2">
+We use the 2D DHWT on a gray intensity image and get back a low frequency image of the fish, for range π to π/2.  We then look only at the rows of this signal that have enough value to be considered actually mass of the fishes body.  
+For every row with mass, we transform the values into binary for the actual parts of the fish. We then take the derivative of that row vector which returns a positive 1 on a rising edge of a body and a negative 1 on the end of that body mass.  The +1 points are more reliabe for a fish and give us the location of a fin.  Yet, as we look at a fin that is slightly angled, we will get a diagonal matrix of 1s for the same fin.  Therefore, we group +1 that are within a range and call that a fin.  
+</para>
+<figure id="pic1">
+<title>Fin testing Image</title>
+<media id="idp378672" alt=""><image src="../../media/fintest.jpg" mime-type="image/jpeg"/></media>
+<caption>The binary fish image before the derivative is taken and the edges of the fins located.</caption>
+</figure>
+<section id="sect1">
+<title>Description of the Discrete Haar Wavelet Transform</title>
+ <para id="HaarWaveletTransform">
+As with all transforms, the <link document="m10764">DHWT</link> takes the image signal and multiplies it by an orthonormal basis.  Wavelets form a basis that are built by a mother wavelet and then different widths and shifts of that wavelet. The <link document="m10764">DHWT</link> is built by averaging values next to each other and then taking the difference of the values. The Haar Wavelet Transform is ideal for low pass filtering and looking at different ranges of frequency.  By taking different levels of the <link document="m10764">DHWT</link> we can create different resolutions for an image, but each level of <link document="m10764">DHWT</link> cuts the signal samples in half.  We used the second level of <link document="m10764">DHWT</link> to get similar blocks.   <link document="m10764">DHWT</link> also works as a rough edge detector but is not ideal.  
+     </para>
+</section>
+      <example id="codeex">
+<title>Code for Fin Detection</title>
+<code display="block" id="idp1996064">% This function looks through a grayscale version of the input rgb image and
+% tries to detect fins by looking at each line of the picture and looking for
+% where the data starts and stops.
+function [fins] = findet(image);
+
+grayimage = rgb2gray(image); 
+[wide, length] = size(grayimage);
+
+Mass = 0; 
+n = 1;
+frontedge = zeros(1,(length/2 -1));
+backedge = zeros(1,(length/2 -1));
+
+for i = 1:wide
+    tempfishrow = dwt(grayimage(i, :),'haar');
+    fishrow(i,:) = double(tempfishrow);
+    if sum(fishrow(i,:)) &lt;= 0.9
+        Mass = Mass;
+    else 
+        n = n + 1;
+        Mass = 1 + Mass;
+        fishrow(i,:) = fishrow(i,:) &gt; 0;
+        diffrow(i,:) = diff(fishrow(i,:));
+        for j = 1:(length/2 - 1)
+            if  diffrow(i,j) == 1
+                frontedge(1,j) = frontedge(1,j) + 1; 
+            elseif diffrow(i,j) == -1
+                backedge(1,j) = backedge(1,j) + 1;
+            end           
+        end
+    end
+end
+
+frontedgefilter = frontedge &gt;=10;
+frontedgeextreme = frontedge &gt;=11;
+backedge = backedge &gt;=3;
+
+for i = 1:(length/2 -1)
+    if frontedgefilter(1,i) == 1
+       if sum(frontedgefilter(1, i:i+10)) &gt; 1
+          frontedgefilter(1, i:i+10) = [1 0 0 0 0 0 0 0 0 0 0];
+      end
+  end
+end
+
+fins = sum(frontedgefilter) - 1;         
+</code>
+</example>
+
+
+  </content>
+  
+</document>

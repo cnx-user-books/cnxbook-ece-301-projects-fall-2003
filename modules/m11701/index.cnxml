@@ -1,0 +1,12 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Background</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>dca2be0b-0e5c-4f53-b54c-ddaaea88c388</md:uuid>
+</metadata>
+
+  <content>
+
+			<para id="bg_para1">Our initial project idea was to develop a computer algorithm that would be able to locate Waldo from an image in a Where's Waldo Search books. However, after further investigation we realized that this project had been previously attempted.  During this whole ordeal our emotions had been on a roller coaster ride desperately searching for a project. Shortly after we thought of how convenient it would have been if the computer we had been searching on could have read our emotions and provided us with some aid. This wishful thinking is what inspired the idea of emotion detection for the theme of our project.</para>
+			<para id="bg_para2">After consulting, with Chris Rozell and Courtney Lane we decided the best approach was to develop an algorithm that took in a few images of a person and classified the images according to the emotions expressed in the image. After developing this plan of attack we brainstormed many different ways to detect emotions from images. Much of online resources had took a computer science approach to solving the same task at hand. After a bit of anxiety we took a dive in and developed programs that could process an image just as a human would go about. We began by looking for edges and also computed different wavelets hoping to find a vast distinction between emotions. The four images we decided to investigate where happy, surprised, angry, and sad. After several different approaches we found the best way to solve our problem was to use a top down method discussed in the approach section. For further more technical explanation continue reading with the problem.</para>
+  </content>
+  
+</document>

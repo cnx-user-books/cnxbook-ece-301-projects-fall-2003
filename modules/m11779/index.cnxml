@@ -1,0 +1,79 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Code</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>9f86a2bb-3033-4e6b-a7cb-0cd2053a36be</md:uuid>
+</metadata>
+
+  <content>
+		<section id="BPC">
+			<title>Basis/Orthogonal Matching Pursuit Code</title>
+			<para id="BPpar">This is our code for the basis pursuit and orthogonal matching pursuit algorithms for 2 dimensional signals, namely images. All of the code was written from scratch by members of the group, and was based on ideas drawn from our research. The code is shown below.</para>
+			<para id="dict">
+				<figure id="bpbasis">
+					<title>BP Basis</title>
+					<media id="idm97072" alt=""><image src="../../media/bpbasis.JPG" mime-type="image/jpeg"/></media>
+					<caption>Code to define our dictionary for the algorithms.</caption>
+				</figure>
+			</para>
+			<para id="dec">
+				<figure id="bpdec">
+					<title>BP Decompose</title>
+					<media id="idm93616" alt=""><image src="../../media/bpdecompose.JPG" mime-type="image/jpeg"/></media>
+					<caption>Given a an image, it decomposes the image into a representation of k terms.</caption>
+				</figure>
+			</para>
+
+<para id="ompdec">
+				<figure id="ompdecf">
+					<title>OMP Decompose</title>
+					<media id="idm944880" alt=""><image src="../../media/ompdecompose.JPG" mime-type="image/jpeg"/></media>
+					<caption>Given a an image, it docomposes the image into a representation of k terms (this one is for OMP, it is the only function that differs between algorithms).</caption>
+				</figure>
+			</para>
+
+
+			<para id="blockdec">
+				<figure id="bpblockdec">
+					<title>BP Block Decompose</title>
+					<media id="idm941184" alt=""><image src="../../media/bpblockdecompose.JPG" mime-type="image/jpeg"/></media>
+					<caption>Decomposes and image into row signals.</caption>
+				</figure>
+			</para>
+			<para id="rec">
+				<figure id="bprec">
+					<title>BP Construct</title>
+					<media id="idm398816" alt=""><image src="../../media/bpconstructs.JPG" mime-type="image/jpeg"/></media>
+					<caption>Reconstructs the approximate representation of the original image.</caption>
+				</figure>
+			</para>
+			<para id="blockrec">
+				<figure id="bpblockrec">
+					<title>BP Block Construct</title>
+					<media id="idm395296" alt=""><image src="../../media/bpblockconstruct.JPG" mime-type="image/jpeg"/></media>
+					<caption>Reconstructs each row of the  approximate representation of the original image.</caption>
+				</figure>
+			</para>
+			<para id="imagproc">
+				<figure id="bbimageproc">
+					<title>Applying BP to an Image</title>
+					<media id="idm391776" alt=""><image src="../../media/imagproc.JPG" mime-type="image/jpeg"/></media>
+					<caption>This algorithm takes in an image and the number of coefficients to use to approximate it and applies the BP algorithm to it.</caption>
+				</figure>
+			</para>
+		</section>
+				<section id="continue">
+			<title>Continue</title>
+			<para id="links"><list list-type="bulleted" id="bullets">
+					<item><link document="m11778">Background Information</link></item>
+<item><link document="m11780">Procedure</link></item>
+<item>
+<link document="m11783">Results</link></item>
+<item><link document="m11781">Conclusion</link></item>
+<item><link document="m11779">Our Code</link></item>
+<item><link document="m11782">Team Members</link></item>
+<item><link document="m11784">References</link></item>				</list></para>
+		</section>
+
+   
+  </content>
+  
+</document>

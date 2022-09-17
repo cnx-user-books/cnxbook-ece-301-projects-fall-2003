@@ -1,0 +1,36 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Conclusions</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>527246fd-a0ed-4a12-9e4e-4f06f3b56e00</md:uuid>
+</metadata>
+
+  <content>
+		<section id="disc">
+			<title>Discoveries</title>
+			<para id="disc1">Our results illustrate that redundant dictionaries can reveal the innate structure of signals - sharp lines and gradual changes in color can represent themselves as artifacts in a compressed image. The conciseness of the representations depends on both the dictionary chosen and the nature of the signal, the compression rates will vary depending on their similarities.  In real world situations, ie those in which we could gather an idea of the kind of signal we were trying to represent, it would be possible to choose a more "fitting" basis. This project was very effective at helping us to better understand the basics of signal processing in different domains. </para>
+
+<para id="dummy1"/>
+<para id="expln">
+Unfortunately, a comparison of the images generated with a non-redundant basis, as opposed to those with an overcomplete basis, suggests that compression schemes that use a single basis are superior to the new, multiple basis schemes (with the exception of the dirac basis).  It is important to understand, however, that this is probably due to the very nature of a greedy algorithm (particularly their propensity to paint themselves into corners), and, as our research suggests, is one of the major unsolved problems facing the field of image compression over redundant dictionaries.  Also, it should be noted that, while the images generated look different, they have very similiar levels of error when calculated strictly mathematically (ie power of the resultant over power of the original signal).</para>
+		</section>
+		<section id="future">
+			<title>Future Work</title>
+			<para id="future1">Future studies can encompass determining better heuristics for basis selection, other algorithmic approaches to sparse approximations, and further optimizations. Applications could be generalized to other seemingly unrelated fields of study such as biological signal processing (imagine representing a heartbeat with a basis consisting of known healthy and sick heartbeats, and then diagnosing a condition based on the sparsity of the transformation), financial market analysis, and weather mapping.</para>
+		</section>
+		<section id="continue">
+			<title>Continue</title>
+			<para id="links">
+				<list list-type="bulleted" id="bullets">
+					<item><link document="m11778">Background Information</link></item>
+<item><link document="m11780">Procedure</link></item>
+<item>
+<link document="m11783">Results</link></item>
+<item><link document="m11781">Conclusion</link></item>
+<item><link document="m11779">Our Code</link></item>
+<item><link document="m11782">Team Members</link></item>
+<item><link document="m11784">References</link></item>				</list>
+			</para>
+		</section>
+
+  </content>
+  
+</document>

@@ -1,0 +1,36 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+	<title>Examples and Code</title>
+	<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>c5af5c0a-e1d1-4bcf-b2ca-9c03398460f0</md:uuid>
+</metadata>
+	<content>
+		<para id="delete_me">These are the files we used to implement our Pitch Correction &amp; Detection system, along with some examples of our results.<!-- Insert module text here --></para>
+		<section id="idp583216">
+			<title>MATLAB Code</title>
+			<para id="p0">When using these programs, type help &lt;name&gt; into MATLAB to determine the format of the inputs and outputs.  Vectors are always columns, and sounds are always monaural.  Sounds should also be normalized.  In general, vectors of pitches refer to windows, and the pitches themselves are in Hertz.  Advisory: choose window size of 4000 samples and jump size of 1000, assuming a 44.1 KHz sample.</para>
+			<para id="p1"><title>Pitch Detection</title>Detect using the time-domain Autocorrelation algorithm (findautomin is required):</para>
+			<para id="p2"><link resource="fastauto.m">fastauto.m</link></para>
+			<para id="p3"><link resource="findautomin.m">findautomin.m</link></para>
+			<para id="p41">Detect using the frequency-domain HPS algorithm:</para>
+			<para id="p4"><link resource="hps.m">hps.m</link></para>
+			<para id="p5">Determine the pitch to which the program should correct:</para>
+			<para id="p6"><title>Pitch Determination</title><link resource="correctfreq.m">correctfreq.m</link></para>
+			<para id="p7"><title>Pitch Correction</title>Correct pitch using the Time Shifting algorithm:</para>
+			<para id="p8"><link resource="TDrev.m">tdrev.m</link></para>
+			<para id="p9">Correct pitch using the PSOLA time domain algorithm:</para>
+			<para id="p10"><link resource="PSOLArev.m">psolarev.m</link></para>
+			<para id="p11">Correct pitch using the Modified Phase Vocoder:</para>
+			<para id="p12"><link resource="modpvshift.m">modpvshift.m</link></para>
+		</section>
+		<section id="idm7363680">
+			<title>Examples</title>
+			<para id="k1">These examples were all generated using the FAST-Auto pitch detector with threshold around 0.05, a 4000 point window, and a 1000 point jump size, using the PSOLA correction algorithm.</para>
+			<para id="k2"><title>Flat Correction</title>Below, listen to how the flat note is corrected.  The singer starts out holding a tune, but soon dips below that tone.  The corrector helps to pick him up and keep him on the right note.</para>
+			<para id="k3"><link resource="flat.wav">Original</link>   <link resource="flatcorr.wav">Corrected</link></para>
+			<para id="k4"><title>Scale</title>Below, listen to how the corrector parses a continuously increasing tone into distinct notes.  The singer increased in tone across his entire range, and this was fed into the system.  The output sounds as if the singer sang distinct notes.</para>
+			<para id="k5"><link resource="scale.wav">Original</link>   <link resource="scale1.wav">Corrected</link></para>
+			<para id="k6"><title>Song Adjustment</title>The examples below are derived from a portion of a song: <link resource="why1.wav">Original</link></para>
+			<para id="k7">Here, listen to how the corrector operates on this song.  The singer was not out of tune to begin with, but there were points at which he deviated from a perfect note and the corrector adjusted his pitch. <link resource="whycorr.wav">Corrected</link></para>
+			<para id="k8">In this last example, we use the correction system in the wrong direction: for distortion!  We took the original clip above and attempted to make the singer monotone by demanding the same key for the entire clip.  Listen to the results: <link resource="yesmono.wav">Adjusted</link></para>
+		</section>
+	</content>
+</document>

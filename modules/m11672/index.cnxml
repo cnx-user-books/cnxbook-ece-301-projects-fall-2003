@@ -1,0 +1,46 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Music Classification by Genre: Bandwidth</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>a1f5e156-ff08-4d18-a7b8-4e5927a3919a</md:uuid>
+</metadata>
+
+  <content>
+    <para id="bw_intro">
+Bandwidth refers to how spread-spectrum the signal is and what frequencies are present.  If a signal is composed of many high frequencies, the bandwidth will be large.  However, if the signal is composed of mostly low frequencies, the bandwidth will be small.  After taking the shifted FFT of windows of the music vector, we find the last frequency component above a certain cutoff threshold, which is the bandwidth of the signal.  Because classical music is composed of harmonic instruments, its bandwidth will be smaller and it will have fewer frequency components.  However, hard music like punk or rap has lots of non-sinusoidal drumbeats, which will create more frequency components and their bandwidth will be larger.
+    </para>   
+
+<figure id="bw_classical">
+  <media id="idm19072" alt=""><image src="../../media/bwclassical.gif" mime-type="image/gif"/></media>
+   <caption>Bandwidth for classical music.</caption>
+</figure>
+
+<figure id="bw_jazz">
+  <media id="idm6698576" alt=""><image src="../../media/bwjazz.gif" mime-type="image/gif"/></media>
+   <caption>Bandwidth for jazz music.</caption>
+</figure>
+
+<section id="results">
+   <title>Results</title>
+    <para id="r1">
+The bandwidth of songs in the frequency domain is very good at distinguishing jazz.  However, the bandwidth of punk, techno, and country, all hover around the same value.  Rap has most of its power in low frequencies, and those coefficients will be large.  Therefore, the bandwidth will be small because the spread of the frequency components is localized in the low frequencies.  Jazz, however, has high and low frequencies, so there could be a frequency component in the high frequencies that is large, increasing the bandwidth.  
+    </para>
+
+    <para id="r2">
+We also give the neural network a measure of how bandwidth changes over the time period of a song.  The standard deviations are good at telling jazz and country apart from the other genres, but no one genre stands out.  
+    </para>
+
+<figure id="bw">
+  <media id="idm242624" alt=""><image src="../../media/bandwidth.gif" mime-type="image/gif"/></media>
+   <caption>Overall, bandwidth is a good detector for jazz and rap, but poorer in distinguishing between classical, punk, techno, and country, which all have about the same bandwidth.</caption>
+</figure>
+
+<figure id="bw2">
+  <media id="idp27728" alt=""><image src="../../media/standarddeviation.gif" mime-type="image/gif"/></media>
+   <caption>Variation of bandwidth across time.</caption>
+</figure>
+
+</section>
+
+
+  </content>
+  
+</document>

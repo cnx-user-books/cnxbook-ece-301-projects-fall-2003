@@ -1,0 +1,30 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Music Classification by Genre: Power Spectral Density</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>9c367c58-5a70-4e66-a93b-deb0fee96044</md:uuid>
+</metadata>
+
+  <content>
+    <para id="pwrspec">
+Our program essentially breaks the time-domain signal into windows and computes the norm squared of the FFT of each window.  It then averages the magnitude squared of the FFT coefficients of each window, then represents it in decibels.  We then have a vector approximately length 100 that represents the power in the frequency domain.  This is a measure of exactly what frequencies are present and at what magnitude.  Rather than using a single number to characterize the whole signal, our power spectral density program returns a vector representing more subtle changes in the spectrum.  The decibel scale helps distinguish and differentiate between genres even further, fanning out the differences between genres.  
+    </para> 
+
+<figure id="psd">
+  <media id="idm116016" alt=""><image src="../../media/psd.gif" mime-type="image/gif"/></media>
+</figure>
+  
+<section id="results">
+  <title>Results</title>
+    <para id="pwrspecresults">
+The power spectral density was great at showing patterns between genres.  Rap has the most distinct pattern, with a sudden downward slope (red).  Classical also had a distinctive pattern, with the smallest power at all frequencies.  Jazz, punk, and country are all near each other, but at higher frequencies, begin to fan out.  Looking closely at the envelopes, techno spans the largest area, encapsulating almost all of jazz, punk, and country.  This is one reason why techno could not be distinguished very well from those genres.  
+    </para> 
+
+<figure id="powerspec">
+  <media id="idp458576" alt=""><image src="../../media/powerspec.gif" mime-type="image/gif"/></media>
+</figure>
+
+</section>
+
+
+  </content>
+  
+</document>

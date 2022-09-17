@@ -1,0 +1,52 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+	<title>Frequency Domain Pitch Correction</title>
+	<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>83042cbf-7cde-4331-90e9-9bbc147f5f3e</md:uuid>
+</metadata>
+	<content>
+		<para id="delete_me"><title>Introduction</title>As with the time domain techniques for pitch shifting, we will deal with one window of the signal at a time (with the length and hop size between windows specified as inputs to the algorithm).  For each window, we will multiply it by a Hanning window, and then take the fft.  Since the fft is redundant for real signals, we need only work with half of the coefficients.  We can then recreate the truncated coefficients at the end by complex conjugation.<!-- Insert module text here --></para>
+		<section id="idm6803440">
+			<title>Modified Phase Vocoder</title>
+			<para id="a"><title>Method</title>First, we need to identify peaks in the spectrum.  For computational simplicity, we define a peak as any fft bin whose magnitude is greater than the magnitude of its two nearest neighbors on either side.  We then assume that the area around a peak (as far away as halfway to the next peak) is part of the peak, or is in the peaks region of influence.  Thus, wherever we shift the peak, this region will move with it.  In order to figure out how much the peak must be shifted by (it is different for every peak), we must identify the frequency of the underlying sinusoid that caused it.  We do this by fitting a parabola to the peak bin and its neighbor to either side.  This involves solving three linear equations (using a matrix multiply).  We then find the vertex of this parabola and assume that point to be the frequency of the peak.  We then will want to shift that peak to some multiple of its current location.  In other words, lower frequency peaks will not shift as far as higher frequency peaks.  That factor is determined by a ratio of the target frequency to the detected frequency.<figure id="idm7217696">
+					<title>Partial Spectrum of Original Signal</title>
+					<media id="idp85072" alt=""><image src="../../media/fgraph1.jpg" mime-type="image/jpeg"/></media>
+					<caption>Note the clear peaks, but note also that they are not single points but rather slightly spread over several bins.</caption>
+				</figure></para>
+			<para id="b">Since it is unlikely that the amount of bins we need to shift the peak by will be an integer, we will need to use linear interpolation to figure out what values to assign in bins where the peak and surrounding regions shift to, since the fft bins are discrete.  A more sophisticated method of interpolation could work as well, but it would only add a great deal of complexity to what is already a very expensive algorithm.  We then add the peak with the interpolated values into its new location in the spectrum and subtract the values of the original peak in the original location (thus, cutting and pasting it, in a sense, rather than just copying it).  If a shift would cause any bins to move beyond the last bin of the fft in either direction, it should be assumed that it has moved into negative frequencies and should therefore be reflected back into the positive frequencies with a complex conjugation since the signal is real.</para>
+			<para id="c">Finally, we must adjust the phase of the peak and its surrounding region to account for the changes we have made to its frequency.  We multiply by a phasor of e^(j*dw*h), where dw is delta omega, the change in frequency, and h is the hop size between windows.  We apply this phasor to all the bins in the area around the peak, thus preserving the phase relationships in the original signal for each peak, and by using the phasor, ensuring maximum frame to frame phase coherence.  One last difficulty that arises is that these phasors must be accumulated from one frame to the next.  This requires the tracking of peaks so that these phasors may be accumulated (since every peak will have a different dw, and thus a different phasor).  One simple way of dealing with this is to look up the region from the frame before at the bin where the current peak in located, then assume the peak that influences that region of the frame is the same peak as the current peak, and accumulate the phasor accordingly.  This principle works under the assumption that because audio signals (produced by a singer) must change frequency smoothly, and thus the peak can't have moved far from one frame to the next as the time difference is very small.<figure id="idp753584">
+					<title>Partial Spectrum of Shifted Signal</title>
+					<media id="idp553568" alt=""><image src="../../media/fgraph2.jpg" mime-type="image/jpeg"/></media>
+					<caption>Partial spectrum of shifted signal.  Direct comparison is difficult, but the peaks have been shifted.  The first peak was shifted by only a few bins, corresponding to about 5% of its original frequency, while the higher peaks were shifted by many more bins, corresponding to 5% of their original frequencies.</caption>
+				</figure></para>
+			<para id="d">Once the phase has been adjusted, the second half of the fft can be recreated by complex conjugation.  Then taking an inverse fft, we should get values for this window of the output signal.  By overlapping and adding these windows in the same manner in which they were analyzed, we will create an output signal corresponding to a pitch-corrected version of the input.</para>
+			<para id="e"><title>Limitations of the modified phase vocoder</title>There are three key problems with this approach.  First, it is painfully slow.  Taking the transform and fitting many parabolas within every window is extremely computationally expensive.  Second, the formants of the singer (seen in the Fourier domain as the spectral envelope) are stretched or compressed depending on the direction of frequency shift.  In reality, a singer's formants should not change when singing a higher or lower note.  For small shifts, this will not be terribly noticeable, but for large shifts it will become problematic and very detectable.  Finally, even with the phase correction, the output of the algorithm still sounds "phasy".  The overlapping windows interfere constructively and destructively to create an effect somewhat like reverberation in a concert hall.  The output signal seems to have less presence, or to be more distant from the microphone than the input signal.</para>
+			<para id="f"><title>Advantages</title>However, the frequency domain approach does have a few advantages over the time domain approaches.  First, it deals well with noisy signals, which can throw off time domain techniques.  Also, it can handle larger pitch shifts than time domain approaches.  For instance, if you wanted to decrease the frequency by a very large amount, the period could become long enough that in PSOLA, the data that you were adding at each new pitch marker did not overlap with the other data, resulting in a very choppy and unacceptable signal.  The frequency domain approach would have no problems with arbitrarily large shifts, as long as you don't mind the formant shifting that will accompany it.  However, there are ways to try to restore the original formants after processing with an algorithm such as this, which would be fertile ground for further exploration.  Finally, this algorithm has no difficulty in handling polyphonic signals.  It could be used to shift the pitch of a track from a CD, or two voices or instruments in harmony.  The time domain algorithms cannot handle anything but a monophonic input, because they require that there be a single dominant fundamental frequency.</para>
+			<para id="g">Clearly, there are pros and cons to this algorithm, but given its complexity, and the huge difference in time it takes to process a sample with this algorithm versus a time domain algorithm, we have concluded that unless the signal is exceptionally noisy, extremely large pitch shifts are required, or the source material is polyphonic, it would be better off sticking with a time domain approach for pitch shifting, such as PSOLA.</para>
+		</section>
+	</content>
+	<bib:file>
+		<bib:entry id="b1">
+			<bib:article>
+				<bib:author>M.S. Puckette</bib:author>
+				<bib:title>Phase-locked vocoder</bib:title>
+				<bib:journal> Proc. IEEE ASSP Workshop on app. of sig. proc. to audio and acous.</bib:journal>
+				<bib:year>1995</bib:year>
+			</bib:article>
+		</bib:entry>
+		<bib:entry id="b2">
+			<bib:article>
+				<bib:author>J. Laroche and M. Dolson</bib:author>
+				<bib:title>New Phase-Vocoder Techniques for Pitch-Shifting, Harmonizing, and other Exotic Effects</bib:title>
+				<bib:journal>Proc. IEEE ASSP Workshop on app. of sig. proc. to audio and acous.</bib:journal>
+				<bib:year>1999</bib:year>
+			</bib:article>
+		</bib:entry>
+		<bib:entry id="b3">
+			<bib:article>
+				<bib:author>J. Laroche and M. Dolson,</bib:author>
+				<bib:title>Phase-vocoder: About this phasiness business</bib:title>
+				<bib:journal>Proc. IEEE ASSP Workshop on app. of sig. proc. to audio and acous</bib:journal>
+				<bib:year>1997</bib:year>
+			</bib:article>
+		</bib:entry>
+	</bib:file>
+</document>

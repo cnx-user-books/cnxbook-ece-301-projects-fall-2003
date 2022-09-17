@@ -1,0 +1,16 @@
+<document xmlns="http://cnx.rice.edu/cnxml" id="Intro" module-id="" cnxml-version="0.7">
+	<title>Background</title>
+	<content><section id="algos"> <title>Algorithms</title> <para id="general">The two algorithms that we are concerned with are <term>basis pursuit</term> (BP) and <term>orthogonal matching pursuit </term> (OMP). What these two algorithms have in common is a requirement to use waveforms from a <term>dictionary</term> to represent an image. One advantage of these two algorithms is that they are very flexible in terms of the dictionary used, which in turn allows for faster, sparser compression. It has been previously shown that while OMP is a faster algorithm, BP yields a mroe accurate approximation.</para> <section id="BS"> <title>Basis Pursuit</title> <para id="basis"><term>Basis pursuit</term> is an effective algorithm which replace the sparse approximation problem by a linear programming problem. It selects the coefficients that will represent the signal to be those with the minimum L1 coefficients. Essentially what it does is the following: Given a signal X, it takes the inner product of X with each element in the dictionary and at the end takes selects the one that yields the larger result (this will be the element the most closely resembles X). This element is added to previously selected elements, and subtracted from the signal X. It does repeat this process on the residual signal until N elements have been chosen, where N is the number of desired coefficients in the approximate representation of X.</para> </section> <section id="OMP"> <title>Orthogonal Matching Pursuit</title> <para id="matching"><term>Orthogonal matching pursuit</term> is an iterative greedy algorithm that chooses the dictionary element that best represents the residual part of the signal at each iteration (just like the BP algorithm). It then projects this element onto those elements which have already been selected, which yields a new approximant signal. This differs from the BP algorithm in that redundant information is not repeated.</para> </section> </section> <section id="continue"> <title>Continue</title> <para id="links"><list list-type="bulleted" id="bullets">
+
+<item><link document="m11778">Background Information</link></item>
+<item><link document="m11780">Procedure</link></item>
+<item>
+<link document="m11783">Results</link></item>
+<item><link document="m11781">Conclusion</link></item>
+<item><link document="m11779">Our Code</link></item>
+<item><link document="m11782">Team Members</link></item>
+<item><link document="m11784">References</link></item>
+</list></para> </section>
+	</content>
+      
+      </document>

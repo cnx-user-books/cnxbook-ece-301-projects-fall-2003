@@ -1,0 +1,37 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Music Classification by Genre: System Diagram</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>ad812480-5251-4641-b3ad-98abe48c3b2f</md:uuid>
+</metadata>
+
+  <content>
+
+<figure id="diagram">
+  <title>Music Classification by Genre System Diagram</title>
+  <media id="idp9056800" alt=""><image src="../../media/systemdiagram.gif" mime-type="image/gif"/></media>
+  <caption>
+Music Matcher, a collection of scripts and functions, takes a .wav file input, digitally processes it, and creates an output vector characteristic of the sample.  A neural network is trained with 20 songs in each genre.  Then it analyzes the new song vectors for patterns and predicts an output classification genre.
+  </caption>
+</figure>
+
+<para id="description">
+Music Matcher takes a .wav file, analyzes it, and outputs a music genre.  Our system breaks up a .wav file into twenty .5 second windows. From here, the 
+DSP functions are called for each of the twenty windows. Each one of these twenty windows is analyzed by seven DSP functions: 
+<list id="dsp">
+  <item>Bandwidth</item>
+  <item>Power Spectral Density</item>
+  <item>Total Power (L-2 norm / L-infinity norm)</item>
+  <item>Spectrogram Smoothness</item>
+  <item>High Pass Filter</item>
+  <item>Beat Detection</item>
+  <item>Frequency Cutoff</item>
+</list>
+The values returned from each of these functions is averaged over all twenty windows to give an average value for each song as well as a standard deviation, which tells us how these qualities change over time.  That way, our DSP vector has some measure of how each of the functions changed with time.
+</para>
+
+<para id="nnet">
+First, the neural network is trained with 120 songs, 20 of each genre.  After we train the neural network, we give it songs it has never seen, and the output of the system is the classification of genre that the neural network determines.
+</para>
+
+  </content>
+  
+</document>

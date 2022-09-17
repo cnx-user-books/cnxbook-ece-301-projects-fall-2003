@@ -1,0 +1,80 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+
+	<title>Range Results</title>
+
+<metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>babf5a42-28a3-4401-8fcb-8b6cdda461c8</md:uuid>
+</metadata>
+
+
+	<content>
+		<section id="Testcases">
+			<title>Test Cases</title>
+			<para id="Ingeneral"><title>General paramters </title><list id="Genparam">
+					<item>L=# of pulses = 4</item>
+					<item>TW = time-bandwidth product = 64</item>
+					<item>p = oversampling factor = 3</item>
+					<item>M = interpulse period = 300</item>
+					<item>n = noise factor = .2  (correspond to SNR of -10dB for received signal)</item>
+					<item>sampfreq = sampling frequency = (20*(10 ^6)) Hz</item>
+				</list><note id="SampFreqChosen">The sampfreq value of 20*(10^6) Hz was given in "Computer-Based Exerciese for Signal Processing Using MATLAB" by Burrus [ et al.] as an example sampling frequency to use</note><note id="TDvalue">The paramter "Time Delay" (i.e. TD) is the amount by which the user wants to shift his vector by (i.e. not units of time) </note><note id="MaxRangeValue">The max range that could be accounted for according to equations based in <link document="m11719"> "Approach for Range" </link> module was 8190 meters (8.2 kilometers)</note></para>
+			<para id="TestCase1"><title>Test Case 1</title>Simulate a Time Delay of 5 (TD = 5) </para>
+			<para id="TestCase1eq"><title>Matlab function call</title>[noisytestecho,noisyshifttestecho,rsigmatchlocs,timedelay,range,h]=<link resource="burst4.m">burst4</link>(4,64,3,300,.2,(20*(10 ^6)),5);</para>
+			<para id="TestCase2"><title>Test Case 2</title>Simulate a Time Delay of 30 (TD = 30)</para>
+			<para id="TestCase2eq"><title>Matlab function call</title>[noisytestecho,noisyshifttestecho,rsigmatchlocs,timedelay,range,h]=<link resource="burst4.m">burst4</link>(4,64,3,300,.2,(20*(10 ^6)),30);</para>
+			<para id="TestCase3"><title>Test Case 3</title>Simulate a Time Delay of 45(TD = 45) </para>
+			<para id="TestCase3eq"><title>Matlab function call</title>[noisytestecho,noisyshifttestecho,rsigmatchlocs,timedelay,range,h]=<link resource="burst4.m">burst4</link>(4,64,3,300,.2,(20*(10 ^6)),45);</para>
+			<para id="TestCase4"><title>Test Case 4</title>Simulate a Time Delay of 65(TD = 65)</para>
+			<para id="TestCase4Eq"><title>Matlab function call</title>[noisytestecho,noisyshifttestecho,rsigmatchlocs,timedelay,range,h]=<link resource="burst4.m">burst4</link>(4,64,3,300,.2,(20*(10 ^6)),65);</para>
+			<para id="TestCase5"><title>Test Case 5</title>Simulate a Time Delay of 100 (TD = 100) </para>
+			<para id="TestCase5Eq"><title>Matlab function call </title>[noisytestecho,noisyshifttestecho,rsigmatchlocs,timedelay,range,h]=<link resource="burst4.m">burst4</link>(4,64,3,300,.2,(20*(10 ^6)),100);  </para>
+			<para id="TestCase6"><title>Test Case 6</title>Simulate a Time Delay of 200 (TD = 200) </para>
+			<para id="TestCase6Eq"><title>Matlab function call</title>[noisytestecho,noisyshifttestecho,rsigmatchlocs,timedelay,range,h]=<link resource="burst4.m">burst4</link>(4,64,3,300,.2,(20*(10 ^6)),200);  </para>
+			<section id="Plotstestcase1">
+				<title>Plot examples (for test case 1)</title>
+				<figure id="TransmittedChirptrainNoiseFree">
+					<title>Transmitted Chirptrain Noise Free</title>
+					<media id="idp1263456" alt=""><image src="../../media/TransmittedchirptrainNOISEfree.jpg" mime-type="image/jpeg"/></media>
+					<caption>Transmitted Chirptrain Noise Free</caption>
+				</figure>
+				<figure id="ShiftedTime-DelayedChirptrainwithNOISE">
+					<title>ShiftedTime-DelayedChirptrainwithNOISE</title>
+					<media id="idp1064976" alt=""><image src="../../media/ShiftedTime-DelayedChirptrainwithNOISE.jpg" mime-type="image/jpeg"/></media>
+					<caption>ShiftedTime-DelayedChirptrainwithNOISE</caption>
+				</figure>
+				<figure id="Matchedfilteroutputfortransmittedsignal">
+					<title>Matchedfilteroutputfortransmittedsignal</title>
+					<media id="idp1241536" alt=""><image src="../../media/Matchedfilteroutputfortransmittedsignal.jpg" mime-type="image/jpeg"/></media>
+					<caption>Matchedfilteroutputfortransmittedsignal</caption>
+				</figure>
+				<figure id="Matchedfilteroutputforrecievedsignal">
+					<title>Matchedfilteroutputforrecievedsignal</title>
+					<media id="idp16896" alt=""><image src="../../media/Matchedfilteroutputforrecievedsignal.jpg" mime-type="image/jpeg"/></media>
+					<caption>Matchedfilteroutputforrecievedsignal</caption>
+				</figure>
+				<figure id="Locationofpickedoutpeaksintransmittedsignal">
+					<title>Locationofpickedoutpeaksintransmittedsignal</title>
+					<media id="idp1912672" alt=""><image src="../../media/Locationofpickedoutpeaksintransmittedsignal.jpg" mime-type="image/jpeg"/></media>
+					<caption>Locationofpickedoutpeaksintransmittedsignal</caption>
+				</figure>
+				<figure id="Locationsofpickedoutpeaksinrecievedsignal">
+					<title>Locationsofpickedoutpeaksinrecievedsignal</title>
+					<media id="idp847568" alt=""><image src="../../media/Locationsofpickedoutpeaksinrecievedsignal.jpg" mime-type="image/jpeg"/></media>
+					<caption>Locationsofpickedoutpeaksinrecievedsignal</caption>
+				</figure>
+				<note id="Startingpoint">The starting value of the past two graphs are at n = 1 </note>
+				<section id="AnalysisofResults">
+					<title>Analysis of Results</title>
+					<para id="Analysis1">Overall result of test cases given by a graph of the %error of the range approximation compared to "<link resource="radar.m">radar</link>" from "Computer-Based Exerciese for Signal Processing Using MATLAB" by Burrus [ et al.] (see pages 328-329 for definition of parameters and function)</para>
+					<figure id="Errorinrange">
+						<title>%errorinrange2</title>
+						<media id="idm6000832" alt=""><image src="../../media/errorinrange2.jpg" mime-type="image/jpeg"/></media>
+						<caption>%errorinrange2</caption>
+					</figure>
+					<para id="ErrorCalc"><title>Method of Error Calculation</title>The % error was calculated by first taking the returned value for range from our developed program and using that as an input to the "<link resource="radar.m">radar</link>" function from Burrus [ et al.]. The resulting waveform generated is then put through the same match filter as our simulated received wave. A comparison of the location of the 1st peaks is then done and the absolute value of the difference is taken. The value is then divided by the difference from the right most edge of "<link resource="radar.m">radar</link>" 's first chirp to the end of the signal.  </para>
+					<para id="Comment"><title>Comment on % Error</title>The % error increased in a direct proportional to however larger we made the new TD value. Thus, if a shift of TD=900 was applied, the % error was 9 times greater than in test case 5 ( TD = 100), it was in fact about 55.89%.</para>
+					<para id="WheretonExt"><title>Where to Next</title> Next, look at <link document="m11757"> "RADAR:Velocity Analysis" </link> as next step.</para>
+				</section>
+			</section>
+		</section>
+	</content>
+</document>
